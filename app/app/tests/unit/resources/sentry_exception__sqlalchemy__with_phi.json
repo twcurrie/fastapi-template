@@ -1,0 +1,3857 @@
+{
+  "level": "error",
+  "exception": {
+    "values": [
+      {
+        "module": "sqlalchemy.exc",
+        "type": "IntegrityError",
+        "value": "(psycopg2.errors.NotNullViolation) null value in column \"first_name\" violates not-null constraint\n[SQL: INSERT INTO eligibility_file_record (subscriber_record_id, first_name, last_name, gender, date_of_birth, insurer, group_number, subscriber_id, address, city, state, postal_code, relationship_code, relation_to_subscriber, published_date, is_exact_match, extra_columns, error_message) VALUES (%(subscriber_record_id)s, %(first_name)s, %(last_name)s, %(gender)s, %(date_of_birth)s, %(insurer)s, %(group_numbe...",
+        "mechanism": {
+          "type": "asgi",
+          "handled": false
+        },
+        "stacktrace": {
+          "frames": [
+            {
+              "filename": "fastapi/applications.py",
+              "abs_path": "/Users/trevor.currie/Library/Caches/pypoetry/virtualenvs/eligibility-service-pgaYkPUD-py3.7/lib/python3.7/site-packages/fastapi/applications.py",
+              "function": "__call__",
+              "module": "fastapi.applications",
+              "lineno": 199,
+              "pre_context": [
+                "        if self.root_path:",
+                "            scope[\"root_path\"] = self.root_path",
+                "        if AsyncExitStack:",
+                "            async with AsyncExitStack() as stack:",
+                "                scope[\"fastapi_astack\"] = stack"
+              ],
+              "context_line": "                await super().__call__(scope, receive, send)",
+              "post_context": [
+                "        else:",
+                "            await super().__call__(scope, receive, send)  # pragma: no cover",
+                "",
+                "    def add_api_route(",
+                "        self,"
+              ],
+              "vars": {
+                "self": "<fastapi.applications.FastAPI object at 0x105fc3810>",
+                "scope": {
+                  "type": "'http'",
+                  "asgi": {
+                    "version": "'3.0'",
+                    "spec_version": "'2.1'"
+                  },
+                  "http_version": "'1.1'",
+                  "server": [
+                    "'127.0.0.1'",
+                    "8080"
+                  ],
+                  "client": [
+                    "'127.0.0.1'",
+                    "57398"
+                  ],
+                  "scheme": "'http'",
+                  "method": "'POST'",
+                  "root_path": "''",
+                  "path": "'/api/v1/file/eligibility'",
+                  "raw_path": "b'/api/v1/file/eligibility'"
+                },
+                "receive": "<function MessageLoggerMiddleware.__call__.<locals>.inner_receive at 0x106065440>",
+                "send": "<function MessageLoggerMiddleware.__call__.<locals>.inner_send at 0x106065d40>",
+                "stack": "<contextlib.AsyncExitStack object at 0x106082f90>",
+                "__class__": "<class 'fastapi.applications.FastAPI'>"
+              },
+              "in_app": true
+            },
+            {
+              "filename": "starlette/applications.py",
+              "abs_path": "/Users/trevor.currie/Library/Caches/pypoetry/virtualenvs/eligibility-service-pgaYkPUD-py3.7/lib/python3.7/site-packages/starlette/applications.py",
+              "function": "__call__",
+              "module": "starlette.applications",
+              "lineno": 112,
+              "pre_context": [
+                "    def url_path_for(self, name: str, **path_params: str) -> URLPath:",
+                "        return self.router.url_path_for(name, **path_params)",
+                "",
+                "    async def __call__(self, scope: Scope, receive: Receive, send: Send) -> None:",
+                "        scope[\"app\"] = self"
+              ],
+              "context_line": "        await self.middleware_stack(scope, receive, send)",
+              "post_context": [
+                "",
+                "    # The following usages are now discouraged in favour of configuration",
+                "    # \u00a0during Starlette.__init__(...)",
+                "    def on_event(self, event_type: str) -> typing.Callable:",
+                "        return self.router.on_event(event_type)"
+              ],
+              "vars": {
+                "self": "<fastapi.applications.FastAPI object at 0x105fc3810>",
+                "scope": {
+                  "type": "'http'",
+                  "asgi": {
+                    "version": "'3.0'",
+                    "spec_version": "'2.1'"
+                  },
+                  "http_version": "'1.1'",
+                  "server": [
+                    "'127.0.0.1'",
+                    "8080"
+                  ],
+                  "client": [
+                    "'127.0.0.1'",
+                    "57398"
+                  ],
+                  "scheme": "'http'",
+                  "method": "'POST'",
+                  "root_path": "''",
+                  "path": "'/api/v1/file/eligibility'",
+                  "raw_path": "b'/api/v1/file/eligibility'"
+                },
+                "receive": "<function MessageLoggerMiddleware.__call__.<locals>.inner_receive at 0x106065440>",
+                "send": "<function MessageLoggerMiddleware.__call__.<locals>.inner_send at 0x106065d40>"
+              },
+              "in_app": true
+            },
+            {
+              "filename": "starlette/middleware/errors.py",
+              "abs_path": "/Users/trevor.currie/Library/Caches/pypoetry/virtualenvs/eligibility-service-pgaYkPUD-py3.7/lib/python3.7/site-packages/starlette/middleware/errors.py",
+              "function": "__call__",
+              "module": "starlette.middleware.errors",
+              "lineno": 181,
+              "pre_context": [
+                "                await response(scope, receive, send)",
+                "",
+                "            # We always continue to raise the exception.",
+                "            # This allows servers to log the error, or allows test clients",
+                "            # to optionally raise the error within the test case."
+              ],
+              "context_line": "            raise exc from None",
+              "post_context": [
+                "",
+                "    def format_line(",
+                "        self, index: int, line: str, frame_lineno: int, frame_index: int",
+                "    ) -> str:",
+                "        values = {"
+              ],
+              "vars": {
+                "self": "<starlette.middleware.errors.ServerErrorMiddleware object at 0x105fd8990>",
+                "scope": {
+                  "type": "'http'",
+                  "asgi": {
+                    "version": "'3.0'",
+                    "spec_version": "'2.1'"
+                  },
+                  "http_version": "'1.1'",
+                  "server": [
+                    "'127.0.0.1'",
+                    "8080"
+                  ],
+                  "client": [
+                    "'127.0.0.1'",
+                    "57398"
+                  ],
+                  "scheme": "'http'",
+                  "method": "'POST'",
+                  "root_path": "''",
+                  "path": "'/api/v1/file/eligibility'",
+                  "raw_path": "b'/api/v1/file/eligibility'"
+                },
+                "receive": "<function MessageLoggerMiddleware.__call__.<locals>.inner_receive at 0x106065440>",
+                "_send": "<function ServerErrorMiddleware.__call__.<locals>._send at 0x1060d6290>",
+                "request": {
+                  "type": "'http'",
+                  "asgi": {
+                    "version": "'3.0'",
+                    "spec_version": "'2.1'"
+                  },
+                  "http_version": "'1.1'",
+                  "server": [
+                    "'127.0.0.1'",
+                    "8080"
+                  ],
+                  "client": [
+                    "'127.0.0.1'",
+                    "57398"
+                  ],
+                  "scheme": "'http'",
+                  "method": "'POST'",
+                  "root_path": "''",
+                  "path": "'/api/v1/file/eligibility'",
+                  "raw_path": "b'/api/v1/file/eligibility'"
+                },
+                "response": "<starlette.responses.PlainTextResponse object at 0x1060db790>",
+                "response_started": "False",
+                "send": "<function MessageLoggerMiddleware.__call__.<locals>.inner_send at 0x106065d40>"
+              },
+              "in_app": true
+            },
+            {
+              "filename": "starlette/middleware/errors.py",
+              "abs_path": "/Users/trevor.currie/Library/Caches/pypoetry/virtualenvs/eligibility-service-pgaYkPUD-py3.7/lib/python3.7/site-packages/starlette/middleware/errors.py",
+              "function": "__call__",
+              "module": "starlette.middleware.errors",
+              "lineno": 159,
+              "pre_context": [
+                "            if message[\"type\"] == \"http.response.start\":",
+                "                response_started = True",
+                "            await send(message)",
+                "",
+                "        try:"
+              ],
+              "context_line": "            await self.app(scope, receive, _send)",
+              "post_context": [
+                "        except Exception as exc:",
+                "            if not response_started:",
+                "                request = Request(scope)",
+                "                if self.debug:",
+                "                    # In debug mode, return traceback responses."
+              ],
+              "vars": {
+                "self": "<starlette.middleware.errors.ServerErrorMiddleware object at 0x105fd8990>",
+                "scope": {
+                  "type": "'http'",
+                  "asgi": {
+                    "version": "'3.0'",
+                    "spec_version": "'2.1'"
+                  },
+                  "http_version": "'1.1'",
+                  "server": [
+                    "'127.0.0.1'",
+                    "8080"
+                  ],
+                  "client": [
+                    "'127.0.0.1'",
+                    "57398"
+                  ],
+                  "scheme": "'http'",
+                  "method": "'POST'",
+                  "root_path": "''",
+                  "path": "'/api/v1/file/eligibility'",
+                  "raw_path": "b'/api/v1/file/eligibility'"
+                },
+                "receive": "<function MessageLoggerMiddleware.__call__.<locals>.inner_receive at 0x106065440>",
+                "_send": "<function ServerErrorMiddleware.__call__.<locals>._send at 0x1060d6290>",
+                "request": {
+                  "type": "'http'",
+                  "asgi": {
+                    "version": "'3.0'",
+                    "spec_version": "'2.1'"
+                  },
+                  "http_version": "'1.1'",
+                  "server": [
+                    "'127.0.0.1'",
+                    "8080"
+                  ],
+                  "client": [
+                    "'127.0.0.1'",
+                    "57398"
+                  ],
+                  "scheme": "'http'",
+                  "method": "'POST'",
+                  "root_path": "''",
+                  "path": "'/api/v1/file/eligibility'",
+                  "raw_path": "b'/api/v1/file/eligibility'"
+                },
+                "response": "<starlette.responses.PlainTextResponse object at 0x1060db790>",
+                "response_started": "False",
+                "send": "<function MessageLoggerMiddleware.__call__.<locals>.inner_send at 0x106065d40>"
+              },
+              "in_app": true
+            },
+            {
+              "filename": "starlette/middleware/base.py",
+              "abs_path": "/Users/trevor.currie/Library/Caches/pypoetry/virtualenvs/eligibility-service-pgaYkPUD-py3.7/lib/python3.7/site-packages/starlette/middleware/base.py",
+              "function": "__call__",
+              "module": "starlette.middleware.base",
+              "lineno": 25,
+              "pre_context": [
+                "        if scope[\"type\"] != \"http\":",
+                "            await self.app(scope, receive, send)",
+                "            return",
+                "",
+                "        request = Request(scope, receive=receive)"
+              ],
+              "context_line": "        response = await self.dispatch_func(request, self.call_next)",
+              "post_context": [
+                "        await response(scope, receive, send)",
+                "",
+                "    async def call_next(self, request: Request) -> Response:",
+                "        loop = asyncio.get_event_loop()",
+                "        queue: \"asyncio.Queue[typing.Optional[Message]]\" = asyncio.Queue()"
+              ],
+              "vars": {
+                "self": "<slowapi.middleware.SlowAPIMiddleware object at 0x105fd8950>",
+                "scope": {
+                  "type": "'http'",
+                  "asgi": {
+                    "version": "'3.0'",
+                    "spec_version": "'2.1'"
+                  },
+                  "http_version": "'1.1'",
+                  "server": [
+                    "'127.0.0.1'",
+                    "8080"
+                  ],
+                  "client": [
+                    "'127.0.0.1'",
+                    "57398"
+                  ],
+                  "scheme": "'http'",
+                  "method": "'POST'",
+                  "root_path": "''",
+                  "path": "'/api/v1/file/eligibility'",
+                  "raw_path": "b'/api/v1/file/eligibility'"
+                },
+                "receive": "<function MessageLoggerMiddleware.__call__.<locals>.inner_receive at 0x106065440>",
+                "send": "<function ServerErrorMiddleware.__call__.<locals>._send at 0x1060d6290>",
+                "request": {
+                  "type": "'http'",
+                  "asgi": {
+                    "version": "'3.0'",
+                    "spec_version": "'2.1'"
+                  },
+                  "http_version": "'1.1'",
+                  "server": [
+                    "'127.0.0.1'",
+                    "8080"
+                  ],
+                  "client": [
+                    "'127.0.0.1'",
+                    "57398"
+                  ],
+                  "scheme": "'http'",
+                  "method": "'POST'",
+                  "root_path": "''",
+                  "path": "'/api/v1/file/eligibility'",
+                  "raw_path": "b'/api/v1/file/eligibility'"
+                }
+              },
+              "in_app": true
+            },
+            {
+              "filename": "slowapi/middleware.py",
+              "abs_path": "/Users/trevor.currie/Library/Caches/pypoetry/virtualenvs/eligibility-service-pgaYkPUD-py3.7/lib/python3.7/site-packages/slowapi/middleware.py",
+              "function": "dispatch",
+              "module": "slowapi.middleware",
+              "lineno": 38,
+              "pre_context": [
+                "        if name in limiter._exempt_routes:",
+                "            return await call_next(request)",
+                "",
+                "        # there is a decorator for this route we let the decorator handle it",
+                "        if name in limiter._route_limits:"
+              ],
+              "context_line": "            return await call_next(request)",
+              "post_context": [
+                "",
+                "        # let the decorator handle if already in",
+                "        if limiter._auto_check and not getattr(",
+                "            request.state, \"_rate_limiting_complete\", False",
+                "        ):"
+              ],
+              "vars": {
+                "self": "<slowapi.middleware.SlowAPIMiddleware object at 0x105fd8950>",
+                "request": {
+                  "type": "'http'",
+                  "asgi": {
+                    "version": "'3.0'",
+                    "spec_version": "'2.1'"
+                  },
+                  "http_version": "'1.1'",
+                  "server": [
+                    "'127.0.0.1'",
+                    "8080"
+                  ],
+                  "client": [
+                    "'127.0.0.1'",
+                    "57398"
+                  ],
+                  "scheme": "'http'",
+                  "method": "'POST'",
+                  "root_path": "''",
+                  "path": "'/api/v1/file/eligibility'",
+                  "raw_path": "b'/api/v1/file/eligibility'"
+                },
+                "call_next": "<bound method BaseHTTPMiddleware.call_next of <slowapi.middleware.SlowAPIMiddleware object at 0x105fd8950>>",
+                "app": "<fastapi.applications.FastAPI object at 0x105fc3810>",
+                "limiter": "<slowapi.extension.Limiter object at 0x1055f2fd0>",
+                "handler": "<function get_eligibility_from_efile at 0x105d4bf80>",
+                "route": "<fastapi.routing.APIRoute object at 0x105fde050>",
+                "match": "<Match.NONE: 0>",
+                "_": {},
+                "name": "'app.api.v1.endpoints.efile.get_eligibility_from_efile'"
+              },
+              "in_app": true
+            },
+            {
+              "filename": "starlette/middleware/base.py",
+              "abs_path": "/Users/trevor.currie/Library/Caches/pypoetry/virtualenvs/eligibility-service-pgaYkPUD-py3.7/lib/python3.7/site-packages/starlette/middleware/base.py",
+              "function": "call_next",
+              "module": "starlette.middleware.base",
+              "lineno": 45,
+              "pre_context": [
+                "                await queue.put(None)",
+                "",
+                "        task = loop.create_task(coro())",
+                "        message = await queue.get()",
+                "        if message is None:"
+              ],
+              "context_line": "            task.result()",
+              "post_context": [
+                "            raise RuntimeError(\"No response returned.\")",
+                "        assert message[\"type\"] == \"http.response.start\"",
+                "",
+                "        async def body_stream() -> typing.AsyncGenerator[bytes, None]:",
+                "            while True:"
+              ],
+              "vars": {
+                "request": {
+                  "type": "'http'",
+                  "asgi": {
+                    "version": "'3.0'",
+                    "spec_version": "'2.1'"
+                  },
+                  "http_version": "'1.1'",
+                  "server": [
+                    "'127.0.0.1'",
+                    "8080"
+                  ],
+                  "client": [
+                    "'127.0.0.1'",
+                    "57398"
+                  ],
+                  "scheme": "'http'",
+                  "method": "'POST'",
+                  "root_path": "''",
+                  "path": "'/api/v1/file/eligibility'",
+                  "raw_path": "b'/api/v1/file/eligibility'"
+                },
+                "loop": "<_UnixSelectorEventLoop running=True closed=False debug=False>",
+                "coro": "<function BaseHTTPMiddleware.call_next.<locals>.coro at 0x1060d64d0>",
+                "message": "None",
+                "queue": "<Queue at 0x106082b10 maxsize=0 tasks=1>",
+                "receive": "<function MessageLoggerMiddleware.__call__.<locals>.inner_receive at 0x106065440>",
+                "scope": {
+                  "type": "'http'",
+                  "asgi": {
+                    "version": "'3.0'",
+                    "spec_version": "'2.1'"
+                  },
+                  "http_version": "'1.1'",
+                  "server": [
+                    "'127.0.0.1'",
+                    "8080"
+                  ],
+                  "client": [
+                    "'127.0.0.1'",
+                    "57398"
+                  ],
+                  "scheme": "'http'",
+                  "method": "'POST'",
+                  "root_path": "''",
+                  "path": "'/api/v1/file/eligibility'",
+                  "raw_path": "b'/api/v1/file/eligibility'"
+                },
+                "send": "<bound method Queue.put of <Queue at 0x106082b10 maxsize=0 tasks=1>>",
+                "task": "<Task finished coro=<BaseHTTPMiddleware.call_next.<locals>.coro() done, defined at /Users/trevor.currie/Library/Caches/pypoetry/virtualenvs/eligibility-service-pgaYkPUD-py3.7/lib/python3.7/site-packages/starlette/middleware/base.py:36> exception=IntegrityError('(psycopg2.errors.NotNullViolation) null value in column \"first_name\" violates not-null constraint')>",
+                "self": "<slowapi.middleware.SlowAPIMiddleware object at 0x105fd8950>"
+              },
+              "in_app": true
+            },
+            {
+              "filename": "starlette/middleware/base.py",
+              "abs_path": "/Users/trevor.currie/Library/Caches/pypoetry/virtualenvs/eligibility-service-pgaYkPUD-py3.7/lib/python3.7/site-packages/starlette/middleware/base.py",
+              "function": "coro",
+              "module": "starlette.middleware.base",
+              "lineno": 38,
+              "pre_context": [
+                "        receive = request.receive",
+                "        send = queue.put",
+                "",
+                "        async def coro() -> None:",
+                "            try:"
+              ],
+              "context_line": "                await self.app(scope, receive, send)",
+              "post_context": [
+                "            finally:",
+                "                await queue.put(None)",
+                "",
+                "        task = loop.create_task(coro())",
+                "        message = await queue.get()"
+              ],
+              "vars": {
+                "queue": "<Queue at 0x106082b10 maxsize=0 tasks=1>",
+                "receive": "<function MessageLoggerMiddleware.__call__.<locals>.inner_receive at 0x106065440>",
+                "scope": {
+                  "type": "'http'",
+                  "asgi": {
+                    "version": "'3.0'",
+                    "spec_version": "'2.1'"
+                  },
+                  "http_version": "'1.1'",
+                  "server": [
+                    "'127.0.0.1'",
+                    "8080"
+                  ],
+                  "client": [
+                    "'127.0.0.1'",
+                    "57398"
+                  ],
+                  "scheme": "'http'",
+                  "method": "'POST'",
+                  "root_path": "''",
+                  "path": "'/api/v1/file/eligibility'",
+                  "raw_path": "b'/api/v1/file/eligibility'"
+                },
+                "self": "<slowapi.middleware.SlowAPIMiddleware object at 0x105fd8950>",
+                "send": "<bound method Queue.put of <Queue at 0x106082b10 maxsize=0 tasks=1>>"
+              },
+              "in_app": true
+            },
+            {
+              "filename": "starlette/middleware/base.py",
+              "abs_path": "/Users/trevor.currie/Library/Caches/pypoetry/virtualenvs/eligibility-service-pgaYkPUD-py3.7/lib/python3.7/site-packages/starlette/middleware/base.py",
+              "function": "__call__",
+              "module": "starlette.middleware.base",
+              "lineno": 25,
+              "pre_context": [
+                "        if scope[\"type\"] != \"http\":",
+                "            await self.app(scope, receive, send)",
+                "            return",
+                "",
+                "        request = Request(scope, receive=receive)"
+              ],
+              "context_line": "        response = await self.dispatch_func(request, self.call_next)",
+              "post_context": [
+                "        await response(scope, receive, send)",
+                "",
+                "    async def call_next(self, request: Request) -> Response:",
+                "        loop = asyncio.get_event_loop()",
+                "        queue: \"asyncio.Queue[typing.Optional[Message]]\" = asyncio.Queue()"
+              ],
+              "vars": {
+                "self": "<app.core.middleware.RequestTimingMiddleware object at 0x105fd8910>",
+                "scope": {
+                  "type": "'http'",
+                  "asgi": {
+                    "version": "'3.0'",
+                    "spec_version": "'2.1'"
+                  },
+                  "http_version": "'1.1'",
+                  "server": [
+                    "'127.0.0.1'",
+                    "8080"
+                  ],
+                  "client": [
+                    "'127.0.0.1'",
+                    "57398"
+                  ],
+                  "scheme": "'http'",
+                  "method": "'POST'",
+                  "root_path": "''",
+                  "path": "'/api/v1/file/eligibility'",
+                  "raw_path": "b'/api/v1/file/eligibility'"
+                },
+                "receive": "<function MessageLoggerMiddleware.__call__.<locals>.inner_receive at 0x106065440>",
+                "send": "<bound method Queue.put of <Queue at 0x106082b10 maxsize=0 tasks=1>>",
+                "request": {
+                  "type": "'http'",
+                  "asgi": {
+                    "version": "'3.0'",
+                    "spec_version": "'2.1'"
+                  },
+                  "http_version": "'1.1'",
+                  "server": [
+                    "'127.0.0.1'",
+                    "8080"
+                  ],
+                  "client": [
+                    "'127.0.0.1'",
+                    "57398"
+                  ],
+                  "scheme": "'http'",
+                  "method": "'POST'",
+                  "root_path": "''",
+                  "path": "'/api/v1/file/eligibility'",
+                  "raw_path": "b'/api/v1/file/eligibility'"
+                }
+              },
+              "in_app": true
+            },
+            {
+              "filename": "app/core/middleware.py",
+              "abs_path": "/Users/trevor.currie/Code/eligibility-service/app/app/core/middleware.py",
+              "function": "dispatch",
+              "module": "app.core.middleware",
+              "lineno": 58,
+              "pre_context": [
+                "class RequestTimingMiddleware(BaseHTTPMiddleware):",
+                "    async def dispatch(",
+                "        self, request: Request, call_next: RequestResponseEndpoint",
+                "    ) -> Response:",
+                "        start_time = time.time()"
+              ],
+              "context_line": "        response = await call_next(request)",
+              "post_context": [
+                "        process_time = time.time() - start_time",
+                "        response.headers[\"X-Process-Time\"] = str(process_time)",
+                "        return response"
+              ],
+              "vars": {
+                "self": "<app.core.middleware.RequestTimingMiddleware object at 0x105fd8910>",
+                "request": {
+                  "type": "'http'",
+                  "asgi": {
+                    "version": "'3.0'",
+                    "spec_version": "'2.1'"
+                  },
+                  "http_version": "'1.1'",
+                  "server": [
+                    "'127.0.0.1'",
+                    "8080"
+                  ],
+                  "client": [
+                    "'127.0.0.1'",
+                    "57398"
+                  ],
+                  "scheme": "'http'",
+                  "method": "'POST'",
+                  "root_path": "''",
+                  "path": "'/api/v1/file/eligibility'",
+                  "raw_path": "b'/api/v1/file/eligibility'"
+                },
+                "call_next": "<bound method BaseHTTPMiddleware.call_next of <app.core.middleware.RequestTimingMiddleware object at 0x105fd8910>>",
+                "start_time": "1628661634.6128461"
+              },
+              "in_app": true
+            },
+            {
+              "filename": "starlette/middleware/base.py",
+              "abs_path": "/Users/trevor.currie/Library/Caches/pypoetry/virtualenvs/eligibility-service-pgaYkPUD-py3.7/lib/python3.7/site-packages/starlette/middleware/base.py",
+              "function": "call_next",
+              "module": "starlette.middleware.base",
+              "lineno": 45,
+              "pre_context": [
+                "                await queue.put(None)",
+                "",
+                "        task = loop.create_task(coro())",
+                "        message = await queue.get()",
+                "        if message is None:"
+              ],
+              "context_line": "            task.result()",
+              "post_context": [
+                "            raise RuntimeError(\"No response returned.\")",
+                "        assert message[\"type\"] == \"http.response.start\"",
+                "",
+                "        async def body_stream() -> typing.AsyncGenerator[bytes, None]:",
+                "            while True:"
+              ],
+              "vars": {
+                "request": {
+                  "type": "'http'",
+                  "asgi": {
+                    "version": "'3.0'",
+                    "spec_version": "'2.1'"
+                  },
+                  "http_version": "'1.1'",
+                  "server": [
+                    "'127.0.0.1'",
+                    "8080"
+                  ],
+                  "client": [
+                    "'127.0.0.1'",
+                    "57398"
+                  ],
+                  "scheme": "'http'",
+                  "method": "'POST'",
+                  "root_path": "''",
+                  "path": "'/api/v1/file/eligibility'",
+                  "raw_path": "b'/api/v1/file/eligibility'"
+                },
+                "loop": "<_UnixSelectorEventLoop running=True closed=False debug=False>",
+                "coro": "<function BaseHTTPMiddleware.call_next.<locals>.coro at 0x1060d68c0>",
+                "message": "None",
+                "queue": "<Queue at 0x1060db190 maxsize=0 tasks=1>",
+                "receive": "<function MessageLoggerMiddleware.__call__.<locals>.inner_receive at 0x106065440>",
+                "scope": {
+                  "type": "'http'",
+                  "asgi": {
+                    "version": "'3.0'",
+                    "spec_version": "'2.1'"
+                  },
+                  "http_version": "'1.1'",
+                  "server": [
+                    "'127.0.0.1'",
+                    "8080"
+                  ],
+                  "client": [
+                    "'127.0.0.1'",
+                    "57398"
+                  ],
+                  "scheme": "'http'",
+                  "method": "'POST'",
+                  "root_path": "''",
+                  "path": "'/api/v1/file/eligibility'",
+                  "raw_path": "b'/api/v1/file/eligibility'"
+                },
+                "send": "<bound method Queue.put of <Queue at 0x1060db190 maxsize=0 tasks=1>>",
+                "task": "<Task finished coro=<BaseHTTPMiddleware.call_next.<locals>.coro() done, defined at /Users/trevor.currie/Library/Caches/pypoetry/virtualenvs/eligibility-service-pgaYkPUD-py3.7/lib/python3.7/site-packages/starlette/middleware/base.py:36> exception=IntegrityError('(psycopg2.errors.NotNullViolation) null value in column \"first_name\" violates not-null constraint')>",
+                "self": "<app.core.middleware.RequestTimingMiddleware object at 0x105fd8910>"
+              },
+              "in_app": true
+            },
+            {
+              "filename": "starlette/middleware/base.py",
+              "abs_path": "/Users/trevor.currie/Library/Caches/pypoetry/virtualenvs/eligibility-service-pgaYkPUD-py3.7/lib/python3.7/site-packages/starlette/middleware/base.py",
+              "function": "coro",
+              "module": "starlette.middleware.base",
+              "lineno": 38,
+              "pre_context": [
+                "        receive = request.receive",
+                "        send = queue.put",
+                "",
+                "        async def coro() -> None:",
+                "            try:"
+              ],
+              "context_line": "                await self.app(scope, receive, send)",
+              "post_context": [
+                "            finally:",
+                "                await queue.put(None)",
+                "",
+                "        task = loop.create_task(coro())",
+                "        message = await queue.get()"
+              ],
+              "vars": {
+                "queue": "<Queue at 0x1060db190 maxsize=0 tasks=1>",
+                "receive": "<function MessageLoggerMiddleware.__call__.<locals>.inner_receive at 0x106065440>",
+                "scope": {
+                  "type": "'http'",
+                  "asgi": {
+                    "version": "'3.0'",
+                    "spec_version": "'2.1'"
+                  },
+                  "http_version": "'1.1'",
+                  "server": [
+                    "'127.0.0.1'",
+                    "8080"
+                  ],
+                  "client": [
+                    "'127.0.0.1'",
+                    "57398"
+                  ],
+                  "scheme": "'http'",
+                  "method": "'POST'",
+                  "root_path": "''",
+                  "path": "'/api/v1/file/eligibility'",
+                  "raw_path": "b'/api/v1/file/eligibility'"
+                },
+                "self": "<app.core.middleware.RequestTimingMiddleware object at 0x105fd8910>",
+                "send": "<bound method Queue.put of <Queue at 0x1060db190 maxsize=0 tasks=1>>"
+              },
+              "in_app": true
+            },
+            {
+              "filename": "starlette/middleware/base.py",
+              "abs_path": "/Users/trevor.currie/Library/Caches/pypoetry/virtualenvs/eligibility-service-pgaYkPUD-py3.7/lib/python3.7/site-packages/starlette/middleware/base.py",
+              "function": "__call__",
+              "module": "starlette.middleware.base",
+              "lineno": 25,
+              "pre_context": [
+                "        if scope[\"type\"] != \"http\":",
+                "            await self.app(scope, receive, send)",
+                "            return",
+                "",
+                "        request = Request(scope, receive=receive)"
+              ],
+              "context_line": "        response = await self.dispatch_func(request, self.call_next)",
+              "post_context": [
+                "        await response(scope, receive, send)",
+                "",
+                "    async def call_next(self, request: Request) -> Response:",
+                "        loop = asyncio.get_event_loop()",
+                "        queue: \"asyncio.Queue[typing.Optional[Message]]\" = asyncio.Queue()"
+              ],
+              "vars": {
+                "self": "<app.core.middleware.RequestLoggingMiddleware object at 0x105fd88d0>",
+                "scope": {
+                  "type": "'http'",
+                  "asgi": {
+                    "version": "'3.0'",
+                    "spec_version": "'2.1'"
+                  },
+                  "http_version": "'1.1'",
+                  "server": [
+                    "'127.0.0.1'",
+                    "8080"
+                  ],
+                  "client": [
+                    "'127.0.0.1'",
+                    "57398"
+                  ],
+                  "scheme": "'http'",
+                  "method": "'POST'",
+                  "root_path": "''",
+                  "path": "'/api/v1/file/eligibility'",
+                  "raw_path": "b'/api/v1/file/eligibility'"
+                },
+                "receive": "<function MessageLoggerMiddleware.__call__.<locals>.inner_receive at 0x106065440>",
+                "send": "<bound method Queue.put of <Queue at 0x1060db190 maxsize=0 tasks=1>>",
+                "request": {
+                  "type": "'http'",
+                  "asgi": {
+                    "version": "'3.0'",
+                    "spec_version": "'2.1'"
+                  },
+                  "http_version": "'1.1'",
+                  "server": [
+                    "'127.0.0.1'",
+                    "8080"
+                  ],
+                  "client": [
+                    "'127.0.0.1'",
+                    "57398"
+                  ],
+                  "scheme": "'http'",
+                  "method": "'POST'",
+                  "root_path": "''",
+                  "path": "'/api/v1/file/eligibility'",
+                  "raw_path": "b'/api/v1/file/eligibility'"
+                }
+              },
+              "in_app": true
+            },
+            {
+              "filename": "app/core/middleware.py",
+              "abs_path": "/Users/trevor.currie/Code/eligibility-service/app/app/core/middleware.py",
+              "function": "dispatch",
+              "module": "app.core.middleware",
+              "lineno": 40,
+              "pre_context": [
+                "",
+                "        logging.info(",
+                "            f\"Processing request id: {request_id}\",",
+                "            extra={\"request.id\": request_id, **extras},",
+                "        )"
+              ],
+              "context_line": "        response = await call_next(request)",
+              "post_context": [
+                "        logging.info(",
+                "            f\"Sending response to request id: {request_id}.\",",
+                "            extra={",
+                "                \"request.id\": request_id,",
+                "                \"response.status_code\": response.status_code,"
+              ],
+              "vars": {
+                "request": {
+                  "type": "'http'",
+                  "asgi": {
+                    "version": "'3.0'",
+                    "spec_version": "'2.1'"
+                  },
+                  "http_version": "'1.1'",
+                  "server": [
+                    "'127.0.0.1'",
+                    "8080"
+                  ],
+                  "client": [
+                    "'127.0.0.1'",
+                    "57398"
+                  ],
+                  "scheme": "'http'",
+                  "method": "'POST'",
+                  "root_path": "''",
+                  "path": "'/api/v1/file/eligibility'",
+                  "raw_path": "b'/api/v1/file/eligibility'"
+                },
+                "call_next": "<bound method BaseHTTPMiddleware.call_next of <app.core.middleware.RequestLoggingMiddleware object at 0x105fd88d0>>",
+                "request_id": "UUID('0bfce5f3-3c35-4765-a379-24989966f4e8')",
+                "extras": {
+                  "request.type": "'http'",
+                  "request.http_version": "'1.1'",
+                  "request.server": [
+                    "'127.0.0.1'",
+                    "8080"
+                  ],
+                  "request.client": [
+                    "'127.0.0.1'",
+                    "57398"
+                  ],
+                  "request.scheme": "'http'",
+                  "request.method": "'POST'",
+                  "request.path": "'/api/v1/file/eligibility'",
+                  "request.query_string": "b''"
+                },
+                "self": "<app.core.middleware.RequestLoggingMiddleware object at 0x105fd88d0>"
+              },
+              "in_app": true
+            },
+            {
+              "filename": "starlette/middleware/base.py",
+              "abs_path": "/Users/trevor.currie/Library/Caches/pypoetry/virtualenvs/eligibility-service-pgaYkPUD-py3.7/lib/python3.7/site-packages/starlette/middleware/base.py",
+              "function": "call_next",
+              "module": "starlette.middleware.base",
+              "lineno": 45,
+              "pre_context": [
+                "                await queue.put(None)",
+                "",
+                "        task = loop.create_task(coro())",
+                "        message = await queue.get()",
+                "        if message is None:"
+              ],
+              "context_line": "            task.result()",
+              "post_context": [
+                "            raise RuntimeError(\"No response returned.\")",
+                "        assert message[\"type\"] == \"http.response.start\"",
+                "",
+                "        async def body_stream() -> typing.AsyncGenerator[bytes, None]:",
+                "            while True:"
+              ],
+              "vars": {
+                "request": {
+                  "type": "'http'",
+                  "asgi": {
+                    "version": "'3.0'",
+                    "spec_version": "'2.1'"
+                  },
+                  "http_version": "'1.1'",
+                  "server": [
+                    "'127.0.0.1'",
+                    "8080"
+                  ],
+                  "client": [
+                    "'127.0.0.1'",
+                    "57398"
+                  ],
+                  "scheme": "'http'",
+                  "method": "'POST'",
+                  "root_path": "''",
+                  "path": "'/api/v1/file/eligibility'",
+                  "raw_path": "b'/api/v1/file/eligibility'"
+                },
+                "loop": "<_UnixSelectorEventLoop running=True closed=False debug=False>",
+                "coro": "<function BaseHTTPMiddleware.call_next.<locals>.coro at 0x1060d6cb0>",
+                "message": "None",
+                "queue": "<Queue at 0x1060db690 maxsize=0 tasks=1>",
+                "receive": "<function MessageLoggerMiddleware.__call__.<locals>.inner_receive at 0x106065440>",
+                "scope": {
+                  "type": "'http'",
+                  "asgi": {
+                    "version": "'3.0'",
+                    "spec_version": "'2.1'"
+                  },
+                  "http_version": "'1.1'",
+                  "server": [
+                    "'127.0.0.1'",
+                    "8080"
+                  ],
+                  "client": [
+                    "'127.0.0.1'",
+                    "57398"
+                  ],
+                  "scheme": "'http'",
+                  "method": "'POST'",
+                  "root_path": "''",
+                  "path": "'/api/v1/file/eligibility'",
+                  "raw_path": "b'/api/v1/file/eligibility'"
+                },
+                "send": "<bound method Queue.put of <Queue at 0x1060db690 maxsize=0 tasks=1>>",
+                "task": "<Task finished coro=<BaseHTTPMiddleware.call_next.<locals>.coro() done, defined at /Users/trevor.currie/Library/Caches/pypoetry/virtualenvs/eligibility-service-pgaYkPUD-py3.7/lib/python3.7/site-packages/starlette/middleware/base.py:36> exception=IntegrityError('(psycopg2.errors.NotNullViolation) null value in column \"first_name\" violates not-null constraint')>",
+                "self": "<app.core.middleware.RequestLoggingMiddleware object at 0x105fd88d0>"
+              },
+              "in_app": true
+            },
+            {
+              "filename": "starlette/middleware/base.py",
+              "abs_path": "/Users/trevor.currie/Library/Caches/pypoetry/virtualenvs/eligibility-service-pgaYkPUD-py3.7/lib/python3.7/site-packages/starlette/middleware/base.py",
+              "function": "coro",
+              "module": "starlette.middleware.base",
+              "lineno": 38,
+              "pre_context": [
+                "        receive = request.receive",
+                "        send = queue.put",
+                "",
+                "        async def coro() -> None:",
+                "            try:"
+              ],
+              "context_line": "                await self.app(scope, receive, send)",
+              "post_context": [
+                "            finally:",
+                "                await queue.put(None)",
+                "",
+                "        task = loop.create_task(coro())",
+                "        message = await queue.get()"
+              ],
+              "vars": {
+                "queue": "<Queue at 0x1060db690 maxsize=0 tasks=1>",
+                "receive": "<function MessageLoggerMiddleware.__call__.<locals>.inner_receive at 0x106065440>",
+                "scope": {
+                  "type": "'http'",
+                  "asgi": {
+                    "version": "'3.0'",
+                    "spec_version": "'2.1'"
+                  },
+                  "http_version": "'1.1'",
+                  "server": [
+                    "'127.0.0.1'",
+                    "8080"
+                  ],
+                  "client": [
+                    "'127.0.0.1'",
+                    "57398"
+                  ],
+                  "scheme": "'http'",
+                  "method": "'POST'",
+                  "root_path": "''",
+                  "path": "'/api/v1/file/eligibility'",
+                  "raw_path": "b'/api/v1/file/eligibility'"
+                },
+                "self": "<app.core.middleware.RequestLoggingMiddleware object at 0x105fd88d0>",
+                "send": "<bound method Queue.put of <Queue at 0x1060db690 maxsize=0 tasks=1>>"
+              },
+              "in_app": true
+            },
+            {
+              "filename": "starlette/exceptions.py",
+              "abs_path": "/Users/trevor.currie/Library/Caches/pypoetry/virtualenvs/eligibility-service-pgaYkPUD-py3.7/lib/python3.7/site-packages/starlette/exceptions.py",
+              "function": "__call__",
+              "module": "starlette.exceptions",
+              "lineno": 82,
+              "pre_context": [
+                "",
+                "            if handler is None:",
+                "                handler = self._lookup_exception_handler(exc)",
+                "",
+                "            if handler is None:"
+              ],
+              "context_line": "                raise exc from None",
+              "post_context": [
+                "",
+                "            if response_started:",
+                "                msg = \"Caught handled exception, but response already started.\"",
+                "                raise RuntimeError(msg) from exc",
+                ""
+              ],
+              "vars": {
+                "self": "<starlette.exceptions.ExceptionMiddleware object at 0x105fd8610>",
+                "scope": {
+                  "type": "'http'",
+                  "asgi": {
+                    "version": "'3.0'",
+                    "spec_version": "'2.1'"
+                  },
+                  "http_version": "'1.1'",
+                  "server": [
+                    "'127.0.0.1'",
+                    "8080"
+                  ],
+                  "client": [
+                    "'127.0.0.1'",
+                    "57398"
+                  ],
+                  "scheme": "'http'",
+                  "method": "'POST'",
+                  "root_path": "''",
+                  "path": "'/api/v1/file/eligibility'",
+                  "raw_path": "b'/api/v1/file/eligibility'"
+                },
+                "receive": "<function MessageLoggerMiddleware.__call__.<locals>.inner_receive at 0x106065440>",
+                "sender": "<function ExceptionMiddleware.__call__.<locals>.sender at 0x1060d6f80>",
+                "handler": "None",
+                "response_started": "False",
+                "send": "<bound method Queue.put of <Queue at 0x1060db690 maxsize=0 tasks=1>>"
+              },
+              "in_app": true
+            },
+            {
+              "filename": "starlette/exceptions.py",
+              "abs_path": "/Users/trevor.currie/Library/Caches/pypoetry/virtualenvs/eligibility-service-pgaYkPUD-py3.7/lib/python3.7/site-packages/starlette/exceptions.py",
+              "function": "__call__",
+              "module": "starlette.exceptions",
+              "lineno": 71,
+              "pre_context": [
+                "            if message[\"type\"] == \"http.response.start\":",
+                "                response_started = True",
+                "            await send(message)",
+                "",
+                "        try:"
+              ],
+              "context_line": "            await self.app(scope, receive, sender)",
+              "post_context": [
+                "        except Exception as exc:",
+                "            handler = None",
+                "",
+                "            if isinstance(exc, HTTPException):",
+                "                handler = self._status_handlers.get(exc.status_code)"
+              ],
+              "vars": {
+                "self": "<starlette.exceptions.ExceptionMiddleware object at 0x105fd8610>",
+                "scope": {
+                  "type": "'http'",
+                  "asgi": {
+                    "version": "'3.0'",
+                    "spec_version": "'2.1'"
+                  },
+                  "http_version": "'1.1'",
+                  "server": [
+                    "'127.0.0.1'",
+                    "8080"
+                  ],
+                  "client": [
+                    "'127.0.0.1'",
+                    "57398"
+                  ],
+                  "scheme": "'http'",
+                  "method": "'POST'",
+                  "root_path": "''",
+                  "path": "'/api/v1/file/eligibility'",
+                  "raw_path": "b'/api/v1/file/eligibility'"
+                },
+                "receive": "<function MessageLoggerMiddleware.__call__.<locals>.inner_receive at 0x106065440>",
+                "sender": "<function ExceptionMiddleware.__call__.<locals>.sender at 0x1060d6f80>",
+                "handler": "None",
+                "response_started": "False",
+                "send": "<bound method Queue.put of <Queue at 0x1060db690 maxsize=0 tasks=1>>"
+              },
+              "in_app": true
+            },
+            {
+              "filename": "starlette/routing.py",
+              "abs_path": "/Users/trevor.currie/Library/Caches/pypoetry/virtualenvs/eligibility-service-pgaYkPUD-py3.7/lib/python3.7/site-packages/starlette/routing.py",
+              "function": "__call__",
+              "module": "starlette.routing",
+              "lineno": 580,
+              "pre_context": [
+                "            # Determine if any route matches the incoming scope,",
+                "            # and hand over to the matching route if found.",
+                "            match, child_scope = route.matches(scope)",
+                "            if match == Match.FULL:",
+                "                scope.update(child_scope)"
+              ],
+              "context_line": "                await route.handle(scope, receive, send)",
+              "post_context": [
+                "                return",
+                "            elif match == Match.PARTIAL and partial is None:",
+                "                partial = route",
+                "                partial_scope = child_scope",
+                ""
+              ],
+              "vars": {
+                "self": "<fastapi.routing.APIRouter object at 0x105fc3890>",
+                "scope": {
+                  "type": "'http'",
+                  "asgi": {
+                    "version": "'3.0'",
+                    "spec_version": "'2.1'"
+                  },
+                  "http_version": "'1.1'",
+                  "server": [
+                    "'127.0.0.1'",
+                    "8080"
+                  ],
+                  "client": [
+                    "'127.0.0.1'",
+                    "57398"
+                  ],
+                  "scheme": "'http'",
+                  "method": "'POST'",
+                  "root_path": "''",
+                  "path": "'/api/v1/file/eligibility'",
+                  "raw_path": "b'/api/v1/file/eligibility'"
+                },
+                "receive": "<function MessageLoggerMiddleware.__call__.<locals>.inner_receive at 0x106065440>",
+                "send": "<function ExceptionMiddleware.__call__.<locals>.sender at 0x1060d6f80>",
+                "partial": "None",
+                "route": "<fastapi.routing.APIRoute object at 0x105fd2390>",
+                "match": "<Match.FULL: 2>",
+                "child_scope": {
+                  "endpoint": "<function get_eligibility_from_efile at 0x105d4bf80>",
+                  "path_params": {}
+                }
+              },
+              "in_app": true
+            },
+            {
+              "filename": "starlette/routing.py",
+              "abs_path": "/Users/trevor.currie/Library/Caches/pypoetry/virtualenvs/eligibility-service-pgaYkPUD-py3.7/lib/python3.7/site-packages/starlette/routing.py",
+              "function": "handle",
+              "module": "starlette.routing",
+              "lineno": 241,
+              "pre_context": [
+                "                raise HTTPException(status_code=405)",
+                "            else:",
+                "                response = PlainTextResponse(\"Method Not Allowed\", status_code=405)",
+                "            await response(scope, receive, send)",
+                "        else:"
+              ],
+              "context_line": "            await self.app(scope, receive, send)",
+              "post_context": [
+                "",
+                "    def __eq__(self, other: typing.Any) -> bool:",
+                "        return (",
+                "            isinstance(other, Route)",
+                "            and self.path == other.path"
+              ],
+              "vars": {
+                "self": "<fastapi.routing.APIRoute object at 0x105fd2390>",
+                "scope": {
+                  "type": "'http'",
+                  "asgi": {
+                    "version": "'3.0'",
+                    "spec_version": "'2.1'"
+                  },
+                  "http_version": "'1.1'",
+                  "server": [
+                    "'127.0.0.1'",
+                    "8080"
+                  ],
+                  "client": [
+                    "'127.0.0.1'",
+                    "57398"
+                  ],
+                  "scheme": "'http'",
+                  "method": "'POST'",
+                  "root_path": "''",
+                  "path": "'/api/v1/file/eligibility'",
+                  "raw_path": "b'/api/v1/file/eligibility'"
+                },
+                "receive": "<function MessageLoggerMiddleware.__call__.<locals>.inner_receive at 0x106065440>",
+                "send": "<function ExceptionMiddleware.__call__.<locals>.sender at 0x1060d6f80>"
+              },
+              "in_app": true
+            },
+            {
+              "filename": "starlette/routing.py",
+              "abs_path": "/Users/trevor.currie/Library/Caches/pypoetry/virtualenvs/eligibility-service-pgaYkPUD-py3.7/lib/python3.7/site-packages/starlette/routing.py",
+              "function": "app",
+              "module": "starlette.routing",
+              "lineno": 52,
+              "pre_context": [
+                "    is_coroutine = iscoroutinefunction_or_partial(func)",
+                "",
+                "    async def app(scope: Scope, receive: Receive, send: Send) -> None:",
+                "        request = Request(scope, receive=receive, send=send)",
+                "        if is_coroutine:"
+              ],
+              "context_line": "            response = await func(request)",
+              "post_context": [
+                "        else:",
+                "            response = await run_in_threadpool(func, request)",
+                "        await response(scope, receive, send)",
+                "",
+                "    return app"
+              ],
+              "vars": {
+                "scope": {
+                  "type": "'http'",
+                  "asgi": {
+                    "version": "'3.0'",
+                    "spec_version": "'2.1'"
+                  },
+                  "http_version": "'1.1'",
+                  "server": [
+                    "'127.0.0.1'",
+                    "8080"
+                  ],
+                  "client": [
+                    "'127.0.0.1'",
+                    "57398"
+                  ],
+                  "scheme": "'http'",
+                  "method": "'POST'",
+                  "root_path": "''",
+                  "path": "'/api/v1/file/eligibility'",
+                  "raw_path": "b'/api/v1/file/eligibility'"
+                },
+                "receive": "<function MessageLoggerMiddleware.__call__.<locals>.inner_receive at 0x106065440>",
+                "send": "<function ExceptionMiddleware.__call__.<locals>.sender at 0x1060d6f80>",
+                "request": {
+                  "type": "'http'",
+                  "asgi": {
+                    "version": "'3.0'",
+                    "spec_version": "'2.1'"
+                  },
+                  "http_version": "'1.1'",
+                  "server": [
+                    "'127.0.0.1'",
+                    "8080"
+                  ],
+                  "client": [
+                    "'127.0.0.1'",
+                    "57398"
+                  ],
+                  "scheme": "'http'",
+                  "method": "'POST'",
+                  "root_path": "''",
+                  "path": "'/api/v1/file/eligibility'",
+                  "raw_path": "b'/api/v1/file/eligibility'"
+                },
+                "func": "<function get_request_handler.<locals>.app at 0x105fb4830>",
+                "is_coroutine": "True"
+              },
+              "in_app": true
+            },
+            {
+              "filename": "fastapi/routing.py",
+              "abs_path": "/Users/trevor.currie/Library/Caches/pypoetry/virtualenvs/eligibility-service-pgaYkPUD-py3.7/lib/python3.7/site-packages/fastapi/routing.py",
+              "function": "app",
+              "module": "fastapi.routing",
+              "lineno": 215,
+              "pre_context": [
+                "        values, errors, background_tasks, sub_response, _ = solved_result",
+                "        if errors:",
+                "            raise RequestValidationError(errors, body=body)",
+                "        else:",
+                "            raw_response = await run_endpoint_function("
+              ],
+              "context_line": "                dependant=dependant, values=values, is_coroutine=is_coroutine",
+              "post_context": [
+                "            )",
+                "",
+                "            if isinstance(raw_response, Response):",
+                "                if raw_response.background is None:",
+                "                    raw_response.background = background_tasks"
+              ],
+              "vars": {
+                "request": {
+                  "type": "'http'",
+                  "asgi": {
+                    "version": "'3.0'",
+                    "spec_version": "'2.1'"
+                  },
+                  "http_version": "'1.1'",
+                  "server": [
+                    "'127.0.0.1'",
+                    "8080"
+                  ],
+                  "client": [
+                    "'127.0.0.1'",
+                    "57398"
+                  ],
+                  "scheme": "'http'",
+                  "method": "'POST'",
+                  "root_path": "''",
+                  "path": "'/api/v1/file/eligibility'",
+                  "raw_path": "b'/api/v1/file/eligibility'"
+                },
+                "body": {
+                  "client": "'string'",
+                  "dateOfBirth": "'2021-08-11'",
+                  "subscriberId": "'string'"
+                },
+                "body_bytes": "b'{\\n  \"client\": \"string\",\\n  \"dateOfBirth\": \"2021-08-11\",\\n  \"subscriberId\": \"string\"\\n\\n}'",
+                "json_body": {
+                  "client": "'string'",
+                  "dateOfBirth": "'2021-08-11'",
+                  "subscriberId": "'string'"
+                },
+                "content_type_value": "'application/json'",
+                "message": "<email.message.Message object at 0x1060db8d0>",
+                "subtype": "'json'",
+                "solved_result": [
+                  {
+                    "db": "<sqlalchemy.orm.session.Session object at 0x1060ff650>",
+                    "eligibility_request": "EligibilityRequest(***)",
+                    "request": {
+                      "type": "'http'",
+                      "asgi": {
+                        "version": "'3.0'",
+                        "spec_version": "'2.1'"
+                      },
+                      "http_version": "'1.1'",
+                      "server": [
+                        "'127.0.0.1'",
+                        "8080"
+                      ],
+                      "client": [
+                        "'127.0.0.1'",
+                        "57398"
+                      ],
+                      "scheme": "'http'",
+                      "method": "'POST'",
+                      "root_path": "''",
+                      "path": "'/api/v1/file/eligibility'",
+                      "raw_path": "b'/api/v1/file/eligibility'"
+                    }
+                  },
+                  [],
+                  "None",
+                  "<starlette.responses.Response object at 0x1060dba50>",
+                  {
+                    "(<fastapi.security.http.HTTPBasic object at 0x1056b2310>, ())": "HTTPBasicCredentials(username='hingehealth', password='swordfish')",
+                    "(<function authenticate_http_basic at 0x105653dd0>, ())": "True",
+                    "(<function get_db at 0x10570c7a0>, ())": "<sqlalchemy.orm.session.Session object at 0x1060ff650>"
+                  }
+                ],
+                "values": {
+                  "db": "<sqlalchemy.orm.session.Session object at 0x1060ff650>",
+                  "eligibility_request": "EligibilityRequest(***)",
+                  "request": {
+                    "type": "'http'",
+                    "asgi": {
+                      "version": "'3.0'",
+                      "spec_version": "'2.1'"
+                    },
+                    "http_version": "'1.1'",
+                    "server": [
+                      "'127.0.0.1'",
+                      "8080"
+                    ],
+                    "client": [
+                      "'127.0.0.1'",
+                      "57398"
+                    ],
+                    "scheme": "'http'",
+                    "method": "'POST'",
+                    "root_path": "''",
+                    "path": "'/api/v1/file/eligibility'",
+                    "raw_path": "b'/api/v1/file/eligibility'"
+                  }
+                },
+                "errors": []
+              },
+              "in_app": true
+            },
+            {
+              "filename": "fastapi/routing.py",
+              "abs_path": "/Users/trevor.currie/Library/Caches/pypoetry/virtualenvs/eligibility-service-pgaYkPUD-py3.7/lib/python3.7/site-packages/fastapi/routing.py",
+              "function": "run_endpoint_function",
+              "module": "fastapi.routing",
+              "lineno": 149,
+              "pre_context": [
+                "    # Only called by get_request_handler. Has been split into its own function to",
+                "    # facilitate profiling endpoints, since inner functions are harder to profile.",
+                "    assert dependant.call is not None, \"dependant.call must be a function\"",
+                "",
+                "    if is_coroutine:"
+              ],
+              "context_line": "        return await dependant.call(**values)",
+              "post_context": [
+                "    else:",
+                "        return await run_in_threadpool(dependant.call, **values)",
+                "",
+                "",
+                "def get_request_handler("
+              ],
+              "vars": {
+                "dependant": "<fastapi.dependencies.models.Dependant object at 0x105fd23d0>",
+                "values": {
+                  "db": "<sqlalchemy.orm.session.Session object at 0x1060ff650>",
+                  "eligibility_request": "EligibilityRequest(***)",
+                  "request": {
+                    "type": "'http'",
+                    "asgi": {
+                      "version": "'3.0'",
+                      "spec_version": "'2.1'"
+                    },
+                    "http_version": "'1.1'",
+                    "server": [
+                      "'127.0.0.1'",
+                      "8080"
+                    ],
+                    "client": [
+                      "'127.0.0.1'",
+                      "57398"
+                    ],
+                    "scheme": "'http'",
+                    "method": "'POST'",
+                    "root_path": "''",
+                    "path": "'/api/v1/file/eligibility'",
+                    "raw_path": "b'/api/v1/file/eligibility'"
+                  }
+                },
+                "is_coroutine": "True"
+              },
+              "in_app": true
+            },
+            {
+              "filename": "slowapi/extension.py",
+              "abs_path": "/Users/trevor.currie/Library/Caches/pypoetry/virtualenvs/eligibility-service-pgaYkPUD-py3.7/lib/python3.7/site-packages/slowapi/extension.py",
+              "function": "async_wrapper",
+              "module": "slowapi.extension",
+              "lineno": 631,
+              "pre_context": [
+                "                        if self._auto_check and not getattr(",
+                "                            request.state, \"_rate_limiting_complete\", False",
+                "                        ):",
+                "                            self._check_request_limit(request, func, False)",
+                "                            request.state._rate_limiting_complete = True"
+              ],
+              "context_line": "                    response = await func(*args, **kwargs)  # type: ignore",
+              "post_context": [
+                "                    if self.enabled:",
+                "                        if not isinstance(response, Response):",
+                "                            # get the response object from the decorated endpoint function",
+                "                            self._inject_headers(",
+                "                                kwargs.get(\"response\"), request.state.view_rate_limit  # type: ignore"
+              ],
+              "vars": {
+                "args": [],
+                "kwargs": {
+                  "db": "<sqlalchemy.orm.session.Session object at 0x1060ff650>",
+                  "eligibility_request": "EligibilityRequest(***)",
+                  "request": {
+                    "type": "'http'",
+                    "asgi": {
+                      "version": "'3.0'",
+                      "spec_version": "'2.1'"
+                    },
+                    "http_version": "'1.1'",
+                    "server": [
+                      "'127.0.0.1'",
+                      "8080"
+                    ],
+                    "client": [
+                      "'127.0.0.1'",
+                      "57398"
+                    ],
+                    "scheme": "'http'",
+                    "method": "'POST'",
+                    "root_path": "''",
+                    "path": "'/api/v1/file/eligibility'",
+                    "raw_path": "b'/api/v1/file/eligibility'"
+                  }
+                },
+                "request": {
+                  "type": "'http'",
+                  "asgi": {
+                    "version": "'3.0'",
+                    "spec_version": "'2.1'"
+                  },
+                  "http_version": "'1.1'",
+                  "server": [
+                    "'127.0.0.1'",
+                    "8080"
+                  ],
+                  "client": [
+                    "'127.0.0.1'",
+                    "57398"
+                  ],
+                  "scheme": "'http'",
+                  "method": "'POST'",
+                  "root_path": "''",
+                  "path": "'/api/v1/file/eligibility'",
+                  "raw_path": "b'/api/v1/file/eligibility'"
+                },
+                "func": "<function get_eligibility_from_efile at 0x105d4bb90>",
+                "idx": "0",
+                "self": "<slowapi.extension.Limiter object at 0x1055f2fd0>"
+              },
+              "in_app": true
+            },
+            {
+              "filename": "app/api/v1/endpoints/efile.py",
+              "abs_path": "/Users/trevor.currie/Code/eligibility-service/app/app/api/v1/endpoints/efile.py",
+              "function": "get_eligibility_from_efile",
+              "module": "app.api.v1.endpoints.efile",
+              "lineno": 80,
+              "pre_context": [
+                "        process_time = time.time() - start_time",
+                "",
+                "        # TODO: Move to `encode` and do these lines all within a transaction",
+                "        eligibility_file_record = (",
+                "            crud.eligibility_file_record.create_from_request_and_response("
+              ],
+              "context_line": "                db, request=eligibility_request, response=member_lookup_response",
+              "post_context": [
+                "            )",
+                "        )",
+                "",
+                "        record = crud.patient_record.create(",
+                "            db,"
+              ],
+              "vars": {
+                "request": {
+                  "type": "'http'",
+                  "asgi": {
+                    "version": "'3.0'",
+                    "spec_version": "'2.1'"
+                  },
+                  "http_version": "'1.1'",
+                  "server": [
+                    "'127.0.0.1'",
+                    "8080"
+                  ],
+                  "client": [
+                    "'127.0.0.1'",
+                    "57398"
+                  ],
+                  "scheme": "'http'",
+                  "method": "'POST'",
+                  "root_path": "''",
+                  "path": "'/api/v1/file/eligibility'",
+                  "raw_path": "b'/api/v1/file/eligibility'"
+                },
+                "eligibility_request": "EligibilityRequest(***)",
+                "db": "<sqlalchemy.orm.session.Session object at 0x1060ff650>",
+                "logger": "<Logger app.api.v1.endpoints.efile (WARNING)>",
+                "provider_id": "4",
+                "start_time": "1628661634.637005",
+                "patient_id": "None",
+                "external_request": "MemberLookupRequest(***)",
+                "client": "<httpx.AsyncClient object at 0x1060ffd50>",
+                "member_lookup_response": "MemberLookupSuccess(***)"
+              },
+              "in_app": true
+            },
+            {
+              "filename": "app/crud/crud_eligibility_file_record.py",
+              "abs_path": "/Users/trevor.currie/Code/eligibility-service/app/app/crud/crud_eligibility_file_record.py",
+              "function": "create_from_request_and_response",
+              "module": "app.crud.crud_eligibility_file_record",
+              "lineno": 53,
+              "pre_context": [
+                "        request: EligibilityRequest,",
+                "        response: Union[MemberLookupSuccess, MemberLookupUnsuccessful],",
+                "    ):",
+                "        if isinstance(response, MemberLookupSuccess):",
+                "            response.member.firstName = None"
+              ],
+              "context_line": "            return self.create_from_response(db, response=response)",
+              "post_context": [
+                "",
+                "        return super().create(",
+                "            db,",
+                "            obj_in=build_record_from_request_and_response(",
+                "                request=request, response=response"
+              ],
+              "vars": {
+                "self": "<app.crud.crud_eligibility_file_record.CRUDEligibilityFileRecord object at 0x10546d990>",
+                "db": "<sqlalchemy.orm.session.Session object at 0x1060ff650>",
+                "request": "EligibilityRequest(***)",
+                "response": "MemberLookupSuccess(***)",
+                "__class__": "<class 'app.crud.crud_eligibility_file_record.CRUDEligibilityFileRecord'>"
+              },
+              "in_app": true
+            },
+            {
+              "filename": "app/crud/crud_eligibility_file_record.py",
+              "abs_path": "/Users/trevor.currie/Code/eligibility-service/app/app/crud/crud_eligibility_file_record.py",
+              "function": "create_from_response",
+              "module": "app.crud.crud_eligibility_file_record",
+              "lineno": 34,
+              "pre_context": [
+                "        subscriber_obj = self.model(**jsonable_encoder(subscriber_record))  # type: ignore",
+                "        dependent_obj = None",
+                "",
+                "        db.add(subscriber_obj)",
+                ""
+              ],
+              "context_line": "        db.commit()",
+              "post_context": [
+                "        db.refresh(subscriber_obj)",
+                "        if dependent_record is not None:",
+                "            dependent_obj = self.model(**jsonable_encoder(dependent_record))  # type: ignore",
+                "            dependent_obj.subscriber_record_id = subscriber_obj.id",
+                "            db.add(dependent_obj)"
+              ],
+              "vars": {
+                "self": "<app.crud.crud_eligibility_file_record.CRUDEligibilityFileRecord object at 0x10546d990>",
+                "db": "<sqlalchemy.orm.session.Session object at 0x1060ff650>",
+                "response": "MemberLookupSuccess(***)",
+                "dependent_record": "None",
+                "subscriber_record": "EligibilityRecord(***)",
+                "subscriber_obj": "<app.models.eligibility_file_record.EligibilityFileRecord object at 0x106174750>",
+                "dependent_obj": "None"
+              },
+              "in_app": true
+            },
+            {
+              "filename": "sqlalchemy/orm/session.py",
+              "abs_path": "/Users/trevor.currie/Library/Caches/pypoetry/virtualenvs/eligibility-service-pgaYkPUD-py3.7/lib/python3.7/site-packages/sqlalchemy/orm/session.py",
+              "function": "commit",
+              "module": "sqlalchemy.orm.session",
+              "lineno": 1428,
+              "pre_context": [
+                "        \"\"\"",
+                "        if self._transaction is None:",
+                "            if not self._autobegin():",
+                "                raise sa_exc.InvalidRequestError(\"No transaction is begun.\")",
+                ""
+              ],
+              "context_line": "        self._transaction.commit(_to_root=self.future)",
+              "post_context": [
+                "",
+                "    def prepare(self):",
+                "        \"\"\"Prepare the current transaction in progress for two phase commit.",
+                "",
+                "        If no transaction is in progress, this method raises an"
+              ],
+              "vars": {
+                "self": "<sqlalchemy.orm.session.Session object at 0x1060ff650>"
+              },
+              "in_app": true
+            },
+            {
+              "filename": "sqlalchemy/orm/session.py",
+              "abs_path": "/Users/trevor.currie/Library/Caches/pypoetry/virtualenvs/eligibility-service-pgaYkPUD-py3.7/lib/python3.7/site-packages/sqlalchemy/orm/session.py",
+              "function": "commit",
+              "module": "sqlalchemy.orm.session",
+              "lineno": 829,
+              "pre_context": [
+                "        self._state = PREPARED",
+                "",
+                "    def commit(self, _to_root=False):",
+                "        self._assert_active(prepared_ok=True)",
+                "        if self._state is not PREPARED:"
+              ],
+              "context_line": "            self._prepare_impl()",
+              "post_context": [
+                "",
+                "        if self._parent is None or self.nested:",
+                "            for conn, trans, should_commit, autoclose in set(",
+                "                self._connections.values()",
+                "            ):"
+              ],
+              "vars": {
+                "self": "<sqlalchemy.orm.session.SessionTransaction object at 0x106198fd0>",
+                "_to_root": "False"
+              },
+              "in_app": true
+            },
+            {
+              "filename": "sqlalchemy/orm/session.py",
+              "abs_path": "/Users/trevor.currie/Library/Caches/pypoetry/virtualenvs/eligibility-service-pgaYkPUD-py3.7/lib/python3.7/site-packages/sqlalchemy/orm/session.py",
+              "function": "_prepare_impl",
+              "module": "sqlalchemy.orm.session",
+              "lineno": 808,
+              "pre_context": [
+                "",
+                "        if not self.session._flushing:",
+                "            for _flush_guard in range(100):",
+                "                if self.session._is_clean():",
+                "                    break"
+              ],
+              "context_line": "                self.session.flush()",
+              "post_context": [
+                "            else:",
+                "                raise exc.FlushError(",
+                "                    \"Over 100 subsequent flushes have occurred within \"",
+                "                    \"session.commit() - is an after_flush() hook \"",
+                "                    \"creating new objects?\""
+              ],
+              "vars": {
+                "self": "<sqlalchemy.orm.session.SessionTransaction object at 0x106198fd0>",
+                "stx": "<sqlalchemy.orm.session.SessionTransaction object at 0x106198fd0>",
+                "_flush_guard": "0"
+              },
+              "in_app": true
+            },
+            {
+              "filename": "sqlalchemy/orm/session.py",
+              "abs_path": "/Users/trevor.currie/Library/Caches/pypoetry/virtualenvs/eligibility-service-pgaYkPUD-py3.7/lib/python3.7/site-packages/sqlalchemy/orm/session.py",
+              "function": "flush",
+              "module": "sqlalchemy.orm.session",
+              "lineno": 3298,
+              "pre_context": [
+                "",
+                "        if self._is_clean():",
+                "            return",
+                "        try:",
+                "            self._flushing = True"
+              ],
+              "context_line": "            self._flush(objects)",
+              "post_context": [
+                "        finally:",
+                "            self._flushing = False",
+                "",
+                "    def _flush_warning(self, method):",
+                "        util.warn("
+              ],
+              "vars": {
+                "self": "<sqlalchemy.orm.session.Session object at 0x1060ff650>",
+                "objects": "None"
+              },
+              "in_app": true
+            },
+            {
+              "filename": "sqlalchemy/orm/session.py",
+              "abs_path": "/Users/trevor.currie/Library/Caches/pypoetry/virtualenvs/eligibility-service-pgaYkPUD-py3.7/lib/python3.7/site-packages/sqlalchemy/orm/session.py",
+              "function": "_flush",
+              "module": "sqlalchemy.orm.session",
+              "lineno": 3438,
+              "pre_context": [
+                "",
+                "            transaction.commit()",
+                "",
+                "        except:",
+                "            with util.safe_reraise():"
+              ],
+              "context_line": "                transaction.rollback(_capture_exception=True)",
+              "post_context": [
+                "",
+                "    def bulk_save_objects(",
+                "        self,",
+                "        objects,",
+                "        return_defaults=False,"
+              ],
+              "vars": {
+                "self": "<sqlalchemy.orm.session.Session object at 0x1060ff650>",
+                "objects": "None",
+                "dirty": [],
+                "flush_context": "<sqlalchemy.orm.unitofwork.UOWTransaction object at 0x106198ed0>",
+                "deleted": [],
+                "new": [
+                  "<sqlalchemy.orm.state.InstanceState object at 0x106198e90>"
+                ],
+                "objset": "None",
+                "state": "<sqlalchemy.orm.state.InstanceState object at 0x106198e90>",
+                "processed": [
+                  "<sqlalchemy.orm.state.InstanceState object at 0x106198e90>"
+                ],
+                "proc": []
+              },
+              "in_app": true
+            },
+            {
+              "filename": "sqlalchemy/util/langhelpers.py",
+              "abs_path": "/Users/trevor.currie/Library/Caches/pypoetry/virtualenvs/eligibility-service-pgaYkPUD-py3.7/lib/python3.7/site-packages/sqlalchemy/util/langhelpers.py",
+              "function": "__exit__",
+              "module": "sqlalchemy.util.langhelpers",
+              "lineno": 72,
+              "pre_context": [
+                "            exc_type, exc_value, exc_tb = self._exc_info",
+                "            self._exc_info = None  # remove potential circular references",
+                "            if not self.warn_only:",
+                "                compat.raise_(",
+                "                    exc_value,"
+              ],
+              "context_line": "                    with_traceback=exc_tb,",
+              "post_context": [
+                "                )",
+                "        else:",
+                "            if not compat.py3k and self._exc_info and self._exc_info[1]:",
+                "                # emulate Py3K's behavior of telling us when an exception",
+                "                # occurs in an exception handler."
+              ],
+              "vars": {
+                "self": "<sqlalchemy.util.langhelpers.safe_reraise object at 0x105f6e110>",
+                "type_": "None",
+                "value": "None",
+                "traceback": "None",
+                "exc_type": "<class 'sqlalchemy.exc.IntegrityError'>",
+                "exc_value": "IntegrityError('(psycopg2.errors.NotNullViolation) null value in column \"first_name\" violates not-null constraint')",
+                "exc_tb": "<traceback object at 0x1061fdc80>"
+              },
+              "in_app": true
+            },
+            {
+              "filename": "sqlalchemy/util/compat.py",
+              "abs_path": "/Users/trevor.currie/Library/Caches/pypoetry/virtualenvs/eligibility-service-pgaYkPUD-py3.7/lib/python3.7/site-packages/sqlalchemy/util/compat.py",
+              "function": "raise_",
+              "module": "sqlalchemy.util.compat",
+              "lineno": 207,
+              "pre_context": [
+                "            # intermediary exception does not change, but we can't figure",
+                "            # that out.",
+                "            exception.__cause__ = replace_context",
+                "",
+                "        try:"
+              ],
+              "context_line": "            raise exception",
+              "post_context": [
+                "        finally:",
+                "            # credit to",
+                "            # https://cosmicpercolator.com/2016/01/13/exception-leaks-in-python-2-and-3/",
+                "            # as the __traceback__ object creates a cycle",
+                "            del exception, replace_context, from_, with_traceback"
+              ],
+              "vars": {},
+              "in_app": true
+            },
+            {
+              "filename": "sqlalchemy/orm/session.py",
+              "abs_path": "/Users/trevor.currie/Library/Caches/pypoetry/virtualenvs/eligibility-service-pgaYkPUD-py3.7/lib/python3.7/site-packages/sqlalchemy/orm/session.py",
+              "function": "_flush",
+              "module": "sqlalchemy.orm.session",
+              "lineno": 3398,
+              "pre_context": [
+                "",
+                "        flush_context.transaction = transaction = self.begin(_subtrans=True)",
+                "        try:",
+                "            self._warn_on_events = True",
+                "            try:"
+              ],
+              "context_line": "                flush_context.execute()",
+              "post_context": [
+                "            finally:",
+                "                self._warn_on_events = False",
+                "",
+                "            self.dispatch.after_flush(self, flush_context)",
+                ""
+              ],
+              "vars": {
+                "self": "<sqlalchemy.orm.session.Session object at 0x1060ff650>",
+                "objects": "None",
+                "dirty": [],
+                "flush_context": "<sqlalchemy.orm.unitofwork.UOWTransaction object at 0x106198ed0>",
+                "deleted": [],
+                "new": [
+                  "<sqlalchemy.orm.state.InstanceState object at 0x106198e90>"
+                ],
+                "objset": "None",
+                "state": "<sqlalchemy.orm.state.InstanceState object at 0x106198e90>",
+                "processed": [
+                  "<sqlalchemy.orm.state.InstanceState object at 0x106198e90>"
+                ],
+                "proc": []
+              },
+              "in_app": true
+            },
+            {
+              "filename": "sqlalchemy/orm/unitofwork.py",
+              "abs_path": "/Users/trevor.currie/Library/Caches/pypoetry/virtualenvs/eligibility-service-pgaYkPUD-py3.7/lib/python3.7/site-packages/sqlalchemy/orm/unitofwork.py",
+              "function": "execute",
+              "module": "sqlalchemy.orm.unitofwork",
+              "lineno": 456,
+              "pre_context": [
+                "                while set_:",
+                "                    n = set_.pop()",
+                "                    n.execute_aggregate(self, set_)",
+                "        else:",
+                "            for rec in topological.sort(self.dependencies, postsort_actions):"
+              ],
+              "context_line": "                rec.execute(self)",
+              "post_context": [
+                "",
+                "    def finalize_flush_changes(self):",
+                "        \"\"\"Mark processed objects as clean / deleted after a successful",
+                "        flush().",
+                ""
+              ],
+              "vars": {
+                "self": "<sqlalchemy.orm.unitofwork.UOWTransaction object at 0x106198ed0>",
+                "postsort_actions": [
+                  "DeleteAll(mapped class EligibilityFileRecord->eligibility_file_record)",
+                  "SaveUpdateAll(mapped class EligibilityFileRecord->eligibility_file_record)"
+                ],
+                "rec": "SaveUpdateAll(mapped class EligibilityFileRecord->eligibility_file_record)"
+              },
+              "in_app": true
+            },
+            {
+              "filename": "sqlalchemy/orm/unitofwork.py",
+              "abs_path": "/Users/trevor.currie/Library/Caches/pypoetry/virtualenvs/eligibility-service-pgaYkPUD-py3.7/lib/python3.7/site-packages/sqlalchemy/orm/unitofwork.py",
+              "function": "execute",
+              "module": "sqlalchemy.orm.unitofwork",
+              "lineno": 633,
+              "pre_context": [
+                "    @util.preload_module(\"sqlalchemy.orm.persistence\")",
+                "    def execute(self, uow):",
+                "        util.preloaded.orm_persistence.save_obj(",
+                "            self.mapper,",
+                "            uow.states_for_mapper_hierarchy(self.mapper, False, False),"
+              ],
+              "context_line": "            uow,",
+              "post_context": [
+                "        )",
+                "",
+                "    def per_state_flush_actions(self, uow):",
+                "        states = list(",
+                "            uow.states_for_mapper_hierarchy(self.mapper, False, False)"
+              ],
+              "vars": {
+                "self": "SaveUpdateAll(mapped class EligibilityFileRecord->eligibility_file_record)",
+                "uow": "<sqlalchemy.orm.unitofwork.UOWTransaction object at 0x106198ed0>"
+              },
+              "in_app": true
+            },
+            {
+              "filename": "sqlalchemy/orm/persistence.py",
+              "abs_path": "/Users/trevor.currie/Library/Caches/pypoetry/virtualenvs/eligibility-service-pgaYkPUD-py3.7/lib/python3.7/site-packages/sqlalchemy/orm/persistence.py",
+              "function": "save_obj",
+              "module": "sqlalchemy.orm.persistence",
+              "lineno": 247,
+              "pre_context": [
+                "        _emit_insert_statements(",
+                "            base_mapper,",
+                "            uowtransaction,",
+                "            mapper,",
+                "            table,"
+              ],
+              "context_line": "            insert,",
+              "post_context": [
+                "        )",
+                "",
+                "    _finalize_insert_update_commands(",
+                "        base_mapper,",
+                "        uowtransaction,"
+              ],
+              "vars": {
+                "base_mapper": "<Mapper at 0x10546d5d0; EligibilityFileRecord>",
+                "states": "<generator object UOWTransaction.states_for_mapper_hierarchy at 0x1061b02d0>",
+                "uowtransaction": "<sqlalchemy.orm.unitofwork.UOWTransaction object at 0x106198ed0>",
+                "single": "False",
+                "state": "<sqlalchemy.orm.state.InstanceState object at 0x106198e90>",
+                "states_to_update": [],
+                "states_to_insert": [
+                  [
+                    "<sqlalchemy.orm.state.InstanceState object at 0x106198e90>",
+                    {
+                      "_sa_instance_state": "<sqlalchemy.orm.state.InstanceState object at 0x106198e90>",
+                      "first_name": "None",
+                      "last_name": "'DOE'",
+                      "date_of_birth": "'1980-01-01'",
+                      "gender": "None",
+                      "subscriber_id": "'1234567890'",
+                      "insurer": "'BCCAC'",
+                      "group_number": "None",
+                      "address": "'2853 Emily Drive'",
+                      "city": "'Gastonia'"
+                    },
+                    "<Mapper at 0x10546d5d0; EligibilityFileRecord>",
+                    "<sqlalchemy.engine.base.Connection object at 0x1061b3e50>"
+                  ]
+                ],
+                "dict_": {
+                  "_sa_instance_state": "<sqlalchemy.orm.state.InstanceState object at 0x106198e90>",
+                  "first_name": "None",
+                  "last_name": "'DOE'",
+                  "date_of_birth": "'1980-01-01'",
+                  "gender": "None",
+                  "subscriber_id": "'1234567890'",
+                  "insurer": "'BCCAC'",
+                  "group_number": "None",
+                  "address": "'2853 Emily Drive'",
+                  "city": "'Gastonia'"
+                },
+                "mapper": "<Mapper at 0x10546d5d0; EligibilityFileRecord>",
+                "connection": "<sqlalchemy.engine.base.Connection object at 0x1061b3e50>"
+              },
+              "in_app": true
+            },
+            {
+              "filename": "sqlalchemy/orm/persistence.py",
+              "abs_path": "/Users/trevor.currie/Library/Caches/pypoetry/virtualenvs/eligibility-service-pgaYkPUD-py3.7/lib/python3.7/site-packages/sqlalchemy/orm/persistence.py",
+              "function": "_emit_insert_statements",
+              "module": "sqlalchemy.orm.persistence",
+              "lineno": 1222,
+              "pre_context": [
+                "                        )",
+                "                    else:",
+                "                        result = connection._execute_20(",
+                "                            statement,",
+                "                            params,"
+              ],
+              "context_line": "                            execution_options=execution_options,",
+              "post_context": [
+                "                        )",
+                "",
+                "                    primary_key = result.inserted_primary_key",
+                "                    for pk, col in zip(",
+                "                        primary_key, mapper._pks_by_table[table]"
+              ],
+              "vars": {
+                "base_mapper": "<Mapper at 0x10546d5d0; EligibilityFileRecord>",
+                "uowtransaction": "<sqlalchemy.orm.unitofwork.UOWTransaction object at 0x106198ed0>",
+                "mapper": "<Mapper at 0x10546d5d0; EligibilityFileRecord>",
+                "table": "Table('eligibility_file_record', MetaData(), Column('id', Integer(), table=<eligibility_file_record>, primary_key=True, nullable=False), Column('subscriber_record_id', Integer(), ForeignKey('eligibility_file_record.id'), table=<eligibility_file_record>), Column('first_name', String(), table=<eligibility_file_record>, nullable=False), Column('last_name', String(), table=<eligibility_file_record>, nullable=False), Column('gender', String(), table=<eligibility_file_record>), Column('date_of_birth', Date(), ...",
+                "insert": "<generator object _collect_insert_commands at 0x1061b01d0>",
+                "bookkeeping": "True",
+                "cached_stmt": "<sqlalchemy.sql.dml.Insert object at 0x101f7a710>",
+                "execution_options": {
+                  "compiled_cache": {
+                    "(<sqlalchemy.dialects.postgresql.psycopg2.PGDialect_psycopg2 object at 0x102f08710>, ('0', <class 'sqlalchemy.sql.dml.Insert'>, 'table', (Table('eligibility_file_record', MetaData(), Column('id', Integer(), table=<eligibility_file_record>, primary_key=True, nullable=False), Column('subscriber_record_id', Integer(), ForeignKey('eligibility_file_record.id'), table=<eligibility_file_record>), Column('first_name', String(), table=<eligibility_file_record>, nullable=False), Column('last_name', String(), table=<eligibility_file_record>, nullable=False), Column('gender', String(), table=<eligibility_file_record>), Column('date_of_birth', Date(), table=<eligibility_file_record>), Column('insurer', String(), table=<eligibility_file_record>), Column('group_number', String(), table=<eligibility_file_record>), Column('subscriber_id', String(), table=<eligibility_file_record>), Column('address', String(), table=<eligibility_file_record>), Column('city', String(), table=<eligibility_file_record>), Column('state', String(), table=<eligibility_file_record>), Column('postal_code', String(), table=<eligibility_file_record>), Column('relationship_code', String(), table=<eligibility_file_record>), Column('relation_to_subscriber', String(), table=<eligibility_file_record>), Column('published_date', Date(), table=<eligibility_file_record>), Column('is_exact_match', Boolean(), table=<eligibility_file_record>), Column('extra_columns', JSON(), table=<eligibility_file_record>), Column('error_message', String(), table=<eligibility_file_record>), schema=None),)), ('address', 'city', 'date_of_birth', 'error_message', 'extra_columns', 'first_name', 'gender', 'group_number', 'insurer', 'is_exact_match', 'last_name', 'postal_code', 'published_date', 'relation_to_subscriber', 'relationship_code', 'state', 'subscriber_id', 'subscriber_record_id'), False, False)": [
+                      [
+                        "<sqlalchemy.dialects.postgresql.psycopg2.PGDialect_psycopg2 object at 0x102f08710>",
+                        "('0', <class 'sqlalchemy.sql.dml.Insert'>, 'table', (Table('eligibility_file_record', MetaData(), Column('id', Integer(), table=<eligibility_file_record>, primary_key=True, nullable=False), Column('subscriber_record_id', Integer(), ForeignKey('eligibility_file_record.id'), table=<eligibility_file_record>), Column('first_name', String(), table=<eligibility_file_record>, nullable=False), Column('last_name', String(), table=<eligibility_file_record>, nullable=False), Column('gender', String(), table=<eligib...",
+                        "('address', 'city', 'date_of_birth', 'error_message', 'extra_columns', 'first_name', 'gender', 'group_number', 'insurer', 'is_exact_match', 'last_name', 'postal_code', 'published_date', 'relation_to_subscriber', 'relationship_code', 'state', 'subscriber_id', 'subscriber_record_id')",
+                        "False",
+                        "False"
+                      ],
+                      "<sqlalchemy.dialects.postgresql.psycopg2.PGCompiler_psycopg2 object at 0x1061b3d50>",
+                      "1"
+                    ]
+                  }
+                },
+                "connection": "<sqlalchemy.engine.base.Connection object at 0x1061b3e50>",
+                "pkeys": [
+                  "'subscriber_id'",
+                  "'relation_to_subscriber'",
+                  "'first_name'",
+                  "'date_of_birth'",
+                  "'postal_code'",
+                  "'last_name'",
+                  "'relationship_code'",
+                  "'state'",
+                  "'extra_columns'",
+                  "'group_number'"
+                ]
+              },
+              "in_app": true
+            },
+            {
+              "filename": "sqlalchemy/engine/base.py",
+              "abs_path": "/Users/trevor.currie/Library/Caches/pypoetry/virtualenvs/eligibility-service-pgaYkPUD-py3.7/lib/python3.7/site-packages/sqlalchemy/engine/base.py",
+              "function": "_execute_20",
+              "module": "sqlalchemy.engine.base",
+              "lineno": 1583,
+              "pre_context": [
+                "        except AttributeError as err:",
+                "            util.raise_(",
+                "                exc.ObjectNotExecutableError(statement), replace_context=err",
+                "            )",
+                "        else:"
+              ],
+              "context_line": "            return meth(self, args_10style, kwargs_10style, execution_options)",
+              "post_context": [
+                "",
+                "    def exec_driver_sql(",
+                "        self, statement, parameters=None, execution_options=None",
+                "    ):",
+                "        r\"\"\"Executes a SQL statement construct and returns a"
+              ],
+              "vars": {
+                "self": "<sqlalchemy.engine.base.Connection object at 0x1061b3e50>",
+                "statement": "<sqlalchemy.sql.dml.Insert object at 0x101f7a710>",
+                "parameters": {
+                  "city": "'Gastonia'",
+                  "published_date": "'2020-01-01'",
+                  "subscriber_id": "'1234567890'",
+                  "date_of_birth": "'1980-01-01'",
+                  "insurer": "'BCCAC'",
+                  "postal_code": "'28052'",
+                  "last_name": "'DOE'",
+                  "address": "'2853 Emily Drive'",
+                  "state": "'SC'",
+                  "extra_columns": {
+                    "foo": "'bar'"
+                  }
+                },
+                "execution_options": {
+                  "compiled_cache": {
+                    "(<sqlalchemy.dialects.postgresql.psycopg2.PGDialect_psycopg2 object at 0x102f08710>, ('0', <class 'sqlalchemy.sql.dml.Insert'>, 'table', (Table('eligibility_file_record', MetaData(), Column('id', Integer(), table=<eligibility_file_record>, primary_key=True, nullable=False), Column('subscriber_record_id', Integer(), ForeignKey('eligibility_file_record.id'), table=<eligibility_file_record>), Column('first_name', String(), table=<eligibility_file_record>, nullable=False), Column('last_name', String(), table=<eligibility_file_record>, nullable=False), Column('gender', String(), table=<eligibility_file_record>), Column('date_of_birth', Date(), table=<eligibility_file_record>), Column('insurer', String(), table=<eligibility_file_record>), Column('group_number', String(), table=<eligibility_file_record>), Column('subscriber_id', String(), table=<eligibility_file_record>), Column('address', String(), table=<eligibility_file_record>), Column('city', String(), table=<eligibility_file_record>), Column('state', String(), table=<eligibility_file_record>), Column('postal_code', String(), table=<eligibility_file_record>), Column('relationship_code', String(), table=<eligibility_file_record>), Column('relation_to_subscriber', String(), table=<eligibility_file_record>), Column('published_date', Date(), table=<eligibility_file_record>), Column('is_exact_match', Boolean(), table=<eligibility_file_record>), Column('extra_columns', JSON(), table=<eligibility_file_record>), Column('error_message', String(), table=<eligibility_file_record>), schema=None),)), ('address', 'city', 'date_of_birth', 'error_message', 'extra_columns', 'first_name', 'gender', 'group_number', 'insurer', 'is_exact_match', 'last_name', 'postal_code', 'published_date', 'relation_to_subscriber', 'relationship_code', 'state', 'subscriber_id', 'subscriber_record_id'), False, False)": [
+                      [
+                        "<sqlalchemy.dialects.postgresql.psycopg2.PGDialect_psycopg2 object at 0x102f08710>",
+                        "('0', <class 'sqlalchemy.sql.dml.Insert'>, 'table', (Table('eligibility_file_record', MetaData(), Column('id', Integer(), table=<eligibility_file_record>, primary_key=True, nullable=False), Column('subscriber_record_id', Integer(), ForeignKey('eligibility_file_record.id'), table=<eligibility_file_record>), Column('first_name', String(), table=<eligibility_file_record>, nullable=False), Column('last_name', String(), table=<eligibility_file_record>, nullable=False), Column('gender', String(), table=<eligib...",
+                        "('address', 'city', 'date_of_birth', 'error_message', 'extra_columns', 'first_name', 'gender', 'group_number', 'insurer', 'is_exact_match', 'last_name', 'postal_code', 'published_date', 'relation_to_subscriber', 'relationship_code', 'state', 'subscriber_id', 'subscriber_record_id')",
+                        "False",
+                        "False"
+                      ],
+                      "<sqlalchemy.dialects.postgresql.psycopg2.PGCompiler_psycopg2 object at 0x1061b3d50>",
+                      "1"
+                    ]
+                  }
+                },
+                "args_10style": [
+                  {
+                    "city": "'Gastonia'",
+                    "published_date": "'2020-01-01'",
+                    "subscriber_id": "'1234567890'",
+                    "date_of_birth": "'1980-01-01'",
+                    "insurer": "'BCCAC'",
+                    "postal_code": "'28052'",
+                    "last_name": "'DOE'",
+                    "address": "'2853 Emily Drive'",
+                    "state": "'SC'",
+                    "extra_columns": {
+                      "foo": "'bar'"
+                    }
+                  }
+                ],
+                "kwargs_10style": {},
+                "meth": "<bound method ClauseElement._execute_on_connection of <sqlalchemy.sql.dml.Insert object at 0x101f7a710>>"
+              },
+              "in_app": true
+            },
+            {
+              "filename": "sqlalchemy/sql/elements.py",
+              "abs_path": "/Users/trevor.currie/Library/Caches/pypoetry/virtualenvs/eligibility-service-pgaYkPUD-py3.7/lib/python3.7/site-packages/sqlalchemy/sql/elements.py",
+              "function": "_execute_on_connection",
+              "module": "sqlalchemy.sql.elements",
+              "lineno": 324,
+              "pre_context": [
+                "    def _execute_on_connection(",
+                "        self, connection, multiparams, params, execution_options, _force=False",
+                "    ):",
+                "        if _force or self.supports_execution:",
+                "            return connection._execute_clauseelement("
+              ],
+              "context_line": "                self, multiparams, params, execution_options",
+              "post_context": [
+                "            )",
+                "        else:",
+                "            raise exc.ObjectNotExecutableError(self)",
+                "",
+                "    def unique_params(self, *optionaldict, **kwargs):"
+              ],
+              "vars": {
+                "self": "<sqlalchemy.sql.dml.Insert object at 0x101f7a710>",
+                "connection": "<sqlalchemy.engine.base.Connection object at 0x1061b3e50>",
+                "multiparams": [
+                  {
+                    "city": "'Gastonia'",
+                    "published_date": "'2020-01-01'",
+                    "subscriber_id": "'1234567890'",
+                    "date_of_birth": "'1980-01-01'",
+                    "insurer": "'BCCAC'",
+                    "postal_code": "'28052'",
+                    "last_name": "'DOE'",
+                    "address": "'2853 Emily Drive'",
+                    "state": "'SC'",
+                    "extra_columns": {
+                      "foo": "'bar'"
+                    }
+                  }
+                ],
+                "params": {},
+                "execution_options": {
+                  "compiled_cache": {
+                    "(<sqlalchemy.dialects.postgresql.psycopg2.PGDialect_psycopg2 object at 0x102f08710>, ('0', <class 'sqlalchemy.sql.dml.Insert'>, 'table', (Table('eligibility_file_record', MetaData(), Column('id', Integer(), table=<eligibility_file_record>, primary_key=True, nullable=False), Column('subscriber_record_id', Integer(), ForeignKey('eligibility_file_record.id'), table=<eligibility_file_record>), Column('first_name', String(), table=<eligibility_file_record>, nullable=False), Column('last_name', String(), table=<eligibility_file_record>, nullable=False), Column('gender', String(), table=<eligibility_file_record>), Column('date_of_birth', Date(), table=<eligibility_file_record>), Column('insurer', String(), table=<eligibility_file_record>), Column('group_number', String(), table=<eligibility_file_record>), Column('subscriber_id', String(), table=<eligibility_file_record>), Column('address', String(), table=<eligibility_file_record>), Column('city', String(), table=<eligibility_file_record>), Column('state', String(), table=<eligibility_file_record>), Column('postal_code', String(), table=<eligibility_file_record>), Column('relationship_code', String(), table=<eligibility_file_record>), Column('relation_to_subscriber', String(), table=<eligibility_file_record>), Column('published_date', Date(), table=<eligibility_file_record>), Column('is_exact_match', Boolean(), table=<eligibility_file_record>), Column('extra_columns', JSON(), table=<eligibility_file_record>), Column('error_message', String(), table=<eligibility_file_record>), schema=None),)), ('address', 'city', 'date_of_birth', 'error_message', 'extra_columns', 'first_name', 'gender', 'group_number', 'insurer', 'is_exact_match', 'last_name', 'postal_code', 'published_date', 'relation_to_subscriber', 'relationship_code', 'state', 'subscriber_id', 'subscriber_record_id'), False, False)": [
+                      [
+                        "<sqlalchemy.dialects.postgresql.psycopg2.PGDialect_psycopg2 object at 0x102f08710>",
+                        "('0', <class 'sqlalchemy.sql.dml.Insert'>, 'table', (Table('eligibility_file_record', MetaData(), Column('id', Integer(), table=<eligibility_file_record>, primary_key=True, nullable=False), Column('subscriber_record_id', Integer(), ForeignKey('eligibility_file_record.id'), table=<eligibility_file_record>), Column('first_name', String(), table=<eligibility_file_record>, nullable=False), Column('last_name', String(), table=<eligibility_file_record>, nullable=False), Column('gender', String(), table=<eligib...",
+                        "('address', 'city', 'date_of_birth', 'error_message', 'extra_columns', 'first_name', 'gender', 'group_number', 'insurer', 'is_exact_match', 'last_name', 'postal_code', 'published_date', 'relation_to_subscriber', 'relationship_code', 'state', 'subscriber_id', 'subscriber_record_id')",
+                        "False",
+                        "False"
+                      ],
+                      "<sqlalchemy.dialects.postgresql.psycopg2.PGCompiler_psycopg2 object at 0x1061b3d50>",
+                      "1"
+                    ]
+                  }
+                },
+                "_force": "False"
+              },
+              "in_app": true
+            },
+            {
+              "filename": "sqlalchemy/engine/base.py",
+              "abs_path": "/Users/trevor.currie/Library/Caches/pypoetry/virtualenvs/eligibility-service-pgaYkPUD-py3.7/lib/python3.7/site-packages/sqlalchemy/engine/base.py",
+              "function": "_execute_clauseelement",
+              "module": "sqlalchemy.engine.base",
+              "lineno": 1462,
+              "pre_context": [
+                "            execution_options,",
+                "            compiled_sql,",
+                "            distilled_params,",
+                "            elem,",
+                "            extracted_params,"
+              ],
+              "context_line": "            cache_hit=cache_hit,",
+              "post_context": [
+                "        )",
+                "        if has_events:",
+                "            self.dispatch.after_execute(",
+                "                self,",
+                "                elem,"
+              ],
+              "vars": {
+                "self": "<sqlalchemy.engine.base.Connection object at 0x1061b3e50>",
+                "elem": "<sqlalchemy.sql.dml.Insert object at 0x101f7a710>",
+                "multiparams": [
+                  {
+                    "city": "'Gastonia'",
+                    "published_date": "'2020-01-01'",
+                    "subscriber_id": "'1234567890'",
+                    "date_of_birth": "'1980-01-01'",
+                    "insurer": "'BCCAC'",
+                    "postal_code": "'28052'",
+                    "last_name": "'DOE'",
+                    "address": "'2853 Emily Drive'",
+                    "state": "'SC'",
+                    "extra_columns": {
+                      "foo": "'bar'"
+                    }
+                  }
+                ],
+                "params": {},
+                "execution_options": {
+                  "autocommit": "True",
+                  "compiled_cache": {
+                    "(<sqlalchemy.dialects.postgresql.psycopg2.PGDialect_psycopg2 object at 0x102f08710>, ('0', <class 'sqlalchemy.sql.dml.Insert'>, 'table', (Table('eligibility_file_record', MetaData(), Column('id', Integer(), table=<eligibility_file_record>, primary_key=True, nullable=False), Column('subscriber_record_id', Integer(), ForeignKey('eligibility_file_record.id'), table=<eligibility_file_record>), Column('first_name', String(), table=<eligibility_file_record>, nullable=False), Column('last_name', String(), table=<eligibility_file_record>, nullable=False), Column('gender', String(), table=<eligibility_file_record>), Column('date_of_birth', Date(), table=<eligibility_file_record>), Column('insurer', String(), table=<eligibility_file_record>), Column('group_number', String(), table=<eligibility_file_record>), Column('subscriber_id', String(), table=<eligibility_file_record>), Column('address', String(), table=<eligibility_file_record>), Column('city', String(), table=<eligibility_file_record>), Column('state', String(), table=<eligibility_file_record>), Column('postal_code', String(), table=<eligibility_file_record>), Column('relationship_code', String(), table=<eligibility_file_record>), Column('relation_to_subscriber', String(), table=<eligibility_file_record>), Column('published_date', Date(), table=<eligibility_file_record>), Column('is_exact_match', Boolean(), table=<eligibility_file_record>), Column('extra_columns', JSON(), table=<eligibility_file_record>), Column('error_message', String(), table=<eligibility_file_record>), schema=None),)), ('address', 'city', 'date_of_birth', 'error_message', 'extra_columns', 'first_name', 'gender', 'group_number', 'insurer', 'is_exact_match', 'last_name', 'postal_code', 'published_date', 'relation_to_subscriber', 'relationship_code', 'state', 'subscriber_id', 'subscriber_record_id'), False, False)": [
+                      [
+                        "<sqlalchemy.dialects.postgresql.psycopg2.PGDialect_psycopg2 object at 0x102f08710>",
+                        "('0', <class 'sqlalchemy.sql.dml.Insert'>, 'table', (Table('eligibility_file_record', MetaData(), Column('id', Integer(), table=<eligibility_file_record>, primary_key=True, nullable=False), Column('subscriber_record_id', Integer(), ForeignKey('eligibility_file_record.id'), table=<eligibility_file_record>), Column('first_name', String(), table=<eligibility_file_record>, nullable=False), Column('last_name', String(), table=<eligibility_file_record>, nullable=False), Column('gender', String(), table=<eligib...",
+                        "('address', 'city', 'date_of_birth', 'error_message', 'extra_columns', 'first_name', 'gender', 'group_number', 'insurer', 'is_exact_match', 'last_name', 'postal_code', 'published_date', 'relation_to_subscriber', 'relationship_code', 'state', 'subscriber_id', 'subscriber_record_id')",
+                        "False",
+                        "False"
+                      ],
+                      "<sqlalchemy.dialects.postgresql.psycopg2.PGCompiler_psycopg2 object at 0x1061b3d50>",
+                      "1"
+                    ]
+                  }
+                },
+                "distilled_params": [
+                  {
+                    "city": "'Gastonia'",
+                    "published_date": "'2020-01-01'",
+                    "subscriber_id": "'1234567890'",
+                    "date_of_birth": "'1980-01-01'",
+                    "insurer": "'BCCAC'",
+                    "postal_code": "'28052'",
+                    "last_name": "'DOE'",
+                    "address": "'2853 Emily Drive'",
+                    "state": "'SC'",
+                    "extra_columns": {
+                      "foo": "'bar'"
+                    }
+                  }
+                ],
+                "has_events": "True",
+                "event_multiparams": [],
+                "event_params": {
+                  "city": "'Gastonia'",
+                  "published_date": "'2020-01-01'",
+                  "subscriber_id": "'1234567890'",
+                  "date_of_birth": "'1980-01-01'",
+                  "insurer": "'BCCAC'",
+                  "postal_code": "'28052'",
+                  "last_name": "'DOE'",
+                  "address": "'2853 Emily Drive'",
+                  "state": "'SC'",
+                  "extra_columns": {
+                    "foo": "'bar'"
+                  }
+                },
+                "keys": [
+                  "'address'",
+                  "'city'",
+                  "'date_of_birth'",
+                  "'error_message'",
+                  "'extra_columns'",
+                  "'first_name'",
+                  "'gender'",
+                  "'group_number'",
+                  "'insurer'",
+                  "'is_exact_match'"
+                ]
+              },
+              "in_app": true
+            },
+            {
+              "filename": "sqlalchemy/engine/base.py",
+              "abs_path": "/Users/trevor.currie/Library/Caches/pypoetry/virtualenvs/eligibility-service-pgaYkPUD-py3.7/lib/python3.7/site-packages/sqlalchemy/engine/base.py",
+              "function": "_execute_context",
+              "module": "sqlalchemy.engine.base",
+              "lineno": 1815,
+              "pre_context": [
+                "                    # close us now",
+                "                    branched.close()",
+                "",
+                "        except BaseException as e:",
+                "            self._handle_dbapi_exception("
+              ],
+              "context_line": "                e, statement, parameters, cursor, context",
+              "post_context": [
+                "            )",
+                "",
+                "        return result",
+                "",
+                "    def _cursor_execute(self, cursor, statement, parameters, context=None):"
+              ],
+              "vars": {
+                "self": "<sqlalchemy.engine.base.Connection object at 0x1061b3e50>",
+                "dialect": "<sqlalchemy.dialects.postgresql.psycopg2.PGDialect_psycopg2 object at 0x102f08710>",
+                "constructor": "<bound method DefaultExecutionContext._init_compiled of <class 'sqlalchemy.dialects.postgresql.psycopg2.PGExecutionContext_psycopg2'>>",
+                "statement": "'INSERT INTO eligibility_file_record (subscriber_record_id, first_name, last_name, gender, date_of_birth, insurer, group_number, subscriber_id, address, city, state, postal_code, relationship_code, relation_to_subscriber, published_date, is_exact_match, extra_columns, error_message) VALUES (%(subscriber_record_id)s, %(first_name)s, %(last_name)s, %(gender)s, %(date_of_birth)s, %(insurer)s, %(group_number)s, %(subscriber_id)s, %(address)s, %(city)s, %(state)s, %(postal_code)s, %(relationship_code)s, %(rel...",
+                "parameters": {
+                  "subscriber_record_id": "None",
+                  "first_name": "None",
+                  "last_name": "String(***)",
+                  "gender": "None",
+                  "date_of_birth": "Date(***)",
+                  "insurer": "'BCCAC'",
+                  "group_number": "None",
+                  "subscriber_id": "String(***)",
+                  "address": "String(***)",
+                  "city": "String(***)"
+                },
+                "execution_options": {
+                  "autocommit": "True",
+                  "compiled_cache": {
+                    "(<sqlalchemy.dialects.postgresql.psycopg2.PGDialect_psycopg2 object at 0x102f08710>, ('0', <class 'sqlalchemy.sql.dml.Insert'>, 'table', (Table('eligibility_file_record', MetaData(), Column('id', Integer(), table=<eligibility_file_record>, primary_key=True, nullable=False), Column('subscriber_record_id', Integer(), ForeignKey('eligibility_file_record.id'), table=<eligibility_file_record>), Column('first_name', String(), table=<eligibility_file_record>, nullable=False), Column('last_name', String(), table=<eligibility_file_record>, nullable=False), Column('gender', String(), table=<eligibility_file_record>), Column('date_of_birth', Date(), table=<eligibility_file_record>), Column('insurer', String(), table=<eligibility_file_record>), Column('group_number', String(), table=<eligibility_file_record>), Column('subscriber_id', String(), table=<eligibility_file_record>), Column('address', String(), table=<eligibility_file_record>), Column('city', String(), table=<eligibility_file_record>), Column('state', String(), table=<eligibility_file_record>), Column('postal_code', String(), table=<eligibility_file_record>), Column('relationship_code', String(), table=<eligibility_file_record>), Column('relation_to_subscriber', String(), table=<eligibility_file_record>), Column('published_date', Date(), table=<eligibility_file_record>), Column('is_exact_match', Boolean(), table=<eligibility_file_record>), Column('extra_columns', JSON(), table=<eligibility_file_record>), Column('error_message', String(), table=<eligibility_file_record>), schema=None),)), ('address', 'city', 'date_of_birth', 'error_message', 'extra_columns', 'first_name', 'gender', 'group_number', 'insurer', 'is_exact_match', 'last_name', 'postal_code', 'published_date', 'relation_to_subscriber', 'relationship_code', 'state', 'subscriber_id', 'subscriber_record_id'), False, False)": [
+                      [
+                        "<sqlalchemy.dialects.postgresql.psycopg2.PGDialect_psycopg2 object at 0x102f08710>",
+                        "('0', <class 'sqlalchemy.sql.dml.Insert'>, 'table', (Table('eligibility_file_record', MetaData(), Column('id', Integer(), table=<eligibility_file_record>, primary_key=True, nullable=False), Column('subscriber_record_id', Integer(), ForeignKey('eligibility_file_record.id'), table=<eligibility_file_record>), Column('first_name', String(), table=<eligibility_file_record>, nullable=False), Column('last_name', String(), table=<eligibility_file_record>, nullable=False), Column('gender', String(), table=<eligib...",
+                        "('address', 'city', 'date_of_birth', 'error_message', 'extra_columns', 'first_name', 'gender', 'group_number', 'insurer', 'is_exact_match', 'last_name', 'postal_code', 'published_date', 'relation_to_subscriber', 'relationship_code', 'state', 'subscriber_id', 'subscriber_record_id')",
+                        "False",
+                        "False"
+                      ],
+                      "<sqlalchemy.dialects.postgresql.psycopg2.PGCompiler_psycopg2 object at 0x1061b3d50>",
+                      "1"
+                    ]
+                  }
+                },
+                "args": [
+                  "<sqlalchemy.dialects.postgresql.psycopg2.PGCompiler_psycopg2 object at 0x1061b3d50>",
+                  [
+                    {
+                      "city": "'Gastonia'",
+                      "published_date": "'2020-01-01'",
+                      "subscriber_id": "'1234567890'",
+                      "date_of_birth": "'1980-01-01'",
+                      "insurer": "'BCCAC'",
+                      "postal_code": "'28052'",
+                      "last_name": "'DOE'",
+                      "address": "'2853 Emily Drive'",
+                      "state": "'SC'",
+                      "extra_columns": {
+                        "foo": "'bar'"
+                      }
+                    }
+                  ],
+                  "<sqlalchemy.sql.dml.Insert object at 0x101f7a710>",
+                  []
+                ],
+                "kw": {
+                  "cache_hit": "symbol('CACHE_MISS')"
+                },
+                "branched": "<sqlalchemy.engine.base.Connection object at 0x1061b3e50>",
+                "conn": "<sqlalchemy.pool.base._ConnectionFairy object at 0x1061b3150>"
+              },
+              "in_app": true
+            },
+            {
+              "filename": "sqlalchemy/engine/base.py",
+              "abs_path": "/Users/trevor.currie/Library/Caches/pypoetry/virtualenvs/eligibility-service-pgaYkPUD-py3.7/lib/python3.7/site-packages/sqlalchemy/engine/base.py",
+              "function": "_handle_dbapi_exception",
+              "module": "sqlalchemy.engine.base",
+              "lineno": 1996,
+              "pre_context": [
+                "",
+                "            if newraise:",
+                "                util.raise_(newraise, with_traceback=exc_info[2], from_=e)",
+                "            elif should_wrap:",
+                "                util.raise_("
+              ],
+              "context_line": "                    sqlalchemy_exception, with_traceback=exc_info[2], from_=e",
+              "post_context": [
+                "                )",
+                "            else:",
+                "                util.raise_(exc_info[1], with_traceback=exc_info[2])",
+                "",
+                "        finally:"
+              ],
+              "vars": {
+                "self": "<sqlalchemy.engine.base.Connection object at 0x1061b3e50>",
+                "e": "NotNullViolation('null value in column \"first_name\" violates not-null constraint')",
+                "statement": "'INSERT INTO eligibility_file_record (subscriber_record_id, first_name, last_name, gender, date_of_birth, insurer, group_number, subscriber_id, address, city, state, postal_code, relationship_code, relation_to_subscriber, published_date, is_exact_match, extra_columns, error_message) VALUES (%(subscriber_record_id)s, %(first_name)s, %(last_name)s, %(gender)s, %(date_of_birth)s, %(insurer)s, %(group_number)s, %(subscriber_id)s, %(address)s, %(city)s, %(state)s, %(postal_code)s, %(relationship_code)s, %(rel...",
+                "parameters": {
+                  "subscriber_record_id": "None",
+                  "first_name": "None",
+                  "last_name": "String(***)",
+                  "gender": "None",
+                  "date_of_birth": "Date(***)",
+                  "insurer": "'BCCAC'",
+                  "group_number": "None",
+                  "subscriber_id": "String(***)",
+                  "address": "String(***)",
+                  "city": "String(***)"
+                },
+                "cursor": "<cursor object at 0x105ea1d50; closed: -1>",
+                "context": "<sqlalchemy.dialects.postgresql.psycopg2.PGExecutionContext_psycopg2 object at 0x1061b3bd0>",
+                "exc_info": [
+                  "<class 'psycopg2.errors.NotNullViolation'>",
+                  "NotNullViolation('null value in column \"first_name\" violates not-null constraint')",
+                  "<traceback object at 0x1061fd870>"
+                ],
+                "is_exit_exception": "False",
+                "invalidate_pool_on_disconnect": "True",
+                "should_wrap": "True"
+              },
+              "in_app": true
+            },
+            {
+              "filename": "sqlalchemy/util/compat.py",
+              "abs_path": "/Users/trevor.currie/Library/Caches/pypoetry/virtualenvs/eligibility-service-pgaYkPUD-py3.7/lib/python3.7/site-packages/sqlalchemy/util/compat.py",
+              "function": "raise_",
+              "module": "sqlalchemy.util.compat",
+              "lineno": 207,
+              "pre_context": [
+                "            # intermediary exception does not change, but we can't figure",
+                "            # that out.",
+                "            exception.__cause__ = replace_context",
+                "",
+                "        try:"
+              ],
+              "context_line": "            raise exception",
+              "post_context": [
+                "        finally:",
+                "            # credit to",
+                "            # https://cosmicpercolator.com/2016/01/13/exception-leaks-in-python-2-and-3/",
+                "            # as the __traceback__ object creates a cycle",
+                "            del exception, replace_context, from_, with_traceback"
+              ],
+              "vars": {},
+              "in_app": true
+            },
+            {
+              "filename": "sqlalchemy/engine/base.py",
+              "abs_path": "/Users/trevor.currie/Library/Caches/pypoetry/virtualenvs/eligibility-service-pgaYkPUD-py3.7/lib/python3.7/site-packages/sqlalchemy/engine/base.py",
+              "function": "_execute_context",
+              "module": "sqlalchemy.engine.base",
+              "lineno": 1772,
+              "pre_context": [
+                "                        if fn(cursor, statement, parameters, context):",
+                "                            evt_handled = True",
+                "                            break",
+                "                if not evt_handled:",
+                "                    self.dialect.do_execute("
+              ],
+              "context_line": "                        cursor, statement, parameters, context",
+              "post_context": [
+                "                    )",
+                "",
+                "            if self._has_events or self.engine._has_events:",
+                "                self.dispatch.after_cursor_execute(",
+                "                    self,"
+              ],
+              "vars": {
+                "self": "<sqlalchemy.engine.base.Connection object at 0x1061b3e50>",
+                "dialect": "<sqlalchemy.dialects.postgresql.psycopg2.PGDialect_psycopg2 object at 0x102f08710>",
+                "constructor": "<bound method DefaultExecutionContext._init_compiled of <class 'sqlalchemy.dialects.postgresql.psycopg2.PGExecutionContext_psycopg2'>>",
+                "statement": "'INSERT INTO eligibility_file_record (subscriber_record_id, first_name, last_name, gender, date_of_birth, insurer, group_number, subscriber_id, address, city, state, postal_code, relationship_code, relation_to_subscriber, published_date, is_exact_match, extra_columns, error_message) VALUES (%(subscriber_record_id)s, %(first_name)s, %(last_name)s, %(gender)s, %(date_of_birth)s, %(insurer)s, %(group_number)s, %(subscriber_id)s, %(address)s, %(city)s, %(state)s, %(postal_code)s, %(relationship_code)s, %(rel...",
+                "parameters": {
+                  "subscriber_record_id": "None",
+                  "first_name": "None",
+                  "last_name": "String(***)",
+                  "gender": "None",
+                  "date_of_birth": "Date(***)",
+                  "insurer": "'BCCAC'",
+                  "group_number": "None",
+                  "subscriber_id": "String(***)",
+                  "address": "String(***)",
+                  "city": "String(***)"
+                },
+                "execution_options": {
+                  "autocommit": "True",
+                  "compiled_cache": {
+                    "(<sqlalchemy.dialects.postgresql.psycopg2.PGDialect_psycopg2 object at 0x102f08710>, ('0', <class 'sqlalchemy.sql.dml.Insert'>, 'table', (Table('eligibility_file_record', MetaData(), Column('id', Integer(), table=<eligibility_file_record>, primary_key=True, nullable=False), Column('subscriber_record_id', Integer(), ForeignKey('eligibility_file_record.id'), table=<eligibility_file_record>), Column('first_name', String(), table=<eligibility_file_record>, nullable=False), Column('last_name', String(), table=<eligibility_file_record>, nullable=False), Column('gender', String(), table=<eligibility_file_record>), Column('date_of_birth', Date(), table=<eligibility_file_record>), Column('insurer', String(), table=<eligibility_file_record>), Column('group_number', String(), table=<eligibility_file_record>), Column('subscriber_id', String(), table=<eligibility_file_record>), Column('address', String(), table=<eligibility_file_record>), Column('city', String(), table=<eligibility_file_record>), Column('state', String(), table=<eligibility_file_record>), Column('postal_code', String(), table=<eligibility_file_record>), Column('relationship_code', String(), table=<eligibility_file_record>), Column('relation_to_subscriber', String(), table=<eligibility_file_record>), Column('published_date', Date(), table=<eligibility_file_record>), Column('is_exact_match', Boolean(), table=<eligibility_file_record>), Column('extra_columns', JSON(), table=<eligibility_file_record>), Column('error_message', String(), table=<eligibility_file_record>), schema=None),)), ('address', 'city', 'date_of_birth', 'error_message', 'extra_columns', 'first_name', 'gender', 'group_number', 'insurer', 'is_exact_match', 'last_name', 'postal_code', 'published_date', 'relation_to_subscriber', 'relationship_code', 'state', 'subscriber_id', 'subscriber_record_id'), False, False)": [
+                      [
+                        "<sqlalchemy.dialects.postgresql.psycopg2.PGDialect_psycopg2 object at 0x102f08710>",
+                        "('0', <class 'sqlalchemy.sql.dml.Insert'>, 'table', (Table('eligibility_file_record', MetaData(), Column('id', Integer(), table=<eligibility_file_record>, primary_key=True, nullable=False), Column('subscriber_record_id', Integer(), ForeignKey('eligibility_file_record.id'), table=<eligibility_file_record>), Column('first_name', String(), table=<eligibility_file_record>, nullable=False), Column('last_name', String(), table=<eligibility_file_record>, nullable=False), Column('gender', String(), table=<eligib...",
+                        "('address', 'city', 'date_of_birth', 'error_message', 'extra_columns', 'first_name', 'gender', 'group_number', 'insurer', 'is_exact_match', 'last_name', 'postal_code', 'published_date', 'relation_to_subscriber', 'relationship_code', 'state', 'subscriber_id', 'subscriber_record_id')",
+                        "False",
+                        "False"
+                      ],
+                      "<sqlalchemy.dialects.postgresql.psycopg2.PGCompiler_psycopg2 object at 0x1061b3d50>",
+                      "1"
+                    ]
+                  }
+                },
+                "args": [
+                  "<sqlalchemy.dialects.postgresql.psycopg2.PGCompiler_psycopg2 object at 0x1061b3d50>",
+                  [
+                    {
+                      "city": "'Gastonia'",
+                      "published_date": "'2020-01-01'",
+                      "subscriber_id": "'1234567890'",
+                      "date_of_birth": "'1980-01-01'",
+                      "insurer": "'BCCAC'",
+                      "postal_code": "'28052'",
+                      "last_name": "'DOE'",
+                      "address": "'2853 Emily Drive'",
+                      "state": "'SC'",
+                      "extra_columns": {
+                        "foo": "'bar'"
+                      }
+                    }
+                  ],
+                  "<sqlalchemy.sql.dml.Insert object at 0x101f7a710>",
+                  []
+                ],
+                "kw": {
+                  "cache_hit": "symbol('CACHE_MISS')"
+                },
+                "branched": "<sqlalchemy.engine.base.Connection object at 0x1061b3e50>",
+                "conn": "<sqlalchemy.pool.base._ConnectionFairy object at 0x1061b3150>"
+              },
+              "in_app": true
+            },
+            {
+              "filename": "sqlalchemy/engine/default.py",
+              "abs_path": "/Users/trevor.currie/Library/Caches/pypoetry/virtualenvs/eligibility-service-pgaYkPUD-py3.7/lib/python3.7/site-packages/sqlalchemy/engine/default.py",
+              "function": "do_execute",
+              "module": "sqlalchemy.engine.default",
+              "lineno": 717,
+              "pre_context": [
+                "",
+                "    def do_executemany(self, cursor, statement, parameters, context=None):",
+                "        cursor.executemany(statement, parameters)",
+                "",
+                "    def do_execute(self, cursor, statement, parameters, context=None):"
+              ],
+              "context_line": "        cursor.execute(statement, parameters)",
+              "post_context": [
+                "",
+                "    def do_execute_no_params(self, cursor, statement, context=None):",
+                "        cursor.execute(statement)",
+                "",
+                "    def is_disconnect(self, e, connection, cursor):"
+              ],
+              "vars": {
+                "self": "<sqlalchemy.dialects.postgresql.psycopg2.PGDialect_psycopg2 object at 0x102f08710>",
+                "cursor": "<cursor object at 0x105ea1d50; closed: -1>",
+                "statement": "'INSERT INTO eligibility_file_record (subscriber_record_id, first_name, last_name, gender, date_of_birth, insurer, group_number, subscriber_id, address, city, state, postal_code, relationship_code, relation_to_subscriber, published_date, is_exact_match, extra_columns, error_message) VALUES (%(subscriber_record_id)s, %(first_name)s, %(last_name)s, %(gender)s, %(date_of_birth)s, %(insurer)s, %(group_number)s, %(subscriber_id)s, %(address)s, %(city)s, %(state)s, %(postal_code)s, %(relationship_code)s, %(rel...",
+                "parameters": {
+                  "subscriber_record_id": "None",
+                  "first_name": "None",
+                  "last_name": "String(***)",
+                  "gender": "None",
+                  "date_of_birth": "Date(***)",
+                  "insurer": "'BCCAC'",
+                  "group_number": "None",
+                  "subscriber_id": "String(***)",
+                  "address": "String(***)",
+                  "city": "String(***)"
+                },
+                "context": "<sqlalchemy.dialects.postgresql.psycopg2.PGExecutionContext_psycopg2 object at 0x1061b3bd0>"
+              },
+              "in_app": true
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "event_id": "24cd18884fc747a69f682ed2d63edf37",
+  "timestamp": "2021-08-11T06:00:36.698789Z",
+  "breadcrumbs": {
+    "values": [
+      {
+        "type": "http",
+        "category": "httplib",
+        "data": {},
+        "timestamp": "2021-08-11T06:00:34.671805Z"
+      },
+      {
+        "message": "INSERT INTO eligibility_file_record (subscriber_record_id, first_name, last_name, gender, date_of_birth, insurer, group_number, subscriber_id, address, city, state, postal_code, relationship_code, relation_to_subscriber, published_date, is_exact_match, extra_columns, error_message) VALUES (%(subscriber_record_id)s, %(first_name)s, %(last_name)s, %(gender)s, %(date_of_birth)s, %(insurer)s, %(group_number)s, %(subscriber_id)s, %(address)s, %(city)s, %(state)s, %(postal_code)s, %(relationship_code)s, %(rela...",
+        "category": "query",
+        "data": {},
+        "timestamp": "2021-08-11T06:00:36.665717Z",
+        "type": "default"
+      },
+      {
+        "type": "log",
+        "level": "info",
+        "category": "uvicorn.access",
+        "message": "127.0.0.1:57398 - \"POST /api/v1/file/eligibility HTTP/1.1\" 500",
+        "timestamp": "2021-08-11T06:00:36.673228Z",
+        "data": {}
+      }
+    ]
+  },
+  "transaction": "app.api.v1.endpoints.efile.get_eligibility_from_efile",
+  "contexts": {
+    "trace": {
+      "trace_id": "1c734f65490347b0951e0cdec28150e5",
+      "span_id": "82aa9e9005b613ff",
+      "parent_span_id": null,
+      "op": "http.server",
+      "description": null
+    },
+    "runtime": {
+      "name": "CPython",
+      "version": "3.7.10",
+      "build": "3.7.10 (default, Mar  1 2021, 14:52:28) \n[Clang 12.0.0 (clang-1200.0.32.29)]"
+    }
+  },
+  "modules": {
+    "zipp": "3.5.0",
+    "wheel": "0.36.2",
+    "uvicorn": "0.13.4",
+    "urllib3": "1.26.6",
+    "typing-extensions": "3.10.0.0",
+    "typed-ast": "1.4.3",
+    "toml": "0.10.2",
+    "text-unidecode": "1.3",
+    "tenacity": "7.0.0",
+    "stringcase": "1.2.0",
+    "stevedore": "3.3.0",
+    "starlette": "0.14.2",
+    "sqlalchemy2-stubs": "0.0.2a8",
+    "sqlalchemy": "1.4.22",
+    "sniffio": "1.2.0",
+    "smmap": "4.0.0",
+    "slowapi": "0.1.4",
+    "six": "1.16.0",
+    "single-source": "0.1.5",
+    "setuptools": "53.1.0",
+    "sentry-sdk": "1.3.1",
+    "safety": "1.10.3",
+    "rfc3986": "1.5.0",
+    "requests": "2.26.0",
+    "regex": "2021.7.6",
+    "redis": "3.5.3",
+    "pyyaml": "5.4.1",
+    "python-levenshtein": "0.12.2",
+    "python-json-logger": "2.0.1",
+    "python-editor": "1.0.4",
+    "python-dotenv": "0.19.0",
+    "python-dateutil": "2.8.2",
+    "pytest": "6.2.4",
+    "pytest-pycharm": "0.7.0",
+    "pytest-mock": "3.6.1",
+    "pytest-lazy-fixture": "0.6.3",
+    "pytest-httpx": "0.11.0",
+    "pytest-freezegun": "0.4.2",
+    "pytest-env": "0.6.2",
+    "pytest-dotenv": "0.5.2",
+    "pytest-cov": "2.12.1",
+    "pytest-asyncio": "0.14.0",
+    "pyparsing": "2.4.7",
+    "pydantic": "1.8.2",
+    "py": "1.10.0",
+    "psycopg2-binary": "2.9.1",
+    "pluggy": "0.13.1",
+    "pip": "21.1.1",
+    "pbr": "5.6.0",
+    "pathspec": "0.9.0",
+    "packaging": "21.0",
+    "ordered-set": "4.0.2",
+    "newrelic": "6.6.0.162",
+    "mypy": "0.812",
+    "mypy-extensions": "0.4.3",
+    "mock": "4.0.3",
+    "markupsafe": "2.0.1",
+    "mako": "1.1.4",
+    "loguru": "0.5.3",
+    "limits": "1.5.1",
+    "iniconfig": "1.1.1",
+    "importlib-metadata": "4.6.3",
+    "idna": "3.2",
+    "httpx": "0.17.1",
+    "httpcore": "0.12.3",
+    "hiro": "0.5.1",
+    "hiredis": "2.0.0",
+    "h11": "0.12.0",
+    "greenlet": "1.1.0",
+    "gitpython": "3.1.20",
+    "gitdb": "4.0.7",
+    "freezegun": "1.1.0",
+    "fastapi": "0.65.2",
+    "fastapi-health": "0.1.0",
+    "faker": "8.10.3",
+    "dparse": "0.5.1",
+    "deepdiff": "5.5.0",
+    "databases": "0.4.3",
+    "coverage": "6.0b1",
+    "click": "7.1.2",
+    "charset-normalizer": "2.0.4",
+    "chardet": "4.0.0",
+    "certifi": "2021.5.30",
+    "bump2version": "1.0.1",
+    "black": "20.8b1",
+    "bandit": "1.7.0",
+    "attrs": "21.2.0",
+    "async-timeout": "3.0.1",
+    "appdirs": "1.4.4",
+    "alembic": "1.6.5",
+    "aioredis": "1.3.1",
+    "aenum": "3.1.0"
+  },
+  "extra": {
+    "sys.argv": [
+      "/Users/trevor.currie/Code/eligibility-service/app/app/main.py"
+    ]
+  },
+  "request": {
+    "method": "POST",
+    "headers": {
+      "host": "localhost:8080",
+      "connection": "keep-alive",
+      "content-length": "84",
+      "accept": "application/json",
+      "authorization": "",
+      "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.164 Safari/537.36",
+      "content-type": "application/json",
+      "sec-gpc": "1",
+      "origin": "http://localhost:8080",
+      "sec-fetch-site": "same-origin",
+      "sec-fetch-mode": "cors",
+      "sec-fetch-dest": "empty",
+      "referer": "http://localhost:8080/docs",
+      "accept-encoding": "gzip, deflate, br",
+      "accept-language": "en-US,en;q=0.9",
+      "cookie": ""
+    },
+    "query_string": null,
+    "url": "http://localhost:8080/api/v1/file/eligibility"
+  },
+  "release": "76bfdd23a4d9267bd5729e2d50af991a789078f6",
+  "environment": "development",
+  "server_name": "big-lurch",
+  "sdk": {
+    "name": "sentry.python",
+    "version": "1.3.1",
+    "packages": [
+      {
+        "name": "pypi:sentry-sdk",
+        "version": "1.3.1"
+      }
+    ],
+    "integrations": [
+      "argv",
+      "atexit",
+      "dedupe",
+      "excepthook",
+      "logging",
+      "modules",
+      "sqlalchemy",
+      "stdlib",
+      "threading"
+    ]
+  },
+  "platform": "python",
+  "_meta": {
+    "exception": {
+      "values": {
+        "0": {
+          "value": {
+            "": {
+              "len": 1286,
+              "rem": [
+                [
+                  "!limit",
+                  "x",
+                  509,
+                  512
+                ]
+              ]
+            }
+          },
+          "stacktrace": {
+            "frames": {
+              "0": {
+                "vars": {
+                  "scope": {
+                    "": {
+                      "len": 18
+                    }
+                  }
+                }
+              },
+              "1": {
+                "vars": {
+                  "scope": {
+                    "": {
+                      "len": 18
+                    }
+                  }
+                }
+              },
+              "2": {
+                "vars": {
+                  "scope": {
+                    "": {
+                      "len": 18
+                    }
+                  },
+                  "request": {
+                    "": {
+                      "len": 18
+                    }
+                  }
+                }
+              },
+              "3": {
+                "vars": {
+                  "scope": {
+                    "": {
+                      "len": 18
+                    }
+                  },
+                  "request": {
+                    "": {
+                      "len": 18
+                    }
+                  }
+                }
+              },
+              "4": {
+                "vars": {
+                  "scope": {
+                    "": {
+                      "len": 18
+                    }
+                  },
+                  "request": {
+                    "": {
+                      "len": 18
+                    }
+                  }
+                }
+              },
+              "5": {
+                "vars": {
+                  "request": {
+                    "": {
+                      "len": 18
+                    }
+                  }
+                }
+              },
+              "6": {
+                "vars": {
+                  "request": {
+                    "": {
+                      "len": 18
+                    }
+                  },
+                  "scope": {
+                    "": {
+                      "len": 18
+                    }
+                  }
+                }
+              },
+              "7": {
+                "vars": {
+                  "scope": {
+                    "": {
+                      "len": 18
+                    }
+                  }
+                }
+              },
+              "8": {
+                "vars": {
+                  "scope": {
+                    "": {
+                      "len": 18
+                    }
+                  },
+                  "request": {
+                    "": {
+                      "len": 18
+                    }
+                  }
+                }
+              },
+              "9": {
+                "vars": {
+                  "request": {
+                    "": {
+                      "len": 18
+                    }
+                  }
+                }
+              },
+              "10": {
+                "vars": {
+                  "request": {
+                    "": {
+                      "len": 18
+                    }
+                  },
+                  "scope": {
+                    "": {
+                      "len": 18
+                    }
+                  }
+                }
+              },
+              "11": {
+                "vars": {
+                  "scope": {
+                    "": {
+                      "len": 18
+                    }
+                  }
+                }
+              },
+              "12": {
+                "vars": {
+                  "scope": {
+                    "": {
+                      "len": 18
+                    }
+                  },
+                  "request": {
+                    "": {
+                      "len": 18
+                    }
+                  }
+                }
+              },
+              "13": {
+                "vars": {
+                  "request": {
+                    "": {
+                      "len": 18
+                    }
+                  }
+                }
+              },
+              "14": {
+                "vars": {
+                  "request": {
+                    "": {
+                      "len": 18
+                    }
+                  },
+                  "scope": {
+                    "": {
+                      "len": 18
+                    }
+                  }
+                }
+              },
+              "15": {
+                "vars": {
+                  "scope": {
+                    "": {
+                      "len": 18
+                    }
+                  }
+                }
+              },
+              "16": {
+                "vars": {
+                  "scope": {
+                    "": {
+                      "len": 18
+                    }
+                  }
+                }
+              },
+              "17": {
+                "vars": {
+                  "scope": {
+                    "": {
+                      "len": 18
+                    }
+                  }
+                }
+              },
+              "18": {
+                "vars": {
+                  "scope": {
+                    "": {
+                      "len": 18
+                    }
+                  }
+                }
+              },
+              "19": {
+                "vars": {
+                  "scope": {
+                    "": {
+                      "len": 18
+                    }
+                  }
+                }
+              },
+              "20": {
+                "vars": {
+                  "scope": {
+                    "": {
+                      "len": 18
+                    }
+                  },
+                  "request": {
+                    "": {
+                      "len": 18
+                    }
+                  }
+                }
+              },
+              "21": {
+                "vars": {
+                  "request": {
+                    "": {
+                      "len": 18
+                    }
+                  },
+                  "solved_result": {
+                    "0": {
+                      "request": {
+                        "asgi": {
+                          "version": {
+                            "": {
+                              "rem": [
+                                [
+                                  "!limit",
+                                  "x"
+                                ]
+                              ]
+                            }
+                          },
+                          "spec_version": {
+                            "": {
+                              "rem": [
+                                [
+                                  "!limit",
+                                  "x"
+                                ]
+                              ]
+                            }
+                          }
+                        },
+                        "server": {
+                          "0": {
+                            "": {
+                              "rem": [
+                                [
+                                  "!limit",
+                                  "x"
+                                ]
+                              ]
+                            }
+                          },
+                          "1": {
+                            "": {
+                              "rem": [
+                                [
+                                  "!limit",
+                                  "x"
+                                ]
+                              ]
+                            }
+                          }
+                        },
+                        "client": {
+                          "0": {
+                            "": {
+                              "rem": [
+                                [
+                                  "!limit",
+                                  "x"
+                                ]
+                              ]
+                            }
+                          },
+                          "1": {
+                            "": {
+                              "rem": [
+                                [
+                                  "!limit",
+                                  "x"
+                                ]
+                              ]
+                            }
+                          }
+                        },
+                        "": {
+                          "len": 18
+                        }
+                      }
+                    }
+                  },
+                  "values": {
+                    "request": {
+                      "": {
+                        "len": 18
+                      }
+                    }
+                  },
+                  "": {
+                    "len": 27
+                  }
+                }
+              },
+              "22": {
+                "vars": {
+                  "values": {
+                    "request": {
+                      "": {
+                        "len": 18
+                      }
+                    }
+                  }
+                }
+              },
+              "23": {
+                "vars": {
+                  "kwargs": {
+                    "request": {
+                      "": {
+                        "len": 18
+                      }
+                    }
+                  },
+                  "request": {
+                    "": {
+                      "len": 18
+                    }
+                  }
+                }
+              },
+              "24": {
+                "vars": {
+                  "request": {
+                    "": {
+                      "len": 18
+                    }
+                  },
+                  "": {
+                    "len": 13
+                  }
+                }
+              },
+              "31": {
+                "vars": {
+                  "": {
+                    "len": 14
+                  }
+                }
+              },
+              "34": {
+                "vars": {
+                  "": {
+                    "len": 14
+                  }
+                }
+              },
+              "37": {
+                "vars": {
+                  "states_to_insert": {
+                    "0": {
+                      "1": {
+                        "": {
+                          "len": 18
+                        }
+                      }
+                    }
+                  },
+                  "dict_": {
+                    "": {
+                      "len": 18
+                    }
+                  },
+                  "": {
+                    "len": 16
+                  }
+                }
+              },
+              "38": {
+                "vars": {
+                  "table": {
+                    "": {
+                      "len": 1419,
+                      "rem": [
+                        [
+                          "!limit",
+                          "x",
+                          509,
+                          512
+                        ]
+                      ]
+                    }
+                  },
+                  "execution_options": {
+                    "compiled_cache": {
+                      "(<sqlalchemy.dialects.postgresql.psycopg2.PGDialect_psycopg2 object at 0x102f08710>, ('0', <class 'sqlalchemy.sql.dml.Insert'>, 'table', (Table('eligibility_file_record', MetaData(), Column('id', Integer(), table=<eligibility_file_record>, primary_key=True, nullable=False), Column('subscriber_record_id', Integer(), ForeignKey('eligibility_file_record.id'), table=<eligibility_file_record>), Column('first_name', String(), table=<eligibility_file_record>, nullable=False), Column('last_name', String(), table=<eligibility_file_record>, nullable=False), Column('gender', String(), table=<eligibility_file_record>), Column('date_of_birth', Date(), table=<eligibility_file_record>), Column('insurer', String(), table=<eligibility_file_record>), Column('group_number', String(), table=<eligibility_file_record>), Column('subscriber_id', String(), table=<eligibility_file_record>), Column('address', String(), table=<eligibility_file_record>), Column('city', String(), table=<eligibility_file_record>), Column('state', String(), table=<eligibility_file_record>), Column('postal_code', String(), table=<eligibility_file_record>), Column('relationship_code', String(), table=<eligibility_file_record>), Column('relation_to_subscriber', String(), table=<eligibility_file_record>), Column('published_date', Date(), table=<eligibility_file_record>), Column('is_exact_match', Boolean(), table=<eligibility_file_record>), Column('extra_columns', JSON(), table=<eligibility_file_record>), Column('error_message', String(), table=<eligibility_file_record>), schema=None),)), ('address', 'city', 'date_of_birth', 'error_message', 'extra_columns', 'first_name', 'gender', 'group_number', 'insurer', 'is_exact_match', 'last_name', 'postal_code', 'published_date', 'relation_to_subscriber', 'relationship_code', 'state', 'subscriber_id', 'subscriber_record_id'), False, False)": {
+                        "0": {
+                          "0": {
+                            "": {
+                              "rem": [
+                                [
+                                  "!limit",
+                                  "x"
+                                ]
+                              ]
+                            }
+                          },
+                          "1": {
+                            "": {
+                              "rem": [
+                                [
+                                  "!limit",
+                                  "x",
+                                  509,
+                                  512
+                                ]
+                              ],
+                              "len": 1475
+                            }
+                          },
+                          "2": {
+                            "": {
+                              "rem": [
+                                [
+                                  "!limit",
+                                  "x"
+                                ]
+                              ]
+                            }
+                          },
+                          "3": {
+                            "": {
+                              "rem": [
+                                [
+                                  "!limit",
+                                  "x"
+                                ]
+                              ]
+                            }
+                          },
+                          "4": {
+                            "": {
+                              "rem": [
+                                [
+                                  "!limit",
+                                  "x"
+                                ]
+                              ]
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "pkeys": {
+                    "": {
+                      "len": 18
+                    }
+                  },
+                  "": {
+                    "len": 21
+                  }
+                }
+              },
+              "39": {
+                "vars": {
+                  "parameters": {
+                    "": {
+                      "len": 18
+                    }
+                  },
+                  "execution_options": {
+                    "compiled_cache": {
+                      "(<sqlalchemy.dialects.postgresql.psycopg2.PGDialect_psycopg2 object at 0x102f08710>, ('0', <class 'sqlalchemy.sql.dml.Insert'>, 'table', (Table('eligibility_file_record', MetaData(), Column('id', Integer(), table=<eligibility_file_record>, primary_key=True, nullable=False), Column('subscriber_record_id', Integer(), ForeignKey('eligibility_file_record.id'), table=<eligibility_file_record>), Column('first_name', String(), table=<eligibility_file_record>, nullable=False), Column('last_name', String(), table=<eligibility_file_record>, nullable=False), Column('gender', String(), table=<eligibility_file_record>), Column('date_of_birth', Date(), table=<eligibility_file_record>), Column('insurer', String(), table=<eligibility_file_record>), Column('group_number', String(), table=<eligibility_file_record>), Column('subscriber_id', String(), table=<eligibility_file_record>), Column('address', String(), table=<eligibility_file_record>), Column('city', String(), table=<eligibility_file_record>), Column('state', String(), table=<eligibility_file_record>), Column('postal_code', String(), table=<eligibility_file_record>), Column('relationship_code', String(), table=<eligibility_file_record>), Column('relation_to_subscriber', String(), table=<eligibility_file_record>), Column('published_date', Date(), table=<eligibility_file_record>), Column('is_exact_match', Boolean(), table=<eligibility_file_record>), Column('extra_columns', JSON(), table=<eligibility_file_record>), Column('error_message', String(), table=<eligibility_file_record>), schema=None),)), ('address', 'city', 'date_of_birth', 'error_message', 'extra_columns', 'first_name', 'gender', 'group_number', 'insurer', 'is_exact_match', 'last_name', 'postal_code', 'published_date', 'relation_to_subscriber', 'relationship_code', 'state', 'subscriber_id', 'subscriber_record_id'), False, False)": {
+                        "0": {
+                          "0": {
+                            "": {
+                              "rem": [
+                                [
+                                  "!limit",
+                                  "x"
+                                ]
+                              ]
+                            }
+                          },
+                          "1": {
+                            "": {
+                              "rem": [
+                                [
+                                  "!limit",
+                                  "x",
+                                  509,
+                                  512
+                                ]
+                              ],
+                              "len": 1475
+                            }
+                          },
+                          "2": {
+                            "": {
+                              "rem": [
+                                [
+                                  "!limit",
+                                  "x"
+                                ]
+                              ]
+                            }
+                          },
+                          "3": {
+                            "": {
+                              "rem": [
+                                [
+                                  "!limit",
+                                  "x"
+                                ]
+                              ]
+                            }
+                          },
+                          "4": {
+                            "": {
+                              "rem": [
+                                [
+                                  "!limit",
+                                  "x"
+                                ]
+                              ]
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "args_10style": {
+                    "0": {
+                      "": {
+                        "len": 18
+                      }
+                    }
+                  }
+                }
+              },
+              "40": {
+                "vars": {
+                  "multiparams": {
+                    "0": {
+                      "": {
+                        "len": 18
+                      }
+                    }
+                  },
+                  "execution_options": {
+                    "compiled_cache": {
+                      "(<sqlalchemy.dialects.postgresql.psycopg2.PGDialect_psycopg2 object at 0x102f08710>, ('0', <class 'sqlalchemy.sql.dml.Insert'>, 'table', (Table('eligibility_file_record', MetaData(), Column('id', Integer(), table=<eligibility_file_record>, primary_key=True, nullable=False), Column('subscriber_record_id', Integer(), ForeignKey('eligibility_file_record.id'), table=<eligibility_file_record>), Column('first_name', String(), table=<eligibility_file_record>, nullable=False), Column('last_name', String(), table=<eligibility_file_record>, nullable=False), Column('gender', String(), table=<eligibility_file_record>), Column('date_of_birth', Date(), table=<eligibility_file_record>), Column('insurer', String(), table=<eligibility_file_record>), Column('group_number', String(), table=<eligibility_file_record>), Column('subscriber_id', String(), table=<eligibility_file_record>), Column('address', String(), table=<eligibility_file_record>), Column('city', String(), table=<eligibility_file_record>), Column('state', String(), table=<eligibility_file_record>), Column('postal_code', String(), table=<eligibility_file_record>), Column('relationship_code', String(), table=<eligibility_file_record>), Column('relation_to_subscriber', String(), table=<eligibility_file_record>), Column('published_date', Date(), table=<eligibility_file_record>), Column('is_exact_match', Boolean(), table=<eligibility_file_record>), Column('extra_columns', JSON(), table=<eligibility_file_record>), Column('error_message', String(), table=<eligibility_file_record>), schema=None),)), ('address', 'city', 'date_of_birth', 'error_message', 'extra_columns', 'first_name', 'gender', 'group_number', 'insurer', 'is_exact_match', 'last_name', 'postal_code', 'published_date', 'relation_to_subscriber', 'relationship_code', 'state', 'subscriber_id', 'subscriber_record_id'), False, False)": {
+                        "0": {
+                          "0": {
+                            "": {
+                              "rem": [
+                                [
+                                  "!limit",
+                                  "x"
+                                ]
+                              ]
+                            }
+                          },
+                          "1": {
+                            "": {
+                              "rem": [
+                                [
+                                  "!limit",
+                                  "x",
+                                  509,
+                                  512
+                                ]
+                              ],
+                              "len": 1475
+                            }
+                          },
+                          "2": {
+                            "": {
+                              "rem": [
+                                [
+                                  "!limit",
+                                  "x"
+                                ]
+                              ]
+                            }
+                          },
+                          "3": {
+                            "": {
+                              "rem": [
+                                [
+                                  "!limit",
+                                  "x"
+                                ]
+                              ]
+                            }
+                          },
+                          "4": {
+                            "": {
+                              "rem": [
+                                [
+                                  "!limit",
+                                  "x"
+                                ]
+                              ]
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "41": {
+                "vars": {
+                  "multiparams": {
+                    "0": {
+                      "": {
+                        "len": 18
+                      }
+                    }
+                  },
+                  "execution_options": {
+                    "compiled_cache": {
+                      "(<sqlalchemy.dialects.postgresql.psycopg2.PGDialect_psycopg2 object at 0x102f08710>, ('0', <class 'sqlalchemy.sql.dml.Insert'>, 'table', (Table('eligibility_file_record', MetaData(), Column('id', Integer(), table=<eligibility_file_record>, primary_key=True, nullable=False), Column('subscriber_record_id', Integer(), ForeignKey('eligibility_file_record.id'), table=<eligibility_file_record>), Column('first_name', String(), table=<eligibility_file_record>, nullable=False), Column('last_name', String(), table=<eligibility_file_record>, nullable=False), Column('gender', String(), table=<eligibility_file_record>), Column('date_of_birth', Date(), table=<eligibility_file_record>), Column('insurer', String(), table=<eligibility_file_record>), Column('group_number', String(), table=<eligibility_file_record>), Column('subscriber_id', String(), table=<eligibility_file_record>), Column('address', String(), table=<eligibility_file_record>), Column('city', String(), table=<eligibility_file_record>), Column('state', String(), table=<eligibility_file_record>), Column('postal_code', String(), table=<eligibility_file_record>), Column('relationship_code', String(), table=<eligibility_file_record>), Column('relation_to_subscriber', String(), table=<eligibility_file_record>), Column('published_date', Date(), table=<eligibility_file_record>), Column('is_exact_match', Boolean(), table=<eligibility_file_record>), Column('extra_columns', JSON(), table=<eligibility_file_record>), Column('error_message', String(), table=<eligibility_file_record>), schema=None),)), ('address', 'city', 'date_of_birth', 'error_message', 'extra_columns', 'first_name', 'gender', 'group_number', 'insurer', 'is_exact_match', 'last_name', 'postal_code', 'published_date', 'relation_to_subscriber', 'relationship_code', 'state', 'subscriber_id', 'subscriber_record_id'), False, False)": {
+                        "0": {
+                          "0": {
+                            "": {
+                              "rem": [
+                                [
+                                  "!limit",
+                                  "x"
+                                ]
+                              ]
+                            }
+                          },
+                          "1": {
+                            "": {
+                              "rem": [
+                                [
+                                  "!limit",
+                                  "x",
+                                  509,
+                                  512
+                                ]
+                              ],
+                              "len": 1475
+                            }
+                          },
+                          "2": {
+                            "": {
+                              "rem": [
+                                [
+                                  "!limit",
+                                  "x"
+                                ]
+                              ]
+                            }
+                          },
+                          "3": {
+                            "": {
+                              "rem": [
+                                [
+                                  "!limit",
+                                  "x"
+                                ]
+                              ]
+                            }
+                          },
+                          "4": {
+                            "": {
+                              "rem": [
+                                [
+                                  "!limit",
+                                  "x"
+                                ]
+                              ]
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "distilled_params": {
+                    "0": {
+                      "": {
+                        "len": 18
+                      }
+                    }
+                  },
+                  "event_params": {
+                    "": {
+                      "len": 18
+                    }
+                  },
+                  "keys": {
+                    "": {
+                      "len": 18
+                    }
+                  },
+                  "": {
+                    "len": 17
+                  }
+                }
+              },
+              "42": {
+                "vars": {
+                  "statement": {
+                    "": {
+                      "len": 647,
+                      "rem": [
+                        [
+                          "!limit",
+                          "x",
+                          509,
+                          512
+                        ]
+                      ]
+                    }
+                  },
+                  "parameters": {
+                    "": {
+                      "len": 18
+                    }
+                  },
+                  "execution_options": {
+                    "compiled_cache": {
+                      "(<sqlalchemy.dialects.postgresql.psycopg2.PGDialect_psycopg2 object at 0x102f08710>, ('0', <class 'sqlalchemy.sql.dml.Insert'>, 'table', (Table('eligibility_file_record', MetaData(), Column('id', Integer(), table=<eligibility_file_record>, primary_key=True, nullable=False), Column('subscriber_record_id', Integer(), ForeignKey('eligibility_file_record.id'), table=<eligibility_file_record>), Column('first_name', String(), table=<eligibility_file_record>, nullable=False), Column('last_name', String(), table=<eligibility_file_record>, nullable=False), Column('gender', String(), table=<eligibility_file_record>), Column('date_of_birth', Date(), table=<eligibility_file_record>), Column('insurer', String(), table=<eligibility_file_record>), Column('group_number', String(), table=<eligibility_file_record>), Column('subscriber_id', String(), table=<eligibility_file_record>), Column('address', String(), table=<eligibility_file_record>), Column('city', String(), table=<eligibility_file_record>), Column('state', String(), table=<eligibility_file_record>), Column('postal_code', String(), table=<eligibility_file_record>), Column('relationship_code', String(), table=<eligibility_file_record>), Column('relation_to_subscriber', String(), table=<eligibility_file_record>), Column('published_date', Date(), table=<eligibility_file_record>), Column('is_exact_match', Boolean(), table=<eligibility_file_record>), Column('extra_columns', JSON(), table=<eligibility_file_record>), Column('error_message', String(), table=<eligibility_file_record>), schema=None),)), ('address', 'city', 'date_of_birth', 'error_message', 'extra_columns', 'first_name', 'gender', 'group_number', 'insurer', 'is_exact_match', 'last_name', 'postal_code', 'published_date', 'relation_to_subscriber', 'relationship_code', 'state', 'subscriber_id', 'subscriber_record_id'), False, False)": {
+                        "0": {
+                          "0": {
+                            "": {
+                              "rem": [
+                                [
+                                  "!limit",
+                                  "x"
+                                ]
+                              ]
+                            }
+                          },
+                          "1": {
+                            "": {
+                              "rem": [
+                                [
+                                  "!limit",
+                                  "x",
+                                  509,
+                                  512
+                                ]
+                              ],
+                              "len": 1475
+                            }
+                          },
+                          "2": {
+                            "": {
+                              "rem": [
+                                [
+                                  "!limit",
+                                  "x"
+                                ]
+                              ]
+                            }
+                          },
+                          "3": {
+                            "": {
+                              "rem": [
+                                [
+                                  "!limit",
+                                  "x"
+                                ]
+                              ]
+                            }
+                          },
+                          "4": {
+                            "": {
+                              "rem": [
+                                [
+                                  "!limit",
+                                  "x"
+                                ]
+                              ]
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "args": {
+                    "1": {
+                      "0": {
+                        "extra_columns": {
+                          "foo": {
+                            "": {
+                              "rem": [
+                                [
+                                  "!limit",
+                                  "x"
+                                ]
+                              ]
+                            }
+                          }
+                        },
+                        "": {
+                          "len": 18
+                        }
+                      }
+                    }
+                  },
+                  "": {
+                    "len": 14
+                  }
+                }
+              },
+              "43": {
+                "vars": {
+                  "statement": {
+                    "": {
+                      "len": 647,
+                      "rem": [
+                        [
+                          "!limit",
+                          "x",
+                          509,
+                          512
+                        ]
+                      ]
+                    }
+                  },
+                  "parameters": {
+                    "": {
+                      "len": 18
+                    }
+                  },
+                  "": {
+                    "len": 15
+                  }
+                }
+              },
+              "45": {
+                "vars": {
+                  "statement": {
+                    "": {
+                      "len": 647,
+                      "rem": [
+                        [
+                          "!limit",
+                          "x",
+                          509,
+                          512
+                        ]
+                      ]
+                    }
+                  },
+                  "parameters": {
+                    "": {
+                      "len": 18
+                    }
+                  },
+                  "execution_options": {
+                    "compiled_cache": {
+                      "(<sqlalchemy.dialects.postgresql.psycopg2.PGDialect_psycopg2 object at 0x102f08710>, ('0', <class 'sqlalchemy.sql.dml.Insert'>, 'table', (Table('eligibility_file_record', MetaData(), Column('id', Integer(), table=<eligibility_file_record>, primary_key=True, nullable=False), Column('subscriber_record_id', Integer(), ForeignKey('eligibility_file_record.id'), table=<eligibility_file_record>), Column('first_name', String(), table=<eligibility_file_record>, nullable=False), Column('last_name', String(), table=<eligibility_file_record>, nullable=False), Column('gender', String(), table=<eligibility_file_record>), Column('date_of_birth', Date(), table=<eligibility_file_record>), Column('insurer', String(), table=<eligibility_file_record>), Column('group_number', String(), table=<eligibility_file_record>), Column('subscriber_id', String(), table=<eligibility_file_record>), Column('address', String(), table=<eligibility_file_record>), Column('city', String(), table=<eligibility_file_record>), Column('state', String(), table=<eligibility_file_record>), Column('postal_code', String(), table=<eligibility_file_record>), Column('relationship_code', String(), table=<eligibility_file_record>), Column('relation_to_subscriber', String(), table=<eligibility_file_record>), Column('published_date', Date(), table=<eligibility_file_record>), Column('is_exact_match', Boolean(), table=<eligibility_file_record>), Column('extra_columns', JSON(), table=<eligibility_file_record>), Column('error_message', String(), table=<eligibility_file_record>), schema=None),)), ('address', 'city', 'date_of_birth', 'error_message', 'extra_columns', 'first_name', 'gender', 'group_number', 'insurer', 'is_exact_match', 'last_name', 'postal_code', 'published_date', 'relation_to_subscriber', 'relationship_code', 'state', 'subscriber_id', 'subscriber_record_id'), False, False)": {
+                        "0": {
+                          "0": {
+                            "": {
+                              "rem": [
+                                [
+                                  "!limit",
+                                  "x"
+                                ]
+                              ]
+                            }
+                          },
+                          "1": {
+                            "": {
+                              "rem": [
+                                [
+                                  "!limit",
+                                  "x",
+                                  509,
+                                  512
+                                ]
+                              ],
+                              "len": 1475
+                            }
+                          },
+                          "2": {
+                            "": {
+                              "rem": [
+                                [
+                                  "!limit",
+                                  "x"
+                                ]
+                              ]
+                            }
+                          },
+                          "3": {
+                            "": {
+                              "rem": [
+                                [
+                                  "!limit",
+                                  "x"
+                                ]
+                              ]
+                            }
+                          },
+                          "4": {
+                            "": {
+                              "rem": [
+                                [
+                                  "!limit",
+                                  "x"
+                                ]
+                              ]
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "args": {
+                    "1": {
+                      "0": {
+                        "extra_columns": {
+                          "foo": {
+                            "": {
+                              "rem": [
+                                [
+                                  "!limit",
+                                  "x"
+                                ]
+                              ]
+                            }
+                          }
+                        },
+                        "": {
+                          "len": 18
+                        }
+                      }
+                    }
+                  },
+                  "": {
+                    "len": 14
+                  }
+                }
+              },
+              "46": {
+                "vars": {
+                  "statement": {
+                    "": {
+                      "len": 647,
+                      "rem": [
+                        [
+                          "!limit",
+                          "x",
+                          509,
+                          512
+                        ]
+                      ]
+                    }
+                  },
+                  "parameters": {
+                    "": {
+                      "len": 18
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "breadcrumbs": {
+      "values": {
+        "1": {
+          "message": {
+            "": {
+              "len": 645,
+              "rem": [
+                [
+                  "!limit",
+                  "x",
+                  509,
+                  512
+                ]
+              ]
+            }
+          }
+        }
+      }
+    },
+    "request": {
+      "headers": {
+        "authorization": {
+          "": {
+            "rem": [
+              [
+                "!config",
+                "x",
+                0,
+                34
+              ]
+            ]
+          }
+        },
+        "cookie": {
+          "": {
+            "rem": [
+              [
+                "!config",
+                "x",
+                0,
+                742
+              ]
+            ]
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "id": "c4942124-b2e1-4032-ba65-ed5610e13b73",
+  "request": {
+    "method": "GET",
+    "url": "/status-check"
+  },
+  "response": {
+    "status": 200,
+    "bodyFileName": "status_response.json"
+  },
+  "uuid": "c4942124-b2e1-4032-ba65-ed5610e13b73"
+}

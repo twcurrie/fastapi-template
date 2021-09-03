@@ -1,0 +1,21 @@
+[run]
+omit =
+    # Ignore tests directory in coverage calculation
+    app/app/tests/*
+    app/tests/*
+branch = True
+
+[report]
+# Regexes for lines to exclude from consideration
+exclude_lines =
+    pragma: no cover
+    def __repr__
+    if self\.debug
+    raise AssertionError
+    raise NotImplementedError
+    if __name__ == .__main__.:
+
+ignore_errors = True
+
+[html]
+directory = coverage_html_report

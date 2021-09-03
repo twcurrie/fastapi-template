@@ -1,0 +1,1052 @@
+{
+  "level": "error",
+  "exception": {
+    "values": [
+      {
+        "module": "pydantic.error_wrappers",
+        "type": "ValidationError",
+        "value": "1 validation error for EnrollmentResponse\nmembership -> personResourceId\n  field required (type=value_error.missing)",
+        "mechanism": null,
+        "stacktrace": {
+          "frames": [
+            {
+              "filename": "app/domain/esi/enrollment.py",
+              "abs_path": "/Users/trevor.currie/Code/eligibility-service/app/app/domain/esi/enrollment.py",
+              "function": "perform_enrollment_request",
+              "module": "app.domain.esi.enrollment",
+              "lineno": 32,
+              "pre_context": [
+                "            )",
+                "        except httpx.ReadTimeout as e:",
+                "            raise ApiTimeoutError(e, api_endpoint=settings.ESI__ENROLLMENT_ENDPOINT)",
+                "        try:",
+                "            span.set_tag(\"http.status_code\", response.status_code)"
+              ],
+              "context_line": "            return esi.EnrollmentResponse(**response.json())",
+              "post_context": [
+                "        except ValidationError as e:",
+                "            raise ApiSerializationError(",
+                "                e, api_endpoint=settings.ESI__ENROLLMENT_ENDPOINT",
+                "            )"
+              ],
+              "vars": {
+                "client": "<httpx.AsyncClient object at 0x105ed8f10>",
+                "request": "EnrollmentRequest(requester='Hinge', product=Product(sourceCode='14', enterpriseId='811'), patient=Patient(invitationCode='HHMV-WZVK', dateOfBirth=datetime.date(1958, 1, 1), postalCode='80214', firstName='ABBIGAIL', lastName='KARTMAN'), action=<Action.VERIFY: 'verify'>)",
+                "span": "<Span(op='http', description:'POST https://api-uat.express-scripts.io/v2/enrollments/patient/enrollmentrequest', trace_id='8d8938d04a4b423b9a8106cc63db0fd8', span_id='a77ab2101513019e', parent_span_id='8d870607364c09fd', sampled=False)>",
+                "response": "<Response [200 OK]>"
+              },
+              "in_app": true
+            },
+            {
+              "filename": "pydantic/main.py",
+              "abs_path": "/Users/trevor.currie/Code/eligibility-service/app/app/pydantic/main.py",
+              "function": "pydantic.main.BaseModel.__init__",
+              "module": "pydantic.main",
+              "lineno": 400,
+              "pre_context": [
+                "        Raises ValidationError if the input data cannot be parsed to form a valid model.",
+                "        \"\"\"",
+                "        # Uses something other than `self` the first arg to allow \"self\" as a settable attribute",
+                "        values, fields_set, validation_error = validate_model(__pydantic_self__.__class__, data)",
+                "        if validation_error:"
+              ],
+              "context_line": "            raise validation_error",
+              "post_context": [
+                "        try:",
+                "            object_setattr(__pydantic_self__, '__dict__', values)",
+                "        except TypeError as e:",
+                "            raise TypeError(",
+                "                'Model values must be a dict; you may not have returned a dictionary from a root validator'"
+              ],
+              "vars": {
+                "__name__": "'pydantic.main'",
+                "__doc__": "None",
+                "__package__": "'pydantic'",
+                "__loader__": "<_frozen_importlib_external.ExtensionFileLoader object at 0x102893110>",
+                "__spec__": "ModuleSpec(name='pydantic.main', loader=<_frozen_importlib_external.ExtensionFileLoader object at 0x102893110>, origin='/Users/trevor.currie/Library/Caches/pypoetry/virtualenvs/eligibility-service-pgaYkPUD-py3.7/lib/python3.7/site-packages/pydantic/main.cpython-37m-darwin.so')",
+                "__file__": "'/Users/trevor.currie/Library/Caches/pypoetry/virtualenvs/eligibility-service-pgaYkPUD-py3.7/lib/python3.7/site-packages/pydantic/main.cpython-37m-darwin.so'",
+                "__builtins__": "<module 'builtins' (built-in)>",
+                "json": "<module 'json' from '/Users/trevor.currie/.pyenv/versions/3.7.10/lib/python3.7/json/__init__.py'>",
+                "sys": "<module 'sys' (built-in)>",
+                "warnings": "<module 'warnings' from '/Users/trevor.currie/.pyenv/versions/3.7.10/lib/python3.7/warnings.py'>"
+              },
+              "in_app": true
+            }
+          ]
+        }
+      },
+      {
+        "module": "app.core.exceptions",
+        "type": "ApiSerializationError",
+        "value": " Serialization/validation issue occurred when parsing API's response content from https://api-uat.express-scripts.io/v2/enrollments/patient/enrollmentrequest",
+        "mechanism": null,
+        "stacktrace": {
+          "frames": [
+            {
+              "filename": "starlette/exceptions.py",
+              "abs_path": "/Users/trevor.currie/Library/Caches/pypoetry/virtualenvs/eligibility-service-pgaYkPUD-py3.7/lib/python3.7/site-packages/starlette/exceptions.py",
+              "function": "__call__",
+              "module": "starlette.exceptions",
+              "lineno": 71,
+              "pre_context": [
+                "            if message[\"type\"] == \"http.response.start\":",
+                "                response_started = True",
+                "            await send(message)",
+                "",
+                "        try:"
+              ],
+              "context_line": "            await self.app(scope, receive, sender)",
+              "post_context": [
+                "        except Exception as exc:",
+                "            handler = None",
+                "",
+                "            if isinstance(exc, HTTPException):",
+                "                handler = self._status_handlers.get(exc.status_code)"
+              ],
+              "vars": {
+                "self": "<starlette.exceptions.ExceptionMiddleware object at 0x105ebe2d0>",
+                "scope": {
+                  "type": "'http'",
+                  "asgi": {
+                    "version": "'3.0'",
+                    "spec_version": "'2.1'"
+                  },
+                  "http_version": "'1.1'",
+                  "server": [
+                    "'127.0.0.1'",
+                    "8080"
+                  ],
+                  "client": [
+                    "'127.0.0.1'",
+                    "56050"
+                  ],
+                  "scheme": "'http'",
+                  "method": "'POST'",
+                  "root_path": "''",
+                  "path": "'/api/v1/esi/eligibility'",
+                  "raw_path": "b'/api/v1/esi/eligibility'"
+                },
+                "receive": "<bound method RequestResponseCycle.receive of <uvicorn.protocols.http.h11_impl.RequestResponseCycle object at 0x105e90790>>",
+                "sender": "<function ExceptionMiddleware.__call__.<locals>.sender at 0x105ed2560>",
+                "exc": "ApiSerializationError(ValidationError(model='EnrollmentResponse', errors=[{'loc': ('membership', 'personResourceId'), 'msg': 'field required', 'type': 'value_error.missing'}]))",
+                "handler": "<function api_serialization_exception_handler at 0x104e385f0>",
+                "request": {
+                  "type": "'http'",
+                  "asgi": {
+                    "version": "'3.0'",
+                    "spec_version": "'2.1'"
+                  },
+                  "http_version": "'1.1'",
+                  "server": [
+                    "'127.0.0.1'",
+                    "8080"
+                  ],
+                  "client": [
+                    "'127.0.0.1'",
+                    "56050"
+                  ],
+                  "scheme": "'http'",
+                  "method": "'POST'",
+                  "root_path": "''",
+                  "path": "'/api/v1/esi/eligibility'",
+                  "raw_path": "b'/api/v1/esi/eligibility'"
+                },
+                "response_started": "False",
+                "send": "<bound method Queue.put of <Queue at 0x105e90d50 maxsize=0 _getters[1]>>"
+              },
+              "in_app": true
+            },
+            {
+              "filename": "starlette/routing.py",
+              "abs_path": "/Users/trevor.currie/Library/Caches/pypoetry/virtualenvs/eligibility-service-pgaYkPUD-py3.7/lib/python3.7/site-packages/starlette/routing.py",
+              "function": "__call__",
+              "module": "starlette.routing",
+              "lineno": 566,
+              "pre_context": [
+                "            # Determine if any route matches the incoming scope,",
+                "            # and hand over to the matching route if found.",
+                "            match, child_scope = route.matches(scope)",
+                "            if match == Match.FULL:",
+                "                scope.update(child_scope)"
+              ],
+              "context_line": "                await route.handle(scope, receive, send)",
+              "post_context": [
+                "                return",
+                "            elif match == Match.PARTIAL and partial is None:",
+                "                partial = route",
+                "                partial_scope = child_scope",
+                ""
+              ],
+              "vars": {
+                "self": "<fastapi.routing.APIRouter object at 0x105eb5390>",
+                "scope": {
+                  "type": "'http'",
+                  "asgi": {
+                    "version": "'3.0'",
+                    "spec_version": "'2.1'"
+                  },
+                  "http_version": "'1.1'",
+                  "server": [
+                    "'127.0.0.1'",
+                    "8080"
+                  ],
+                  "client": [
+                    "'127.0.0.1'",
+                    "56050"
+                  ],
+                  "scheme": "'http'",
+                  "method": "'POST'",
+                  "root_path": "''",
+                  "path": "'/api/v1/esi/eligibility'",
+                  "raw_path": "b'/api/v1/esi/eligibility'"
+                },
+                "receive": "<bound method RequestResponseCycle.receive of <uvicorn.protocols.http.h11_impl.RequestResponseCycle object at 0x105e90790>>",
+                "send": "<function ExceptionMiddleware.__call__.<locals>.sender at 0x105ed2560>",
+                "partial": "None",
+                "route": "<fastapi.routing.APIRoute object at 0x105ebb150>",
+                "match": "<Match.FULL: 2>",
+                "child_scope": {
+                  "endpoint": "<function get_eligibility_from_esi at 0x1034b8290>",
+                  "path_params": {}
+                }
+              },
+              "in_app": true
+            },
+            {
+              "filename": "starlette/routing.py",
+              "abs_path": "/Users/trevor.currie/Library/Caches/pypoetry/virtualenvs/eligibility-service-pgaYkPUD-py3.7/lib/python3.7/site-packages/starlette/routing.py",
+              "function": "handle",
+              "module": "starlette.routing",
+              "lineno": 227,
+              "pre_context": [
+                "                raise HTTPException(status_code=405)",
+                "            else:",
+                "                response = PlainTextResponse(\"Method Not Allowed\", status_code=405)",
+                "            await response(scope, receive, send)",
+                "        else:"
+              ],
+              "context_line": "            await self.app(scope, receive, send)",
+              "post_context": [
+                "",
+                "    def __eq__(self, other: typing.Any) -> bool:",
+                "        return (",
+                "            isinstance(other, Route)",
+                "            and self.path == other.path"
+              ],
+              "vars": {
+                "self": "<fastapi.routing.APIRoute object at 0x105ebb150>",
+                "scope": {
+                  "type": "'http'",
+                  "asgi": {
+                    "version": "'3.0'",
+                    "spec_version": "'2.1'"
+                  },
+                  "http_version": "'1.1'",
+                  "server": [
+                    "'127.0.0.1'",
+                    "8080"
+                  ],
+                  "client": [
+                    "'127.0.0.1'",
+                    "56050"
+                  ],
+                  "scheme": "'http'",
+                  "method": "'POST'",
+                  "root_path": "''",
+                  "path": "'/api/v1/esi/eligibility'",
+                  "raw_path": "b'/api/v1/esi/eligibility'"
+                },
+                "receive": "<bound method RequestResponseCycle.receive of <uvicorn.protocols.http.h11_impl.RequestResponseCycle object at 0x105e90790>>",
+                "send": "<function ExceptionMiddleware.__call__.<locals>.sender at 0x105ed2560>"
+              },
+              "in_app": true
+            },
+            {
+              "filename": "starlette/routing.py",
+              "abs_path": "/Users/trevor.currie/Library/Caches/pypoetry/virtualenvs/eligibility-service-pgaYkPUD-py3.7/lib/python3.7/site-packages/starlette/routing.py",
+              "function": "app",
+              "module": "starlette.routing",
+              "lineno": 41,
+              "pre_context": [
+                "    is_coroutine = asyncio.iscoroutinefunction(func)",
+                "",
+                "    async def app(scope: Scope, receive: Receive, send: Send) -> None:",
+                "        request = Request(scope, receive=receive, send=send)",
+                "        if is_coroutine:"
+              ],
+              "context_line": "            response = await func(request)",
+              "post_context": [
+                "        else:",
+                "            response = await run_in_threadpool(func, request)",
+                "        await response(scope, receive, send)",
+                "",
+                "    return app"
+              ],
+              "vars": {
+                "scope": {
+                  "type": "'http'",
+                  "asgi": {
+                    "version": "'3.0'",
+                    "spec_version": "'2.1'"
+                  },
+                  "http_version": "'1.1'",
+                  "server": [
+                    "'127.0.0.1'",
+                    "8080"
+                  ],
+                  "client": [
+                    "'127.0.0.1'",
+                    "56050"
+                  ],
+                  "scheme": "'http'",
+                  "method": "'POST'",
+                  "root_path": "''",
+                  "path": "'/api/v1/esi/eligibility'",
+                  "raw_path": "b'/api/v1/esi/eligibility'"
+                },
+                "receive": "<bound method RequestResponseCycle.receive of <uvicorn.protocols.http.h11_impl.RequestResponseCycle object at 0x105e90790>>",
+                "send": "<function ExceptionMiddleware.__call__.<locals>.sender at 0x105ed2560>",
+                "request": {
+                  "type": "'http'",
+                  "asgi": {
+                    "version": "'3.0'",
+                    "spec_version": "'2.1'"
+                  },
+                  "http_version": "'1.1'",
+                  "server": [
+                    "'127.0.0.1'",
+                    "8080"
+                  ],
+                  "client": [
+                    "'127.0.0.1'",
+                    "56050"
+                  ],
+                  "scheme": "'http'",
+                  "method": "'POST'",
+                  "root_path": "''",
+                  "path": "'/api/v1/esi/eligibility'",
+                  "raw_path": "b'/api/v1/esi/eligibility'"
+                },
+                "func": "<function get_request_handler.<locals>.app at 0x105eb1e60>",
+                "is_coroutine": "True"
+              },
+              "in_app": true
+            },
+            {
+              "filename": "fastapi/routing.py",
+              "abs_path": "/Users/trevor.currie/Library/Caches/pypoetry/virtualenvs/eligibility-service-pgaYkPUD-py3.7/lib/python3.7/site-packages/fastapi/routing.py",
+              "function": "app",
+              "module": "fastapi.routing",
+              "lineno": 202,
+              "pre_context": [
+                "        values, errors, background_tasks, sub_response, _ = solved_result",
+                "        if errors:",
+                "            raise RequestValidationError(errors, body=body)",
+                "        else:",
+                "            raw_response = await run_endpoint_function("
+              ],
+              "context_line": "                dependant=dependant, values=values, is_coroutine=is_coroutine",
+              "post_context": [
+                "            )",
+                "",
+                "            if isinstance(raw_response, Response):",
+                "                if raw_response.background is None:",
+                "                    raw_response.background = background_tasks"
+              ],
+              "vars": {
+                "request": {
+                  "type": "'http'",
+                  "asgi": {
+                    "version": "'3.0'",
+                    "spec_version": "'2.1'"
+                  },
+                  "http_version": "'1.1'",
+                  "server": [
+                    "'127.0.0.1'",
+                    "8080"
+                  ],
+                  "client": [
+                    "'127.0.0.1'",
+                    "56050"
+                  ],
+                  "scheme": "'http'",
+                  "method": "'POST'",
+                  "root_path": "''",
+                  "path": "'/api/v1/esi/eligibility'",
+                  "raw_path": "b'/api/v1/esi/eligibility'"
+                },
+                "body": {
+                  "invitationCode": "'HHMV-WZVK'",
+                  "dateOfBirth": "'1958-01-01'",
+                  "firstName": "'ABBIGAIL'",
+                  "lastName": "'KARTMAN'",
+                  "postalCode": "'80214'"
+                },
+                "body_bytes": "b'{\\n  \"invitationCode\": \"HHMV-WZVK\",\\n  \"dateOfBirth\": \"1958-01-01\",\\n  \"firstName\": \"ABBIGAIL\",\\n  \"lastName\": \"KARTMAN\",\\n  \"postalCode\": \"80214\"\\n}'",
+                "solved_result": [
+                  {
+                    "eligibility_request": "EligibilityRequest(invitationCode='HHMV-WZVK', dateOfBirth=datetime.date(1958, 1, 1), firstName='ABBIGAIL', lastName='KARTMAN', postalCode='80214')",
+                    "request": {
+                      "type": "'http'",
+                      "asgi": {
+                        "version": "'3.0'",
+                        "spec_version": "'2.1'"
+                      },
+                      "http_version": "'1.1'",
+                      "server": [
+                        "'127.0.0.1'",
+                        "8080"
+                      ],
+                      "client": [
+                        "'127.0.0.1'",
+                        "56050"
+                      ],
+                      "scheme": "'http'",
+                      "method": "'POST'",
+                      "root_path": "''",
+                      "path": "'/api/v1/esi/eligibility'",
+                      "raw_path": "b'/api/v1/esi/eligibility'"
+                    }
+                  },
+                  [],
+                  "None",
+                  "<starlette.responses.Response object at 0x105ed8150>",
+                  {
+                    "(<fastapi.security.http.HTTPBasic object at 0x103488c90>, ())": "HTTPBasicCredentials(username='a_service_user_for_eligibility', password='a_super_secret_token_shhhh')",
+                    "(<function authenticate_http_basic at 0x1032ad5f0>, ())": "True"
+                  }
+                ],
+                "values": {
+                  "eligibility_request": "EligibilityRequest(invitationCode='HHMV-WZVK', dateOfBirth=datetime.date(1958, 1, 1), firstName='ABBIGAIL', lastName='KARTMAN', postalCode='80214')",
+                  "request": {
+                    "type": "'http'",
+                    "asgi": {
+                      "version": "'3.0'",
+                      "spec_version": "'2.1'"
+                    },
+                    "http_version": "'1.1'",
+                    "server": [
+                      "'127.0.0.1'",
+                      "8080"
+                    ],
+                    "client": [
+                      "'127.0.0.1'",
+                      "56050"
+                    ],
+                    "scheme": "'http'",
+                    "method": "'POST'",
+                    "root_path": "''",
+                    "path": "'/api/v1/esi/eligibility'",
+                    "raw_path": "b'/api/v1/esi/eligibility'"
+                  }
+                },
+                "errors": [],
+                "background_tasks": "None",
+                "sub_response": "<starlette.responses.Response object at 0x105ed8150>",
+                "_": {
+                  "(<fastapi.security.http.HTTPBasic object at 0x103488c90>, ())": "HTTPBasicCredentials(username='a_service_user_for_eligibility', password='a_super_secret_token_shhhh')",
+                  "(<function authenticate_http_basic at 0x1032ad5f0>, ())": "True"
+                },
+                "actual_response_class": "<class 'starlette.responses.JSONResponse'>"
+              },
+              "in_app": true
+            },
+            {
+              "filename": "fastapi/routing.py",
+              "abs_path": "/Users/trevor.currie/Library/Caches/pypoetry/virtualenvs/eligibility-service-pgaYkPUD-py3.7/lib/python3.7/site-packages/fastapi/routing.py",
+              "function": "run_endpoint_function",
+              "module": "fastapi.routing",
+              "lineno": 148,
+              "pre_context": [
+                "    # Only called by get_request_handler. Has been split into its own function to",
+                "    # facilitate profiling endpoints, since inner functions are harder to profile.",
+                "    assert dependant.call is not None, \"dependant.call must be a function\"",
+                "",
+                "    if is_coroutine:"
+              ],
+              "context_line": "        return await dependant.call(**values)",
+              "post_context": [
+                "    else:",
+                "        return await run_in_threadpool(dependant.call, **values)",
+                "",
+                "",
+                "def get_request_handler("
+              ],
+              "vars": {
+                "dependant": "<fastapi.dependencies.models.Dependant object at 0x105ebb190>",
+                "values": {
+                  "eligibility_request": "EligibilityRequest(invitationCode='HHMV-WZVK', dateOfBirth=datetime.date(1958, 1, 1), firstName='ABBIGAIL', lastName='KARTMAN', postalCode='80214')",
+                  "request": {
+                    "type": "'http'",
+                    "asgi": {
+                      "version": "'3.0'",
+                      "spec_version": "'2.1'"
+                    },
+                    "http_version": "'1.1'",
+                    "server": [
+                      "'127.0.0.1'",
+                      "8080"
+                    ],
+                    "client": [
+                      "'127.0.0.1'",
+                      "56050"
+                    ],
+                    "scheme": "'http'",
+                    "method": "'POST'",
+                    "root_path": "''",
+                    "path": "'/api/v1/esi/eligibility'",
+                    "raw_path": "b'/api/v1/esi/eligibility'"
+                  }
+                },
+                "is_coroutine": "True"
+              },
+              "in_app": true
+            },
+            {
+              "filename": "slowapi/extension.py",
+              "abs_path": "/Users/trevor.currie/Library/Caches/pypoetry/virtualenvs/eligibility-service-pgaYkPUD-py3.7/lib/python3.7/site-packages/slowapi/extension.py",
+              "function": "async_wrapper",
+              "module": "slowapi.extension",
+              "lineno": 631,
+              "pre_context": [
+                "                        if self._auto_check and not getattr(",
+                "                            request.state, \"_rate_limiting_complete\", False",
+                "                        ):",
+                "                            self._check_request_limit(request, func, False)",
+                "                            request.state._rate_limiting_complete = True"
+              ],
+              "context_line": "                    response = await func(*args, **kwargs)  # type: ignore",
+              "post_context": [
+                "                    if self.enabled:",
+                "                        if not isinstance(response, Response):",
+                "                            # get the response object from the decorated endpoint function",
+                "                            self._inject_headers(",
+                "                                kwargs.get(\"response\"), request.state.view_rate_limit  # type: ignore"
+              ],
+              "vars": {
+                "args": [],
+                "kwargs": {
+                  "eligibility_request": "EligibilityRequest(invitationCode='HHMV-WZVK', dateOfBirth=datetime.date(1958, 1, 1), firstName='ABBIGAIL', lastName='KARTMAN', postalCode='80214')",
+                  "request": {
+                    "type": "'http'",
+                    "asgi": {
+                      "version": "'3.0'",
+                      "spec_version": "'2.1'"
+                    },
+                    "http_version": "'1.1'",
+                    "server": [
+                      "'127.0.0.1'",
+                      "8080"
+                    ],
+                    "client": [
+                      "'127.0.0.1'",
+                      "56050"
+                    ],
+                    "scheme": "'http'",
+                    "method": "'POST'",
+                    "root_path": "''",
+                    "path": "'/api/v1/esi/eligibility'",
+                    "raw_path": "b'/api/v1/esi/eligibility'"
+                  }
+                },
+                "request": {
+                  "type": "'http'",
+                  "asgi": {
+                    "version": "'3.0'",
+                    "spec_version": "'2.1'"
+                  },
+                  "http_version": "'1.1'",
+                  "server": [
+                    "'127.0.0.1'",
+                    "8080"
+                  ],
+                  "client": [
+                    "'127.0.0.1'",
+                    "56050"
+                  ],
+                  "scheme": "'http'",
+                  "method": "'POST'",
+                  "root_path": "''",
+                  "path": "'/api/v1/esi/eligibility'",
+                  "raw_path": "b'/api/v1/esi/eligibility'"
+                },
+                "func": "<function get_eligibility_from_esi at 0x103499d40>",
+                "idx": "0",
+                "self": "<slowapi.extension.Limiter object at 0x102ff2750>"
+              },
+              "in_app": true
+            },
+            {
+              "filename": "app/api/v1/endpoints/esi.py",
+              "abs_path": "/Users/trevor.currie/Code/eligibility-service/app/app/api/v1/endpoints/esi.py",
+              "function": "get_eligibility_from_esi",
+              "module": "app.api.v1.endpoints.esi",
+              "lineno": 24,
+              "pre_context": [
+                ") -> esi.EligibilityStatus:",
+                "    async with httpx.AsyncClient() as client:",
+                "        external_response = await enrollment.perform_enrollment_request(",
+                "            client,",
+                "            external.EnrollmentRequest.from_service_request("
+              ],
+              "context_line": "                eligibility_request, action=Action.VERIFY",
+              "post_context": [
+                "            ),",
+                "        )",
+                "        return external_response.to_service_eligibility_response()",
+                "",
+                ""
+              ],
+              "vars": {
+                "request": {
+                  "type": "'http'",
+                  "asgi": {
+                    "version": "'3.0'",
+                    "spec_version": "'2.1'"
+                  },
+                  "http_version": "'1.1'",
+                  "server": [
+                    "'127.0.0.1'",
+                    "8080"
+                  ],
+                  "client": [
+                    "'127.0.0.1'",
+                    "56050"
+                  ],
+                  "scheme": "'http'",
+                  "method": "'POST'",
+                  "root_path": "''",
+                  "path": "'/api/v1/esi/eligibility'",
+                  "raw_path": "b'/api/v1/esi/eligibility'"
+                },
+                "eligibility_request": "EligibilityRequest(invitationCode='HHMV-WZVK', dateOfBirth=datetime.date(1958, 1, 1), firstName='ABBIGAIL', lastName='KARTMAN', postalCode='80214')",
+                "client": "<httpx.AsyncClient object at 0x105ed8f10>"
+              },
+              "in_app": true
+            },
+            {
+              "filename": "app/domain/esi/enrollment.py",
+              "abs_path": "/Users/trevor.currie/Code/eligibility-service/app/app/domain/esi/enrollment.py",
+              "function": "perform_enrollment_request",
+              "module": "app.domain.esi.enrollment",
+              "lineno": 35,
+              "pre_context": [
+                "        try:",
+                "            span.set_tag(\"http.status_code\", response.status_code)",
+                "            return esi.EnrollmentResponse(**response.json())",
+                "        except ValidationError as e:",
+                "            raise ApiSerializationError("
+              ],
+              "context_line": "                e, api_endpoint=settings.ESI__ENROLLMENT_ENDPOINT",
+              "post_context": [
+                "            )"
+              ],
+              "vars": {
+                "client": "<httpx.AsyncClient object at 0x105ed8f10>",
+                "request": "EnrollmentRequest(requester='Hinge', product=Product(sourceCode='14', enterpriseId='811'), patient=Patient(invitationCode='HHMV-WZVK', dateOfBirth=datetime.date(1958, 1, 1), postalCode='80214', firstName='ABBIGAIL', lastName='KARTMAN'), action=<Action.VERIFY: 'verify'>)",
+                "span": "<Span(op='http', description:'POST https://api-uat.express-scripts.io/v2/enrollments/patient/enrollmentrequest', trace_id='8d8938d04a4b423b9a8106cc63db0fd8', span_id='a77ab2101513019e', parent_span_id='8d870607364c09fd', sampled=False)>",
+                "response": "<Response [200 OK]>"
+              },
+              "in_app": true
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "event_id": "e50112a4706a4317a62882747cf8dde9",
+  "timestamp": "2021-05-13T18:54:25.481682Z",
+  "breadcrumbs": {
+    "values": [
+      {
+        "type": "http",
+        "category": "httplib",
+        "data": {},
+        "timestamp": "2021-05-13T18:54:25.473911Z"
+      }
+    ]
+  },
+  "transaction": "app.api.v1.endpoints.esi.get_eligibility_from_esi",
+  "contexts": {
+    "trace": {
+      "trace_id": "8d8938d04a4b423b9a8106cc63db0fd8",
+      "span_id": "8d870607364c09fd",
+      "parent_span_id": null,
+      "op": "http.server",
+      "description": null
+    },
+    "runtime": {
+      "name": "CPython",
+      "version": "3.7.10",
+      "build": "3.7.10 (default, Mar  1 2021, 14:52:28) \n[Clang 12.0.0 (clang-1200.0.32.29)]"
+    }
+  },
+  "modules": {
+    "zipp": "3.4.1",
+    "wheel": "0.36.2",
+    "uvicorn": "0.13.4",
+    "urllib3": "1.26.4",
+    "typing-extensions": "3.10.0.0",
+    "typed-ast": "1.4.3",
+    "toml": "0.10.2",
+    "text-unidecode": "1.3",
+    "tenacity": "7.0.0",
+    "stevedore": "3.3.0",
+    "starlette": "0.13.6",
+    "sqlalchemy": "1.4.14",
+    "sniffio": "1.2.0",
+    "smmap": "4.0.0",
+    "slowapi": "0.1.4",
+    "six": "1.16.0",
+    "single-source": "0.1.5",
+    "setuptools": "53.1.0",
+    "sentry-sdk": "1.1.0",
+    "safety": "1.10.3",
+    "rfc3986": "1.4.0",
+    "requests": "2.25.1",
+    "regex": "2021.4.4",
+    "redis": "3.5.3",
+    "pyyaml": "5.4.1",
+    "python-levenshtein": "0.12.2",
+    "python-editor": "1.0.4",
+    "python-dotenv": "0.17.1",
+    "python-dateutil": "2.8.1",
+    "pytest": "6.2.4",
+    "pytest-pycharm": "0.7.0",
+    "pytest-mock": "3.6.1",
+    "pytest-lazy-fixture": "0.6.3",
+    "pytest-httpx": "0.11.0",
+    "pytest-freezegun": "0.4.2",
+    "pytest-dotenv": "0.5.2",
+    "pytest-cov": "2.11.1",
+    "pytest-asyncio": "0.14.0",
+    "pyparsing": "2.4.7",
+    "pydantic": "1.8.1",
+    "py": "1.10.0",
+    "psycopg2-binary": "2.8.6",
+    "pluggy": "0.13.1",
+    "pip": "21.1.1",
+    "pbr": "5.6.0",
+    "pathspec": "0.8.1",
+    "packaging": "20.9",
+    "ordered-set": "4.0.2",
+    "mypy": "0.812",
+    "mypy-extensions": "0.4.3",
+    "mock": "4.0.3",
+    "markupsafe": "1.1.1",
+    "mako": "1.1.4",
+    "limits": "1.5.1",
+    "iniconfig": "1.1.1",
+    "importlib-metadata": "4.0.1",
+    "idna": "2.10",
+    "httpx": "0.17.1",
+    "httpcore": "0.12.3",
+    "hiro": "0.5.1",
+    "hiredis": "2.0.0",
+    "h11": "0.12.0",
+    "greenlet": "1.1.0",
+    "gitpython": "3.1.15",
+    "gitdb": "4.0.7",
+    "freezegun": "1.1.0",
+    "fastapi": "0.63.0",
+    "fastapi-health": "0.2.1",
+    "faker": "8.1.2",
+    "dparse": "0.5.1",
+    "deepdiff": "5.5.0",
+    "coverage": "5.5",
+    "click": "7.1.2",
+    "chardet": "4.0.0",
+    "certifi": "2020.12.5",
+    "bump2version": "1.0.1",
+    "black": "20.8b1",
+    "bandit": "1.7.0",
+    "attrs": "21.1.0",
+    "async-timeout": "3.0.1",
+    "appdirs": "1.4.4",
+    "alembic": "1.6.2",
+    "aioredis": "1.3.1",
+    "aenum": "3.0.0"
+  },
+  "extra": {
+    "sys.argv": [
+      "/Users/trevor.currie/Code/eligibility-service/app/app/main.py"
+    ]
+  },
+  "request": {
+    "method": "POST",
+    "headers": {
+      "host": "localhost:8080",
+      "connection": "keep-alive",
+      "content-length": "143",
+      "accept": "application/json",
+      "authorization": "",
+      "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.85 Safari/537.36",
+      "content-type": "application/json",
+      "sec-gpc": "1",
+      "origin": "http://localhost:8080",
+      "sec-fetch-site": "same-origin",
+      "sec-fetch-mode": "cors",
+      "sec-fetch-dest": "empty",
+      "referer": "http://localhost:8080/docs",
+      "accept-encoding": "gzip, deflate, br",
+      "accept-language": "en-US,en;q=0.9",
+      "cookie": ""
+    },
+    "query_string": null,
+    "url": "http://localhost:8080/api/v1/esi/eligibility"
+  },
+  "release": "297e55bf3596df114fd9e86ec697c43b10392b8c",
+  "environment": "scaling",
+  "server_name": "big-lurch",
+  "sdk": {
+    "name": "sentry.python",
+    "version": "1.1.0",
+    "packages": [
+      {
+        "name": "pypi:sentry-sdk",
+        "version": "1.1.0"
+      }
+    ],
+    "integrations": [
+      "argv",
+      "atexit",
+      "dedupe",
+      "excepthook",
+      "logging",
+      "modules",
+      "sqlalchemy",
+      "stdlib",
+      "threading"
+    ]
+  },
+  "platform": "python",
+  "_meta": {
+    "exception": {
+      "values": {
+        "0": {
+          "stacktrace": {
+            "frames": {
+              "1": {
+                "vars": {
+                  "": {
+                    "len": 95
+                  }
+                }
+              }
+            }
+          }
+        },
+        "1": {
+          "stacktrace": {
+            "frames": {
+              "0": {
+                "vars": {
+                  "scope": {
+                    "": {
+                      "len": 18
+                    }
+                  },
+                  "request": {
+                    "": {
+                      "len": 18
+                    }
+                  }
+                }
+              },
+              "1": {
+                "vars": {
+                  "scope": {
+                    "": {
+                      "len": 18
+                    }
+                  }
+                }
+              },
+              "2": {
+                "vars": {
+                  "scope": {
+                    "": {
+                      "len": 18
+                    }
+                  }
+                }
+              },
+              "3": {
+                "vars": {
+                  "scope": {
+                    "": {
+                      "len": 18
+                    }
+                  },
+                  "request": {
+                    "": {
+                      "len": 18
+                    }
+                  }
+                }
+              },
+              "4": {
+                "vars": {
+                  "request": {
+                    "": {
+                      "len": 18
+                    }
+                  },
+                  "solved_result": {
+                    "0": {
+                      "request": {
+                        "asgi": {
+                          "version": {
+                            "": {
+                              "rem": [
+                                [
+                                  "!limit",
+                                  "x"
+                                ]
+                              ]
+                            }
+                          },
+                          "spec_version": {
+                            "": {
+                              "rem": [
+                                [
+                                  "!limit",
+                                  "x"
+                                ]
+                              ]
+                            }
+                          }
+                        },
+                        "server": {
+                          "0": {
+                            "": {
+                              "rem": [
+                                [
+                                  "!limit",
+                                  "x"
+                                ]
+                              ]
+                            }
+                          },
+                          "1": {
+                            "": {
+                              "rem": [
+                                [
+                                  "!limit",
+                                  "x"
+                                ]
+                              ]
+                            }
+                          }
+                        },
+                        "client": {
+                          "0": {
+                            "": {
+                              "rem": [
+                                [
+                                  "!limit",
+                                  "x"
+                                ]
+                              ]
+                            }
+                          },
+                          "1": {
+                            "": {
+                              "rem": [
+                                [
+                                  "!limit",
+                                  "x"
+                                ]
+                              ]
+                            }
+                          }
+                        },
+                        "": {
+                          "len": 18
+                        }
+                      }
+                    }
+                  },
+                  "values": {
+                    "request": {
+                      "": {
+                        "len": 18
+                      }
+                    }
+                  },
+                  "": {
+                    "len": 23
+                  }
+                }
+              },
+              "5": {
+                "vars": {
+                  "values": {
+                    "request": {
+                      "": {
+                        "len": 18
+                      }
+                    }
+                  }
+                }
+              },
+              "6": {
+                "vars": {
+                  "kwargs": {
+                    "request": {
+                      "": {
+                        "len": 18
+                      }
+                    }
+                  },
+                  "request": {
+                    "": {
+                      "len": 18
+                    }
+                  }
+                }
+              },
+              "7": {
+                "vars": {
+                  "request": {
+                    "": {
+                      "len": 18
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "request": {
+      "headers": {
+        "authorization": {
+          "": {
+            "rem": [
+              [
+                "!config",
+                "x",
+                0,
+                82
+              ]
+            ]
+          }
+        },
+        "cookie": {
+          "": {
+            "rem": [
+              [
+                "!config",
+                "x",
+                0,
+                883
+              ]
+            ]
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,35 @@
+# This docker-compose override file is intended to support debugging through
+# an IDE/terminal.  It exposes all the ports for the defined services to localhost.
+# It can be run with the following command:
+#
+# $> COMPOSE_FILE=docker-compose.yml:docker-compose.debug.yml docker-compose up
+#
+#
+# This assumes the user will be running the template service from an IDE to debug, but if the
+# user intends to run the service from a container this must be run with an additional flag:
+#
+# $> COMPOSE_FILE=docker-compose.yml:docker-compose.debug.yml docker-compose up --profile=service
+
+version: "3"
+services:
+
+  db:
+    ports:
+      - 5432:5432
+
+  queue:
+    ports:
+      - 6379:6379
+
+  message-bus:
+    ports:
+      - 5672:5672
+      - 15672:15672
+
+  template-service:
+    profiles:
+      - service
+
+  example-api:
+    ports:
+      - 8081:8080

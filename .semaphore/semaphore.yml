@@ -1,0 +1,162 @@
+version: v1.0
+name: {{ Template-service}}
+agent:
+  machine:
+    type: e1-standard-2
+    os_image: ubuntu1804
+
+fail_fast:
+  stop:
+    when: "branch != 'master'"
+
+blocks:
+  - name: Install
+    dependencies: []
+    task:
+      prologue:
+        commands:
+          - sem-version python 3.7
+          - export VIRTUAL_ENV=$HOME/{{ template-service }}/.venv
+          - pip install poetry
+          - checkout
+      jobs:
+        - name: 'Install dependencies'
+          commands:
+            - cache restore poetry-$SEMAPHORE_GIT_BRANCH-$(checksum poetry.lock)
+            - poetry config --local virtualenvs.in-project true
+            - poetry install
+            - cache store poetry-$SEMAPHORE_GIT_BRANCH-$(checksum poetry.lock) $VIRTUAL_ENV
+  - name: Linting check
+    dependencies: ['Install']
+    task:
+      prologue:
+        commands:
+          - sem-version python 3.7
+          - export VIRTUAL_ENV=$HOME/{{ template-service }}/.venv
+          - pip install poetry
+          - checkout
+          - cache restore poetry-$SEMAPHORE_GIT_BRANCH-$(checksum poetry.lock)
+      jobs:
+        - name: Linting check
+          commands:
+            - echo "Checking linting against $(poetry run black --version)"
+            - poetry run black . --check
+  - name: Static typing checks
+    dependencies: ['Install']
+    task:
+      prologue:
+        commands:
+          - sem-version python 3.7
+          - export VIRTUAL_ENV=$HOME/{{ template-service }}/.venv
+          - pip install poetry
+          - checkout
+          - cache restore poetry-$SEMAPHORE_GIT_BRANCH-$(checksum poetry.lock)
+      jobs:
+        - name: Static typing checks
+          commands:
+            - poetry run mypy app
+  - name: Dependency vulnerability checks
+    dependencies: ['Install']
+    task:
+      prologue:
+        commands:
+          - sem-version python 3.7
+          - export VIRTUAL_ENV=$HOME/{{ template-service }}/.venv
+          - pip install poetry
+          - checkout
+          - cache restore poetry-$SEMAPHORE_GIT_BRANCH-$(checksum poetry.lock)
+          - poetry run pip install --upgrade pip  # Ref: https://github.com/python-poetry/poetry/issues/732
+      jobs:
+        - name: Dependent package vulnerability checks
+          commands:
+            - poetry run safety check
+  - name: Static security checks
+    dependencies: ['Install']
+    task:
+      prologue:
+        commands:
+          - sem-version python 3.7
+          - export VIRTUAL_ENV=$HOME/{{ template-service }}/.venv
+          - pip install poetry
+          - checkout
+          - cache restore poetry-$SEMAPHORE_GIT_BRANCH-$(checksum poetry.lock)
+          - poetry run pip install --upgrade pip  # Ref: https://github.com/python-poetry/poetry/issues/732
+      jobs:
+        - name: Static security check
+          commands:
+            - poetry run bandit -x app/app/tests,/app/alembic --ini .bandit -r app/app
+  - name: Unit tests
+    dependencies: ['Install']
+    task:
+      prologue:
+        commands:
+          - sem-version python 3.7
+          - export VIRTUAL_ENV=$HOME/{{ template-service }}/.venv
+          - pip install poetry
+          - checkout
+          - cache restore poetry-$SEMAPHORE_GIT_BRANCH-$(checksum poetry.lock)
+      env_vars:
+        - name: ENVIRONMENT
+          value: test
+      jobs:
+        - name: Unit tests
+          commands:
+            - poetry run pytest -m unit
+  - name: Integration tests
+    dependencies: ['Install']
+    task:
+      agent:
+        machine:
+          type: e1-standard-4
+          os_image: ubuntu1804
+      prologue:
+        commands:
+          - checkout
+      env_vars:
+        - name: ENVIRONMENT
+          value: test
+        - name: DOCKER_BUILDKIT
+          value: "1"
+      jobs:
+        - name: Integration tests
+          commands:
+            - sh ci/test.sh
+  - name: Docker build and push
+    dependencies:
+      - 'Linting check'
+      - 'Static typing checks'
+      - 'Dependency vulnerability checks'
+      - 'Static security checks'
+      - 'Unit tests'
+      - 'Integration tests'
+    task:
+      secrets:
+        - name: aws-ecr-write
+      env_vars:
+        - name: DOCKER_BUILDKIT
+          value: "1"
+      prologue:
+        commands:
+          - sudo pip install awscli
+          - checkout
+      jobs:
+        - name: Docker build and push
+          commands:
+            - make ecr-login
+            - make docker-build
+            - make docker-tag
+            - make docker-push
+
+promotions:
+  - name: Scaling deploy
+    pipeline_file: aptible-scaling-deploy.yml
+    auto_promote:
+      when: "result = 'passed' and (branch = 'master')"
+  - name: Pentest deploy
+    pipeline_file: aptible-pentest-deploy.yml
+  - name: RND testing deploy
+    pipeline_file: aptible-rnd-testing-deploy.yml
+  - name: Production deploy
+    pipeline_file: aptible-production-deploy.yml
+    auto_promote:
+      when: "result = 'passed' and (branch = 'master')"
