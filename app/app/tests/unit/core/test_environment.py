@@ -14,6 +14,13 @@ def test__environment__override(caplog):
     assert expected_message in [record.message for record in caplog.records]
 
 
+def test__environment__is_development():
+    assert not Environment("PROD").is_development()
+    assert Environment("dev").is_development()
+    assert Environment("DEV").is_development()
+    assert Environment("local").is_development()
+
+
 def test__environment__is_production():
     assert not Environment("dev").is_production()
     assert Environment("prod").is_production()

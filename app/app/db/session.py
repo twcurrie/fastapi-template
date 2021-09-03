@@ -36,6 +36,6 @@ def erase_parameters(exception_context):
     ]:
         if exc is not None:
             exc.args = [exc.args[0].split("\n")[0]]
-            if "DETAIL" in exc.args[0]:
+            if "DETAIL" in exc.args[0]:  # pragma: no cover
                 # If DETAIL was not removed by the preceding approach, just redact the entire message.
                 exc.args = ["<redacted>"]

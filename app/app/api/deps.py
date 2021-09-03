@@ -1,5 +1,5 @@
 import aioredis  # type: ignore
-from sentry_sdk import start_transaction, start_span
+from sentry_sdk import start_transaction
 from typing import AsyncGenerator, Generator
 
 from app.core.config import settings

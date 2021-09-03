@@ -11,7 +11,7 @@ def test__create_patient(db: Session) -> None:
     new_patient = PatientCreate(
         program="chronic-knee",
         name="A Patient",
-        date_of_birth=date(year=2000, month=1, day=1)
+        date_of_birth=date(year=2000, month=1, day=1),
     )
     patient: Patient = crud.patient.create(db, obj_in=new_patient)
 
@@ -24,12 +24,14 @@ def test__update_patient(db: Session) -> None:
     initial_patient = PatientCreate(
         program="chronic-knee",
         name="A Patient",
-        date_of_birth=date(year=2000, month=1, day=1)
+        date_of_birth=date(year=2000, month=1, day=1),
     )
     patient: Patient = crud.patient.create(db, obj_in=initial_patient)
 
     updates = PatientUpdate(program="chronic-elbow")
-    updated_patient: Patient = crud.patient.update(db, db_obj=patient, obj_in=updates)
+    updated_patient: Patient = crud.patient.update(
+        db, db_obj=patient, obj_in=updates.dict(exclude_none=True)
+    )
 
     assert patient.name == updated_patient.name
     assert patient.date_of_birth == updated_patient.date_of_birth
@@ -41,7 +43,7 @@ def test__get_patient(db: Session) -> None:
     new_patient = PatientCreate(
         program="chronic-knee",
         name="A Patient",
-        date_of_birth=date(year=2000, month=1, day=1)
+        date_of_birth=date(year=2000, month=1, day=1),
     )
     patient: Patient = crud.patient.create(db, obj_in=new_patient)
 
@@ -57,7 +59,7 @@ def test__delete_patient(db: Session) -> None:
     new_patient = PatientCreate(
         program="chronic-knee",
         name="A Patient",
-        date_of_birth=date(year=2000, month=1, day=1)
+        date_of_birth=date(year=2000, month=1, day=1),
     )
     patient: Patient = crud.patient.create(db, obj_in=new_patient)
 

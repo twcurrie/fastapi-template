@@ -7,7 +7,7 @@ from app.db.base_class import Base
 from app.db.types import phi_column as phi
 
 
-class TestUserModel(Base):
+class UserModelTest(Base):
     id = sa.Column(sa.Integer, primary_key=True)
     user_name = sa.Column(phi.String(16), nullable=False)
     user_type = sa.Column(sa.String(16), nullable=False)
@@ -16,11 +16,11 @@ class TestUserModel(Base):
 
 @pytest.fixture(scope="function", autouse=True)
 def sample_table(db: Session):
-    TestUserModel.__table__.create(db.get_bind())  # type: ignore
+    UserModelTest.__table__.create(db.get_bind())  # type: ignore
 
 
 def test__sample_table__create_with_exception(db):
-    test_user_model = TestUserModel(
+    test_user_model = UserModelTest(
         user_name="A person's name", user_type="A user type", user_gender=None
     )
     db.add(test_user_model)

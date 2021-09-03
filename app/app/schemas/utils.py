@@ -1,8 +1,6 @@
 from datetime import date
 from enum import Enum
 
-from aenum import MultiValueEnum  # type: ignore
-
 
 default_json_encoders = {
     # If using the default with overrides, ensure
@@ -17,6 +15,5 @@ default_json_encoders = {
     #             date: lambda v: v.day,
     #         }
     Enum: lambda v: v.value,
-    MultiValueEnum: lambda v: v.value,
     date: lambda v: v.strftime("%Y-%m-%d"),
 }

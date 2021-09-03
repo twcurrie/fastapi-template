@@ -61,6 +61,7 @@ class PHIType(sa.TypeDecorator):
         if cls is PHIType:
             type_ = type(name, (sa.TypeDecorator,), {})
             type_.impl = sqlalchemy_type
+            type_.cache_ok = False
 
             type_.process_bind_param = cls._process_bind_param(
                 implementation=contains_phi(type(name, (base_type,), {}))

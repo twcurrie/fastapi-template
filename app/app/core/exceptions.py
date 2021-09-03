@@ -29,13 +29,6 @@ class ApiNotFoundError(ApiError, ValueError):
     """ Failed to locate the requested resource within the API from """
 
 
-class ApiIntegrationError(ApiError, ValueError):
-    """ Issue with the configuration supporting the API integration from """
-
-    def __str__(self):
-        return f"{super().__str__()} ({self.args[0]})"
-
-
 class ApiRateLimitError(ApiError, ValueError):
     """ Rate limits have been exceeded for """
 

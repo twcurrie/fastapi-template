@@ -20,3 +20,10 @@ def test__app_database_uri__string_provided__success():
 
     settings = Settings(APP_DATABASE_URI=postgres_uri)
     assert f"{settings.APP_DATABASE_URI}" == postgres_uri
+
+
+def test__amqp_uri__string_provided__success():
+    amqp_uri = "amqp://user:password@localhost:5379"
+
+    settings = Settings(AMQP_URI=amqp_uri)
+    assert f"{settings.AMQP_URI}" == amqp_uri
