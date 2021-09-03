@@ -2,7 +2,7 @@
 
 # FastAPI Template Service
 
-Python JWT based authentication microservice built with :heart: on the [FastAPI](https://github.com/tiangolo/fastapi) framework. The intent of this repo is to provide a skeleton application that includes as much as possible that will be required for our services. 
+Python-based microservice built with :heart: on the [FastAPI](https://github.com/tiangolo/fastapi) framework. The intent of this repo is to provide a skeleton application that includes as much as possible that will be required for our services. 
 
 - [So what's included?](#so-whats-included)
 - [Prerequisites](#prerequisites)
