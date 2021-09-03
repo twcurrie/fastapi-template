@@ -3,6 +3,7 @@ omit =
     # Ignore tests directory in coverage calculation
     app/app/tests/*
     app/tests/*
+    *__init__*
 branch = True
 
 [report]

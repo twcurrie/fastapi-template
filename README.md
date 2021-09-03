@@ -17,17 +17,24 @@ Python-based microservice built with :heart: on the [FastAPI](https://github.com
 
 There is _a lot_ built in out of the box. 
 
-* Automated Swagger documentation
-* SQLAlchemy ORM with a Postgres database
+* Automated Swagger documentation (and redoc!)
+* SQLAlchemy ORM with a Postgres database 
+* Generic CRUD implementation with example data models.
 * Alembic-managed migrations
 * Basic, configurable, [rate limiting](https://github.com/laurentS/slowapi) using Redis.
+* Example external API provided using Wiremock
 * New Relic and Sentry scaffolding
 * PHI-protecting decorators and handlers 
 * Semaphore configurations
-* Basic security logging
-* JSON-formatted log handler
+* Static security checks and dependency vulnerability checks  
+* Request id generating middleware (provides back to client in a header!)
+* Basic security logging on 
+* JSON-formatted log handler with ability to provide additional fields in different contexts.
 * Example SumoLogic dashboard
+* Health check endpoints  
+* Generic SHA-based versioning setup, with endpoint to obtain version
 * Dockerfile and docker-compose ready
+* Static type analysis with [mypy](https://mypy.readthedocs.io/en/stable/)
 * Linting and formatting of code upon commit
 
 [comment]: <> (* JWT auth guards )
@@ -60,15 +67,20 @@ To simplify development and follow [12 Factor App factor 10](https://12factor.ne
 
 ## Test
 
-Unit, integration and end-to-end tests have been provided in the repo.  
+Unit, integration and end-to-end tests have been provided in the repo.  These are differentiated by:
+* Unit tests require no external dependency.
+* Integration tests require at least one external dependency (Postgres, eg.). 
+* End-to-end tests interact externally with the application, and are generally intended to test the system after it has been deployed (typically in a scaling environment).
 
-[comment]: <> (* Unit tests: `make test`)
+They can be run with the following commands:
+* Unit tests: `make test-unit`
+* Integration tests: `make test-integration`
+* End-to-end tests: `make test-e2e`
 
-[comment]: <> (* E2E tests: `make test-e2e`. Note: you must run `make start` for these to run as they run inside the container.)
 
 ## Authorization
 
-Currently, the application only supports Basic Authentication requests.  The
+Currently, the application only supports Basic Authentication requests.  The credentials to connect to the application are loaded as environment variables (visible in `.sample.env`)
 
 
 [comment]: <> (To correctly test an endpoint, you will need to generate a JWT that will pass internal validation checks.)
@@ -77,65 +89,49 @@ Currently, the application only supports Basic Authentication requests.  The
 
 ### Coverage
 
-Coverage is currently at 92%!
+Coverage is currently at 93%!
 
 ``` bash
 -------------------------------------------------------------------------------------
 Name                                      Stmts   Miss Branch BrPart  Cover   Missing
 -------------------------------------------------------------------------------------
-app/app/__init__.py                          12      0      0      0   100%
-app/app/api/__init__.py                       0      0      0      0   100%
 app/app/api/deps.py                          25     17      0      0    32%   10-15, 19-25, 29-35
-app/app/api/v0/__init__.py                    0      0      0      0   100%
 app/app/api/v0/api.py                         7      0      0      0   100%
-app/app/api/v0/endpoints/__init__.py          0      0      0      0   100%
 app/app/api/v0/endpoints/example.py          29      0      0      0   100%
 app/app/api/v0/endpoints/patient.py          33      0      6      0   100%
 app/app/backend_pre_start.py                 21      0      0      0   100%
-app/app/core/__init__.py                      0      0      0      0   100%
 app/app/core/config.py                       53      0      6      0   100%
 app/app/core/controls.py                      4      0      0      0   100%
 app/app/core/environment.py                  16      0      0      0   100%
 app/app/core/exceptions.py                   16      1      0      0    94%   25
-app/app/core/external_auth.py                81      6     14      1    91%   144-154
+app/app/core/external_auth.py                81      0     14      0   100%
 app/app/core/handlers.py                     25      5      0      0    80%   20-27
-app/app/core/health/__init__.py               0      0      0      0   100%
 app/app/core/health/checks.py                23      0      0      0   100%
 app/app/core/health/route.py                 13      0      5      0   100%
-app/app/core/logging/__init__.py              7      0      0      0   100%
 app/app/core/logging/config.py                1      0      0      0   100%
 app/app/core/logging/filter.py               13      3      6      2    63%   12, 17-18
 app/app/core/logging/formatter.py             8      0      0      0   100%
-app/app/core/logging/log.py                  47      1     16      1    97%   62
+app/app/core/logging/log.py                  45      0     14      0   100%
 app/app/core/middleware.py                   23      0      2      0   100%
-app/app/core/monitoring/__init__.py           2      0      0      0   100%
 app/app/core/monitoring/new_relic.py          0      0      0      0   100%
 app/app/core/monitoring/sentry.py            33      2     30      6    87%   19, 24, 34->42, 43->61, 66->82, 83->26
 app/app/core/monitoring/utils.py              3      0      0      0   100%
 app/app/core/security.py                     12      0      2      0   100%
 app/app/core/version.py                       4      0      0      0   100%
-app/app/crud/__init__.py                      3      0      0      0   100%
 app/app/crud/base.py                         39      0      6      0   100%
 app/app/crud/crud_patient.py                  8      0      0      0   100%
-app/app/db/__init__.py                        0      0      0      0   100%
 app/app/db/base_class.py                      9      0      2      0   100%
 app/app/db/session.py                        16      0      4      0   100%
-app/app/db/types/__init__.py                  0      0      0      0   100%
 app/app/db/types/phi_column.py               58     11     22      5    75%   25-27, 41, 78, 86, 93-96, 106
 app/app/domain/example_api.py                23      0      2      0   100%
 app/app/main.py                              31      0      0      0   100%
-app/app/models/__init__.py                    0      0      0      0   100%
 app/app/models/patient.py                     8      0      0      0   100%
-app/app/schemas/__init__.py                   1      0      0      0   100%
-app/app/schemas/enums/__init__.py             0      0      0      0   100%
 app/app/schemas/enums/types.py               15      0      8      0   100%
-app/app/schemas/external/__init__.py          0      0      0      0   100%
 app/app/schemas/external/example_api.py       3      0      0      0   100%
 app/app/schemas/patient.py                   25      0      2      0   100%
 app/app/schemas/utils.py                      3      0      2      0   100%
 -------------------------------------------------------------------------------------
-TOTAL                                       753     46    135     15    92%
-
+TOTAL                                       726     39    133     13    93%
 ```
 
 
@@ -146,5 +142,5 @@ Once the service is started, you can visit the `/docs` route to view the Swagger
 ## Example modules
 
 Two example endpoints are provided to demonstrate functionality:
-* `/example` - 
-* `/patient` - 
+* `/example` - Shows basic requests to an external API.
+* `/patient` - Shows basic CRUD operations on an endpoint.

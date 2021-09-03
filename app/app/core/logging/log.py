@@ -57,7 +57,7 @@ class Log(dict):
             "line.number": record.lineno,
         }
 
-        if record.name == "uvicorn.access":
+        if record.name == "uvicorn.access":  # pragma: no cover
             # For uvicorn logs, add request information available
             output = {
                 **output,

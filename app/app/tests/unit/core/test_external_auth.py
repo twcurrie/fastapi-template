@@ -8,6 +8,7 @@ from datetime import timedelta
 from pydantic import ValidationError
 
 from app.core.external_auth import BaseCredentials, BaseOAuthResponse, BaseOAuthRequest
+from app.core.exceptions import ApiAuthenticationError
 
 
 @pytest.fixture(autouse=True)
@@ -88,6 +89,24 @@ def test__retrieve_token__validation_error(httpx_mock: HTTPXMock):
     credentials = ConcreteBaseCredentials(BaseOAuthRequest, BaseOAuthResponse)
     with pytest.raises(ValidationError):
         credentials.retrieve_token()
+
+
+def test__retrieve_token__error_with_json(httpx_mock: HTTPXMock):
+    message = "an important error message"
+    httpx_mock.add_response(status_code=403, json={"a_key": message})
+    credentials = ConcreteBaseCredentials(BaseOAuthRequest, BaseOAuthResponse)
+    with pytest.raises(ApiAuthenticationError) as e:
+        credentials.retrieve_token()
+    assert message in str(e)
+
+
+def test__retrieve_token__error_no_json(httpx_mock: HTTPXMock):
+    message = "an important error message"
+    httpx_mock.add_response(status_code=403, json={"error": message})
+    credentials = ConcreteBaseCredentials(BaseOAuthRequest, BaseOAuthResponse)
+    with pytest.raises(ApiAuthenticationError) as e:
+        credentials.retrieve_token()
+    assert message in str(e)
 
 
 def test__refresh_token__token_refreshed_on_access(httpx_mock: HTTPXMock):

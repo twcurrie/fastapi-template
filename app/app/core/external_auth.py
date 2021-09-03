@@ -93,12 +93,12 @@ class BaseCredentials(
     @property
     @abstractmethod
     def authentication_endpoint(self) -> str:
-        raise NotImplementedError("Child class must implement")  # pragma: no cover
+        raise NotImplementedError("Child class must implement")
 
     @property
     @abstractmethod
     def authentication_request(self) -> RequestSchemaType:
-        raise NotImplementedError("Child class must implement")  # pragma: no cover
+        raise NotImplementedError("Child class must implement")
 
     @property
     def accessed_at(self) -> datetime:

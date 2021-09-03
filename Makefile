@@ -50,3 +50,14 @@ docker-tag-latest:
 # Run unit tests
 test-unit:
 	poetry run pytest -m unit
+
+# Run integration tests
+test-integration:
+	sh ci/test.sh
+
+# Run end-to-end tests
+test-e2e:
+	poetry run pytest -m end-to-end
+
+
+

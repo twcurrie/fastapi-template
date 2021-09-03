@@ -13,8 +13,7 @@ shared_limit = rate_limiter.shared_limit("5/minute", "from-downstream")
 
 @router.get("/")
 @rate_limiter.exempt
-def get_string(request: Request,  # noqa: Attribute used by rate limiter
-               ) -> str:
+def get_string(request: Request,) -> str:  # noqa: Attribute used by rate limiter
     return "dummy"
 
 
@@ -27,19 +26,23 @@ async def get_strings_from_downstream(request: Request) -> List[str]:
 @router.get("/from-downstream/{id}")
 @shared_limit
 async def get_multiple_strings_from_downstream(
-        request: Request,  # noqa: Attribute used by rate limiter
-        id: Optional[int] = None
+    request: Request, id: Optional[int] = None  # noqa: Attribute used by rate limiter
 ) -> List[str]:
     logger = get_logger(__name__)
-    logger.warning(f"Received GET request for {id} checks.", extra={"request.id": request.state.id})
+    logger.info(
+        f"Received GET request for {id} checks.", extra={"request.id": request.state.id}
+    )
     response = await example_api.get_status_checks(number_of_checks=id)
     return response
 
 
 @router.get("/{id}")
 @rate_limiter.limit("1/minute")
-def get_string_by_id(request: Request,  # noqa: Attribute used by rate limiter
-                     id: int) -> str:
+def get_string_by_id(
+    request: Request, id: int  # noqa: Attribute used by rate limiter
+) -> str:
     logger = get_logger(__name__)
-    logger.warning(f"Received GET request for {id}.", extra={"request.id": request.state.id})
+    logger.info(
+        f"Received GET request for {id}.", extra={"request.id": request.state.id}
+    )
     return f"dummy {id}"
