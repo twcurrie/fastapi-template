@@ -46,3 +46,7 @@ docker-tag-latest:
 	aws ecr batch-delete-image --region ${AWS_DEFAULT_REGION}  --repository-name ${SERVICE_NAME} --image-ids imageTag=latest; \
 	docker tag ${SERVICE_NAME} $(ECR_REGISTRY):latest; \
 	docker push $(ECR_REGISTRY):latest;
+
+# Run unit tests
+test-unit:
+	poetry run pytest -m unit

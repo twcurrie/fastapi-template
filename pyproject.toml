@@ -52,15 +52,14 @@ markers = [
     "integration",
     "unit",
     "asyncio",
-    "no_mock_credentials"
 ]
 testpaths = [
     "app/app/tests/unit",
     "app/app/tests/integration",
     "app/app/tests/end_to_end",
 ]
-env_files = ".env"
-env = [# This overrides the default values provided within the .env file
+env_files = ".sample.env"
+env = [# This overrides the default values provided within the .sample.env file
     "ENVIRONMENT=test",
     "ENABLE_RATE_LIMITING=False"
 ]

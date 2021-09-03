@@ -1,6 +1,4 @@
 import os
-import random
-import string
 from base64 import b64encode
 from pathlib import Path
 
