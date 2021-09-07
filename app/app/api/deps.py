@@ -1,9 +1,18 @@
-import aioredis  # type: ignore
-from sentry_sdk import start_transaction
+import asyncio
+from fastapi import Request
 from typing import AsyncGenerator, Generator
+
+import aioredis  # type: ignore
+from uuid import UUID
+from aio_pika import connect_robust
+from sentry_sdk import start_transaction
 
 from app.core.config import settings
 from app.db.session import SessionLocal
+
+
+def get_request_id(request: Request) -> UUID:
+    return request.state.id
 
 
 def get_db() -> Generator:
@@ -13,6 +22,17 @@ def get_db() -> Generator:
             yield db
         finally:
             db.close()
+
+
+async def get_amqp_channel() -> AsyncGenerator:
+    loop = asyncio.get_event_loop()
+    with start_transaction(op="rabbitmq"):
+        try:
+            connection = await connect_robust(settings.AMQP_URI, loop=loop)
+            channel = await connection.channel()
+            yield channel
+        finally:
+            await channel.close()
 
 
 async def get_redis_connection() -> AsyncGenerator:

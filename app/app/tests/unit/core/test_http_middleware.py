@@ -1,11 +1,9 @@
-import pytest
-
 import logging
 from starlette.applications import Starlette
 from starlette.responses import PlainTextResponse
 from starlette.testclient import TestClient
 
-from app.core.middleware import RequestLoggingMiddleware, RequestTimingMiddleware
+from app.core.middleware.http import RequestLoggingMiddleware, RequestTimingMiddleware
 
 
 logging_app = Starlette()

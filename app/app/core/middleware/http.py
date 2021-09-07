@@ -1,18 +1,13 @@
-# import asyncio
 import logging
 import time
 from uuid import uuid4
 
-# from aio_pika import connect_robust
-# from aio_pika.patterns import RPC
 from fastapi import Request
 from starlette.middleware.base import (
     BaseHTTPMiddleware,
     RequestResponseEndpoint,
     Response,
 )
-
-# from app.core.config import settings
 
 
 class RequestLoggingMiddleware(BaseHTTPMiddleware):
@@ -64,26 +59,3 @@ class RequestTimingMiddleware(BaseHTTPMiddleware):
         process_time = time.time() - start_time
         response.headers["X-Process-Time"] = str(process_time)
         return response
-
-
-#
-# async def rpc_middleware(request: Request, call_next):
-#     try:
-#         loop = asyncio.get_event_loop()
-#         connection = await connect_robust(settings.AMQP_URI, loop=loop)
-#         channel = await connection.channel()
-#         request.state.rpc = await RPC.create(channel)
-#         response = await call_next(request)
-#     except:
-#         response = Response("Internal server error", status_code=500)
-#     finally:
-#
-#         # UPD: just thought that we probably want to keep queue and don't
-#         # recreate it for each request so we can remove this line and move
-#         # connection, channel and rpc initialisation out from middleware
-#         # and do it once on app start
-#
-#         # Also based of this: https://github.com/encode/starlette/issues/1029
-#         # it's better to create ASGI middleware instead of HTTP
-#         await request.state.rpc.close()
-#     return response

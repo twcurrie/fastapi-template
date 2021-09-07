@@ -63,7 +63,7 @@ A `Makefile` has been added to this project to simplify interactions with the se
 
 ## Running the App
 
-To simplify development and follow [12 Factor App factor 10](https://12factor.net/dev-prod-parity), everything is run inside a docker-compose context. The following commands will get things up and running in development mode with hot-reloading.  An `.sample.env` file is provided in the repo in order to simplify start-up of the application and its dependencies and share the credentials.
+To simplify development and follow [12 Factor App factor 10](https://12factor.net/dev-prod-parity), everything is run inside a docker-compose context. The following commands will get things up and running in development mode with hot-reloading.  An `.env` file is provided in the repo in order to simplify start-up of the application and its dependencies and share the credentials.
 
 ## Test
 
@@ -80,7 +80,7 @@ They can be run with the following commands:
 
 ## Authorization
 
-Currently, the application only supports Basic Authentication requests.  The credentials to connect to the application are loaded as environment variables (visible in `.sample.env`)
+Currently, the application only supports Basic Authentication requests.  The credentials to connect to the application are loaded as environment variables (visible in `.env`)
 
 
 [comment]: <> (To correctly test an endpoint, you will need to generate a JWT that will pass internal validation checks.)
@@ -89,13 +89,13 @@ Currently, the application only supports Basic Authentication requests.  The cre
 
 ### Coverage
 
-Coverage is currently at 93%!
+Coverage is currently at 92%!
 
 ``` bash
 -------------------------------------------------------------------------------------
 Name                                      Stmts   Miss Branch BrPart  Cover   Missing
 -------------------------------------------------------------------------------------
-app/app/api/deps.py                          25     17      0      0    32%   10-15, 19-25, 29-35
+app/app/api/deps.py                          39     25      0      0    36%   15, 19-24, 28-35, 39-45, 49-55
 app/app/api/v0/api.py                         7      0      0      0   100%
 app/app/api/v0/endpoints/example.py          29      0      0      0   100%
 app/app/api/v0/endpoints/patient.py          33      0      6      0   100%
@@ -112,7 +112,7 @@ app/app/core/logging/config.py                1      0      0      0   100%
 app/app/core/logging/filter.py               13      3      6      2    63%   12, 17-18
 app/app/core/logging/formatter.py             8      0      0      0   100%
 app/app/core/logging/log.py                  45      0     14      0   100%
-app/app/core/middleware.py                   23      0      2      0   100%
+app/app/core/middleware/http.py              23      0      2      0   100%
 app/app/core/monitoring/new_relic.py          0      0      0      0   100%
 app/app/core/monitoring/sentry.py            33      2     30      6    87%   19, 24, 34->42, 43->61, 66->82, 83->26
 app/app/core/monitoring/utils.py              3      0      0      0   100%
@@ -131,7 +131,7 @@ app/app/schemas/external/example_api.py       3      0      0      0   100%
 app/app/schemas/patient.py                   25      0      2      0   100%
 app/app/schemas/utils.py                      3      0      2      0   100%
 -------------------------------------------------------------------------------------
-TOTAL                                       726     39    133     13    93%
+TOTAL                                       761     68    135     13    92%
 ```
 
 

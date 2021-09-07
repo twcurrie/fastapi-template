@@ -1,6 +1,8 @@
 from app.core.config import settings  # noqa
 
-if not settings.ENVIRONMENT.is_testing() and not settings.ENVIRONMENT.is_development():  # pragma: no cover
+if (
+    not settings.ENVIRONMENT.is_testing() and not settings.ENVIRONMENT.is_development()
+):  # pragma: no cover
     # Disable new relic monitoring during testing and development
     from app.core.monitoring.new_relic import *  # noqa
 
@@ -27,7 +29,7 @@ from app.core.health.checks import checks
 from app.core.health import route
 from app.core.logging.config import LOGGING_CONFIG
 from app.core.logging.formatter import JsonLogFormatter
-from app.core.middleware import RequestLoggingMiddleware, RequestTimingMiddleware
+from app.core.middleware.http import RequestLoggingMiddleware, RequestTimingMiddleware
 from app.core.monitoring import sentry
 
 app = FastAPI(
