@@ -9,11 +9,6 @@ from app.api import deps
 
 
 @pytest.fixture(scope="function")
-def client() -> TestClient:
-    return TestClient(app)
-
-
-@pytest.fixture(scope="function")
 def get_test_db(db) -> Callable[[], Session]:
     return lambda: db  # type: ignore
 

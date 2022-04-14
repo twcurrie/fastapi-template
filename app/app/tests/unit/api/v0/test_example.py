@@ -13,7 +13,7 @@ def test__get_example_string__success(client: TestClient, basic_auth_headers: di
 
 @pytest.mark.asyncio
 def test__get_example_string_from_downstream__success(
-    client: TestClient, mock_example_api, basic_auth_headers: dict
+        client: TestClient, mock_example_api, basic_auth_headers: dict
 ):
     response = client.get(
         "api/v0/example/from-downstream",
@@ -29,9 +29,9 @@ def test__get_example_string_from_downstream__success(
     [
         (ApiTimeoutError("Some issue..."), "Supporting API is not available.", 504),
         (
-            ApiSerializationError("Some issue..."),
-            "Response from supporting API can not be parsed.",
-            424,
+                ApiSerializationError("Some issue..."),
+                "Response from supporting API can not be parsed.",
+                424,
         ),
     ],
 )

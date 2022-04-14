@@ -1,4 +1,4 @@
-import sqlalchemy as sa
+import sqlalchemy as sa  # type: ignore
 
 from app.db.base_class import Base
 from app.db.types import phi_column as phi

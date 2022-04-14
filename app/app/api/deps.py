@@ -2,7 +2,7 @@ import asyncio
 from fastapi import Request
 from typing import AsyncGenerator, Generator
 
-import aioredis  # type: ignore
+import aioredis
 from uuid import UUID
 from aio_pika import connect_robust
 
@@ -34,8 +34,8 @@ async def get_amqp_channel() -> AsyncGenerator:
 
 async def get_redis_connection() -> AsyncGenerator:
     try:
-        connection = await aioredis.create_connection(settings.REDIS_URI)
-        yield connection
+        connection = aioredis.from_url(settings.REDIS_URI, encoding="utf-8", decode_responses=True)
+        yield connection.client()
     finally:
         connection.close()
     await connection.wait_closed()
@@ -43,7 +43,7 @@ async def get_redis_connection() -> AsyncGenerator:
 
 async def get_redis_connection_pool() -> AsyncGenerator:
     try:
-        connection_pool = await aioredis.create_redis_pool(settings.REDIS_URI)
+        connection_pool = aioredis.from_url(settings.REDIS_URI, encoding="utf-8", decode_responses=True)
         yield connection_pool
     finally:
         connection_pool.close()

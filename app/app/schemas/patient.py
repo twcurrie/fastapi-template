@@ -2,7 +2,7 @@ from datetime import date
 from typing import Optional
 
 from pydantic import BaseModel
-from stringcase import camelcase
+from stringcase import camelcase  # type: ignore
 
 from app.core.monitoring import contains_phi
 
