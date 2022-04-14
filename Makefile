@@ -15,7 +15,8 @@ aptible-deploy:
 		--environment=${ENVIRONMENT} \
 		--docker-image=$(ECR_REGISTRY):${GIT_SHA} \
 		--private-registry-username=AWS \
-		--private-registry-password=`aws ecr get-login-password --region us-east-1`
+		--private-registry-password=`aws ecr get-login-password --region us-east-1` \
+		DD_VERSION=${GIT_SHA}
 
 # Post deployment to New Relic endpoint
 notify-new-relic-of-deploy:

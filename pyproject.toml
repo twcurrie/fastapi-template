@@ -21,9 +21,10 @@ httpx = "~0.17.1"
 uvicorn = "^0.13.4"
 freezegun = "^1.1.0"
 Faker = "^8.1.2"
-newrelic = "^6.2.0"
 stringcase = "^1.2.0"
 aio-pika = "^6.8.0"
+datadog = "^0.44.0"
+ddtrace = "^1.0.0"
 
 [tool.poetry.dev-dependencies]
 black = "^20.8b1"

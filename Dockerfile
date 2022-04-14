@@ -32,5 +32,7 @@ FROM ${BUILD_IMAGE}-version AS final_image
 RUN apt-get remove -y gcc gcc-8
 
 COPY ./app /app
-COPY ./newrelic.ini /app/newrelic.ini
+COPY ./start.sh /start.sh
+RUN chmod +x /start.sh
+
 ENV PYTHONPATH=/app
