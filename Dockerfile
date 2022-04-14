@@ -29,7 +29,7 @@ RUN mkdir /.aptible/
 COPY Procfile /.aptible/
 
 FROM ${BUILD_IMAGE}-version AS final_image
-RUN apt-get remove -y gcc gcc-8
+RUN apt-get remove -y gcc
 
 COPY ./app /app
 COPY ./newrelic.ini /app/newrelic.ini
