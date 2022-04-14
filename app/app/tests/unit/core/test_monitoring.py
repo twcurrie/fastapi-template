@@ -184,7 +184,7 @@ def test__contains_phi__success():
 
 
 def test__before_send__sanitizes_requests__fastapi(get_resource):
-    with get_resource("esi/sentry_exception__with_phi.json") as json_with_phi:
+    with get_resource("sentry_exception__fastapi__with_phi.json") as json_with_phi:
         event_with_phi = json.load(json_with_phi)
 
     processed_event = before_send(event_with_phi, {})
@@ -208,7 +208,7 @@ def test__before_send__sanitizes_requests__fastapi(get_resource):
 
 
 def test__before_send__sanitizes_requests__httpx(get_resource):
-    with get_resource("change_health/sentry_exception__with_phi.json") as json_with_phi:
+    with get_resource("sentry_exception__httpx__with_phi.json") as json_with_phi:
         event_with_phi = json.load(json_with_phi)
 
     processed_event = before_send(event_with_phi, {})

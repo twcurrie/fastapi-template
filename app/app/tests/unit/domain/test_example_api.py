@@ -1,7 +1,6 @@
 import pytest
 from pytest_httpx import HTTPXMock  # type: ignore
 
-import asyncio
 import httpx
 
 from app.domain import example_api
@@ -22,10 +21,8 @@ async def test__request_status_check__validation_error(httpx_mock: HTTPXMock):
 
 @pytest.mark.asyncio
 async def test__request_status_check__timeout_error(httpx_mock: HTTPXMock):
-    def raise_timeout(request, ext: dict):
-        raise httpx.ReadTimeout(
-            f"Unable to read within {ext['timeout']}", request=request
-        )
+    def raise_timeout(request: httpx.Request):
+        raise httpx.ReadTimeout(f"Unable to read within timeout", request=request)
 
     httpx_mock.add_callback(raise_timeout)
     async with httpx.AsyncClient() as client:
@@ -61,18 +58,15 @@ async def test__get_status_checks__total_failure(mocker):
 async def test__get_status_checks__partial_failure(mocker):
     number_of_checks = 3
     expected_message = "My friend isn't well!"
-    future_status = asyncio.Future()
-    future_status.set_result(StatusCheck(value=expected_message))
-    return_values = (number_of_checks - 1) * [future_status] + [ApiTimeoutError]
+
+    future_status = StatusCheck(value=expected_message)
     mocker.patch(
         "app.domain.example_api.request_status_check",
-        side_effect=return_values,
+        side_effect=(number_of_checks - 1) * [future_status] + [ApiTimeoutError],
     )
-
     status_checks = await example_api.get_status_checks(number_of_checks - 1)
     assert all([status == expected_message for status in status_checks])
 
-    # TODO: Surface successful requests, and log errors.
     with pytest.raises(ApiTimeoutError):
         await example_api.get_status_checks(1)
 
@@ -81,12 +75,9 @@ async def test__get_status_checks__partial_failure(mocker):
 async def test__get_status_checks__success(mocker):
     number_of_checks = 3
     expected_message = "Thanks for checking on me."
-    future_status = asyncio.Future()
-    future_status.set_result(StatusCheck(value=expected_message))
-    return_values = number_of_checks * [future_status]
     mocker.patch(
         "app.domain.example_api.request_status_check",
-        side_effect=return_values,
+        return_value=StatusCheck(value=expected_message),
     )
 
     status_checks = await example_api.get_status_checks(number_of_checks)

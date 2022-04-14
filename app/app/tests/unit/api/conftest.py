@@ -2,7 +2,7 @@ import asyncio
 from typing import Callable
 
 import pytest
-from mock import MagicMock
+from mock import MagicMock, AsyncMock
 from sqlalchemy.orm import Session  # type: ignore
 from starlette.testclient import TestClient
 
@@ -33,9 +33,8 @@ def client(get_mock_db) -> TestClient:
 
 @pytest.fixture(scope="function")
 def mock_example_api(mocker):
-    future = asyncio.Future()
-    future.set_result(["All good!"])
-    mocker.patch("app.domain.example_api.get_status_checks", return_value=future)
+    future = AsyncMock(return_value=["All good!"])
+    mocker.patch("app.domain.example_api.get_status_checks", side_effect=future)
 
 
 @pytest.fixture(scope="function")
