@@ -1,9 +1,165 @@
+import pytest
 from pydantic import BaseModel
 
 import json
+import logging
+from typing import Any
 
-from app.core.monitoring import contains_phi
+from app.core.monitoring import contains_phi, handles_phi
 from app.core.monitoring.sentry import before_send
+
+
+@pytest.mark.parametrize("sensitive_data", ["Jane Doe", 123, 1.0])
+def test__handles_phi__exception_success(sensitive_data):
+    @handles_phi
+    def method_handling_phi_primitives(a_sensitive_field: Any) -> None:
+        raise ValueError(a_sensitive_field)
+
+    with pytest.raises(ValueError) as e:
+        method_handling_phi_primitives(sensitive_data)
+
+    assert str(sensitive_data) not in str(e.value.args[0])
+
+
+@pytest.mark.parametrize("sensitive_data", ["Jane Doe", 123, 1.0])
+def test__handles_phi__logging_success(caplog, sensitive_data):
+    @handles_phi
+    def method_handling_phi_primitives(a_sensitive_field: Any) -> None:
+        logging.info(f"A sensitive field is being processed: {a_sensitive_field}")
+        assert a_sensitive_field.has_phi  # type: ignore
+
+    caplog.clear()
+    caplog.set_level(logging.INFO)
+
+    method_handling_phi_primitives(sensitive_data)
+    assert sensitive_data not in [record.message for record in caplog.records]
+
+
+@pytest.mark.parametrize("sensitive_data", ["Jane Doe", 123, 1.0])
+def test__handles_phi__sub_function_success(caplog, sensitive_data):
+    def method_unknowingly_handling_phi_primitives(maybe_sensitive_field: Any) -> None:
+        logging.info(
+            f"We might be processing a sensitive field: {maybe_sensitive_field}"
+        )
+        assert maybe_sensitive_field.has_phi  # type: ignore
+
+    @handles_phi
+    def method_handling_phi_primitives(a_sensitive_field: Any) -> None:
+        method_unknowingly_handling_phi_primitives(a_sensitive_field)
+
+    caplog.clear()
+    caplog.set_level(logging.INFO)
+
+    method_handling_phi_primitives(sensitive_data)
+    assert sensitive_data not in [record.message for record in caplog.records]
+
+
+@pytest.mark.parametrize("sensitive_data", ["Jane Doe", 123, 1.0])
+def test__handles_phi_with_args__exception_success(sensitive_data):
+    @handles_phi(sensitive_fields=["a_sensitive_field"])
+    def method_handling_phi_primitives(a_sensitive_field: Any, a_field: str) -> None:
+        raise ValueError(f"{a_sensitive_field} - {a_field}")
+
+    insensitive_data = "bull-in-a-china shop"
+    with pytest.raises(ValueError) as e:
+        method_handling_phi_primitives(sensitive_data, insensitive_data)
+
+    assert str(sensitive_data) not in str(e.value.args[0])
+    assert insensitive_data in str(e.value.args[0])
+
+
+@pytest.mark.parametrize("sensitive_data", ["Jane Doe", 123, 1.0])
+def test__handles_phi_with_args__logging_success(caplog, sensitive_data):
+    @handles_phi(sensitive_fields=["a_sensitive_field"])
+    def method_handling_phi_primitives(a_sensitive_field: Any, a_field: str) -> None:
+        logging.info(f"A sensitive field is being processed: {a_sensitive_field}")
+        assert a_sensitive_field.has_phi  # type: ignore
+
+    caplog.clear()
+    caplog.set_level(logging.INFO)
+
+    insensitive_data = "feelings"
+    method_handling_phi_primitives(sensitive_data, insensitive_data)
+    assert sensitive_data not in [record.message for record in caplog.records]
+
+
+@pytest.mark.parametrize("sensitive_data", ["Jane Doe", 123, 1.0])
+def test__handles_phi_with_args__sub_function_success(caplog, sensitive_data):
+    def method_unknowingly_handling_phi_primitives(
+            maybe_sensitive_field: Any, a_field: Any
+    ) -> None:
+        logging.info(
+            f"We might be processing a sensitive fields: {maybe_sensitive_field}, {a_field}"
+        )
+        assert maybe_sensitive_field.has_phi  # type: ignore
+
+    @handles_phi(sensitive_fields=["a_sensitive_field"])
+    def method_handling_phi_primitives(a_sensitive_field: Any, a_field: str) -> None:
+        method_unknowingly_handling_phi_primitives(a_sensitive_field, a_field)
+
+    caplog.clear()
+    caplog.set_level(logging.INFO)
+
+    insensitive_data = "just-no-remorse"
+    method_handling_phi_primitives(sensitive_data, insensitive_data)
+    assert sensitive_data not in [record.message for record in caplog.records]
+
+
+@pytest.mark.parametrize("sensitive_data", ["Jane Doe", 123, 1.0])
+def test__handles_phi_with_kwargs__exception_success(sensitive_data):
+    @handles_phi(sensitive_fields=["a_sensitive_field"])
+    def method_handling_phi_primitives(a_sensitive_field: Any, a_field: str) -> None:
+        raise ValueError(f"{a_sensitive_field} - {a_field}")
+
+    insensitive_data = "bull-in-a-china shop"
+    with pytest.raises(ValueError) as e:
+        method_handling_phi_primitives(
+            a_sensitive_field=sensitive_data, a_field=insensitive_data
+        )
+
+    assert str(sensitive_data) not in str(e.value.args[0])
+    assert insensitive_data in str(e.value.args[0])
+
+
+@pytest.mark.parametrize("sensitive_data", ["Jane Doe", 123, 1.0])
+def test__handles_phi_with_kwargs__logging_success(caplog, sensitive_data):
+    @handles_phi(sensitive_fields=["a_sensitive_field"])
+    def method_handling_phi_primitives(a_sensitive_field: Any, a_field: str) -> None:
+        logging.info(f"A sensitive field is being processed: {a_sensitive_field}")
+        assert a_sensitive_field.has_phi  # type: ignore
+
+    caplog.clear()
+    caplog.set_level(logging.INFO)
+
+    insensitive_data = "feelings"
+    method_handling_phi_primitives(
+        a_sensitive_field=sensitive_data, a_field=insensitive_data
+    )
+    assert sensitive_data not in [record.message for record in caplog.records]
+
+
+@pytest.mark.parametrize("sensitive_data", ["Jane Doe", 123, 1.0])
+def test__handles_phi_with_kwargs__sub_function_success(caplog, sensitive_data):
+    def method_unknowingly_handling_phi_primitives(
+            maybe_sensitive_field: Any, a_field: Any
+    ) -> None:
+        logging.info(
+            f"We might be processing a sensitive fields: {maybe_sensitive_field}, {a_field}"
+        )
+        assert maybe_sensitive_field.has_phi  # type: ignore
+
+    @handles_phi(sensitive_fields=["a_sensitive_field"])
+    def method_handling_phi_primitives(a_sensitive_field: Any, a_field: str) -> None:
+        method_unknowingly_handling_phi_primitives(a_sensitive_field, a_field)
+
+    caplog.clear()
+    caplog.set_level(logging.INFO)
+
+    insensitive_data = "just-no-remorse"
+    method_handling_phi_primitives(
+        a_sensitive_field=sensitive_data, a_field=insensitive_data
+    )
+    assert sensitive_data not in [record.message for record in caplog.records]
 
 
 def test__contains_phi__success():
@@ -28,7 +184,7 @@ def test__contains_phi__success():
 
 
 def test__before_send__sanitizes_requests__fastapi(get_resource):
-    with get_resource("sentry_exception__fastapi__with_phi.json") as json_with_phi:
+    with get_resource("esi/sentry_exception__with_phi.json") as json_with_phi:
         event_with_phi = json.load(json_with_phi)
 
     processed_event = before_send(event_with_phi, {})
@@ -52,7 +208,7 @@ def test__before_send__sanitizes_requests__fastapi(get_resource):
 
 
 def test__before_send__sanitizes_requests__httpx(get_resource):
-    with get_resource("sentry_exception__httpx__with_phi.json") as json_with_phi:
+    with get_resource("change_health/sentry_exception__with_phi.json") as json_with_phi:
         event_with_phi = json.load(json_with_phi)
 
     processed_event = before_send(event_with_phi, {})
@@ -93,25 +249,21 @@ def test__before_send__sanitizes_requests__sqlalchemy(get_resource):
         """
         if isinstance(obj_, dict):
             if (
-                isinstance(parent, dict)
-                and parent.get("module") == "sqlalchemy.engine.base"
+                    isinstance(parent, dict)
+                    and parent.get("module") == "sqlalchemy.engine.base"
             ):
                 assert "parameters" not in obj_
             if isinstance(parent, dict) and "sqlalchemy.engine" in parent.get(
-                "module", ""
+                    "module", ""
             ):
                 assert "args" not in obj_
                 assert "args_10style" not in obj_
                 assert "distilled_params" not in obj_
                 assert "event_params" not in obj_
             if isinstance(parent, dict) and "sqlalchemy.sql" in parent.get(
-                "module", ""
+                    "module", ""
             ):
                 assert "multiparams" not in obj_
-            if isinstance(parent, dict) and "newrelic.hooks.database" in parent.get(
-                "module", ""
-            ):
-                assert "args" not in obj_
             for value in obj_.values():
                 dict_checker(obj_, value)
         elif isinstance(obj_, list) or isinstance(obj_, tuple):
