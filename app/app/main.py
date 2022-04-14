@@ -46,7 +46,7 @@ app.add_middleware(RequestTimingMiddleware)
 if settings.ENABLE_RATE_LIMITING:  # pragma: no cover
     app.add_middleware(SlowAPIMiddleware)
     app.add_exception_handler(RateLimitExceeded, rate_limiter_exception_handler)
-app.add_api_route("/health", rate_limiter.exempt(route.health(checks)))
+app.add_api_route("/healthcheck", rate_limiter.exempt(route.health(checks)))
 app.add_api_route("/version", version.endpoint)
 
 

@@ -34,7 +34,7 @@ def sick():
 )
 def test_health(conditions, status_code):
     app = FastAPI()
-    app.add_api_route("/health", health(conditions))
+    app.add_api_route("/healthcheck", health(conditions))
     with TestClient(app) as client:
-        res = client.get("/health")
+        res = client.get("/healthcheck")
         assert res.status_code == status_code
