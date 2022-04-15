@@ -117,11 +117,10 @@ jobs:
       - name: Combine code coverage reports
         run: poetry run coverage combine
       - name: Produce coverage report
+        id: code-coverage
         working-directory: ./app
         run: |
-          ls -al
           cp ../.coverage .
-          poetry run coverage report -m
           report=$(poetry run coverage report -m)
           echo "::set-output name=report::${report}"
         continue-on-error: true
@@ -139,7 +138,7 @@ jobs:
             ```
       - name: Verify code coverage percent
         working-directory: ./app
-        run: poetry run coverage report --fail-under=80
+        run: poetry run coverage report --fail-under=90
 
   docker-build:
     name: Build docker image
