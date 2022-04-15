@@ -70,7 +70,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: .coverage.unit
-          path: ./coverage.unit
+          path: ./app/coverage.unit
 
   integration-tests:
     name: Integration tests
