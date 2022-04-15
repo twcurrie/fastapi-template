@@ -89,7 +89,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: .coverage.integration
-          path: ./app/.coverage.integration
+          path: .coverage.integration
 
   code-coverage:
     name: Validate code coverage
