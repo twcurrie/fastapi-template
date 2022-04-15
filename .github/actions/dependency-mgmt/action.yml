@@ -3,10 +3,11 @@ description: Checks cached dependencies and installs dependencies if needed
 
 inputs:
   python_version:
+    description: "The python version to setup."
     required: true
-    type: string
 
 runs:
+  using: "composite"
   steps:
     - name: Checkout repo
       uses: actions/checkout@v3
@@ -31,3 +32,4 @@ runs:
       run: |
         poetry config --local virtualenvs.in-project true
         poetry install
+      shell: bash
