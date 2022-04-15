@@ -1009,6 +1009,14 @@ optional = false
 python-versions = ">=3.7"
 
 [[package]]
+name = "types-mock"
+version = "4.0.13"
+description = "Typing stubs for mock"
+category = "main"
+optional = false
+python-versions = "*"
+
+[[package]]
 name = "typing-extensions"
 version = "4.1.1"
 description = "Backported and Experimental Type Hints for Python 3.6+"
@@ -1060,7 +1068,7 @@ multidict = ">=4.0"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.9"
-content-hash = "ac2859d6afcbe2ad7e79323e711982770460a0c11e74cc894d3d0f7b800def89"
+content-hash = "7bf43f70d1e2bc1895fd9dd66432fdee63cc0503cec303f2917bbd44a73a445b"
 
 [metadata.files]
 aenum = [
@@ -1840,6 +1848,10 @@ toml = [
 tomli = [
     {file = "tomli-2.0.1-py3-none-any.whl", hash = "sha256:939de3e7a6161af0c887ef91b7d41a53e7c5a1ca976325f429cb46ea9bc30ecc"},
     {file = "tomli-2.0.1.tar.gz", hash = "sha256:de526c12914f0c550d15924c62d72abc48d6fe7364aa87328337a31007fe8a4f"},
+]
+types-mock = [
+    {file = "types-mock-4.0.13.tar.gz", hash = "sha256:82c819a5ba384c47a65c148df062138f38790b61d7e6b40eaeb8f2179f28f842"},
+    {file = "types_mock-4.0.13-py3-none-any.whl", hash = "sha256:7c1db9f937109d96da14e5ed95c89920c3e4913eeff44a4adfea38eb335d0c99"},
 ]
 typing-extensions = [
     {file = "typing_extensions-4.1.1-py3-none-any.whl", hash = "sha256:21c85e0fe4b9a155d0799430b0ad741cdce7e359660ccbd8b530613e8df88ce2"},
