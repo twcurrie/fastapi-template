@@ -121,21 +121,18 @@ jobs:
         working-directory: ./app
         run: |
           cp ../.coverage .
-          report=$(poetry run coverage report -m)
-          echo "::set-output name=report::${report}"
+          poetry run coverage report -m > pytest-coverage.txt
+          poetry run coverage html --skip-covered --skip-empty
         continue-on-error: true
-      - name: Post code coverage to pull request
-        uses: mshick/add-pr-comment@v1
-        id: comment
+    - name: Comment coverage
+      uses: coroo/pytest-coverage-commentator@v1.0.2
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Upload HTML report
+        uses: actions/upload-artifact@v3
         with:
-          allow-repeats: true
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-          repo-token-user-login: 'github-actions[bot]'
-          message: |
-            ## Code coverage: ${{ steps.code-coverage.outcome }}
-            ```
-            ${{ steps.code-coverage.outputs.report}}
-            ```
+          name: html-report
+          path: htmlcov
       - name: Verify code coverage percent
         working-directory: ./app
         run: poetry run coverage report --fail-under=90
