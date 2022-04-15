@@ -3,10 +3,11 @@ description: Follows standard workflow to deploy to an aptible environment
 
 inputs:
   environment:
+    description: "The aptible environment to target"
     required: true
-    type: string
 
 runs:
+  using: "composite"
   env:
     ENVIRONMENT: ${{ environment }}
   environment:
