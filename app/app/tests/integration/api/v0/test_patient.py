@@ -3,12 +3,12 @@ from datetime import date
 from typing import Callable
 
 from fastapi.testclient import TestClient
-from sqlalchemy.orm import Session
+from sqlalchemy.orm import Session  # type: ignore
 
 from app import crud
 from app.core.config import settings
 from app.models.patient import Patient
-from app.schemas.patient import PatientCreate, PatientUpdate
+from app.schemas.patient import PatientCreate
 
 
 def test__create_patient(
