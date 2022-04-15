@@ -47,7 +47,7 @@ pytest-env = "^0.6.2"
 
 [tool.pytest.ini_options]
 minversion = "6.0"
-addopts = "--strict-markers --cov=app --cov-config=app/.coveragerc --cov-report=term-missing"
+addopts = "--strict-markers --cov=app --cov-config=.coveragerc --cov-report=term-missing"
 markers = [
     "end_to_end",
     "integration",

@@ -1,0 +1,18 @@
+name: Deploy to scaling (aptible)
+on:
+  workflow_run:
+    workflows: ["Continuous Integration Workflow"]
+    branches: [main]
+    types: [completed]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    if: | 
+      github.repository != 'hinge-health/fastapi-template' ||
+      ${{ github.event.workflow_run.conclusion == 'success' }}
+    steps:
+      - name: Deploy
+        uses: hinge-health/fastapi-template/.github/workflows/deploy_to_aptible.yml@main
+        with:
+          environment: scaling
