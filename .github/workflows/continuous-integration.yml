@@ -67,6 +67,7 @@ jobs:
         run: poetry run pytest -m unit
         continue-on-error: true
       - name: Store coverage report
+        if: always()
         uses: actions/upload-artifact@v3
         with:
           name: .coverage.unit
@@ -84,8 +85,8 @@ jobs:
         run: make test-integration
         env:
           COVERAGE_FILE: .coverage.integration
-        continue-on-error: true
       - name: Store coverage report
+        if: always()
         uses: actions/upload-artifact@v3
         with:
           name: .coverage.integration
@@ -136,7 +137,7 @@ jobs:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           repo-token-user-login: 'github-actions[bot]'
           message: |
-            ## Code coverage: ${{ steps.code-coverage.outcome }}
+            ## ---- Code coverage ----  
             ```
             ${{ steps.code-coverage.outputs.report}}
             ```
