@@ -23,7 +23,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Install dependencies
-        uses: ./.github/actions/dependency-mgmt@main
+        uses: ./.github/actions/dependency-mgmt
         with:
           python_version: 3.9
       - name: Static typing checks
