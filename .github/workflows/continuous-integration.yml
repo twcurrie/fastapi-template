@@ -1,4 +1,4 @@
-name: Continuous Integration Workflow
+name: Continuous Integration
 
 on:
   pull_request:
@@ -65,11 +65,12 @@ jobs:
           ENVIRONMENT: test
           COVERAGE_FILE: .coverage.unit
         run: poetry run pytest -m unit
+        continue-on-error: true
       - name: Store coverage report
         uses: actions/upload-artifact@v3
         with:
           name: .coverage.unit
-          path: ./
+          path: ./coverage.unit
 
   integration-tests:
     name: Integration tests
@@ -83,11 +84,12 @@ jobs:
         run: make test-integration
         env:
           COVERAGE_FILE: coverage.integration
+        continue-on-error: true
       - name: Store coverage report
         uses: actions/upload-artifact@v3
         with:
           name: .coverage.integration
-          path: ./
+          path: ./coverage.integration
 
   code-coverage:
     name: Validate code coverage
