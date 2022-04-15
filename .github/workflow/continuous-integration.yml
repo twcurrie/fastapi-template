@@ -110,9 +110,7 @@ jobs:
         run: | 
           coverage combine
           report="${coverage report -m}"
-          json_report="${coverage json -q -o report.json}"
           echo "::set-output name=report::${report}"
-          echo "::set-output name=json::${json_report}"
       - name: Post code coverage to pull request
         uses: mshick/add-pr-comment@v1
         id: comment
