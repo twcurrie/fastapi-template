@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Install dependencies
-        uses: hinge-health/fastapi-template/.github/workflows/dependency-mgmt.yml@main
+        uses: .github/actions/dependency-mgmt.yml@main
       - name: Linting check
         run: |
           echo "Checking linting against $(poetry run black --version)"
@@ -21,7 +21,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Install dependencies
-        uses: hinge-health/fastapi-template/.github/workflows/dependency-mgmt.yml@main
+        uses: .github/actions/dependency-mgmt.yml@main
         with:
           python_version: 3.9
       - name: Static typing checks
@@ -31,7 +31,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Install dependencies
-        uses: hinge-health/fastapi-template/.github/workflows/dependency-mgmt.yml@main
+        uses: .github/actions/dependency-mgmt.yml@main
         with:
           python_version: 3.9
       - name: Run safety
@@ -41,7 +41,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Install dependencies
-        uses: hinge-health/fastapi-template/.github/workflows/dependency-mgmt.yml@main
+        uses: .github/actions/dependency-mgmt.yml@main
         with:
           python_version: 3.9
       - name: Run bandit
@@ -51,7 +51,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Install dependencies
-        uses: hinge-health/fastapi-template/.github/workflows/dependency-mgmt.yml@main
+        uses: .github/actions/dependency-mgmt.yml@main
         with:
           python_version: 3.9
       - name: Run unit tests
@@ -93,7 +93,7 @@ jobs:
     steps:
       # TODO: Full dependencies are not required, just 'coverage'
       - name: Install dependencies
-        uses: hinge-health/fastapi-template/.github/workflows/dependency-mgmt.yml@main
+        uses: .github/actions/dependency-mgmt.yml@main
         with:
           python_version: 3.9
       - name: Download unit test coverage report
