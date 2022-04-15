@@ -1,4 +1,4 @@
-name: Continuous Integration Workflow
+name: Continuous Integration
 
 on:
   pull_request:
@@ -65,11 +65,13 @@ jobs:
           ENVIRONMENT: test
           COVERAGE_FILE: .coverage.unit
         run: poetry run pytest -m unit
+        continue-on-error: true
       - name: Store coverage report
+        if: always()
         uses: actions/upload-artifact@v3
         with:
           name: .coverage.unit
-          path: ./
+          path: ./app/.coverage.unit
 
   integration-tests:
     name: Integration tests
@@ -82,12 +84,13 @@ jobs:
       - name: Setup environment and run integration tests
         run: make test-integration
         env:
-          COVERAGE_FILE: coverage.integration
+          COVERAGE_FILE: .coverage.integration
       - name: Store coverage report
+        if: always()
         uses: actions/upload-artifact@v3
         with:
           name: .coverage.integration
-          path: ./
+          path: .coverage.integration
 
   code-coverage:
     name: Validate code coverage
@@ -113,10 +116,19 @@ jobs:
         with:
           name: .coverage.integration
       - name: Combine code coverage reports
-        run: | 
-          coverage combine
-          report="${coverage report -m}"
+        run: poetry run coverage combine
+      - name: Produce coverage report
+        id: code-coverage
+        working-directory: ./app
+        run: |
+          cp ../.coverage .
+          report=$(poetry run coverage report -m)
+          poetry run coverage html --skip-covered --skip-empty
+          report="${report//'%'/'%25'}"
+          report="${report//$'\n'/'%0A'}"
+          report="${report//$'\r'/'%0D'}"
           echo "::set-output name=report::${report}"
+        continue-on-error: true
       - name: Post code coverage to pull request
         uses: mshick/add-pr-comment@v1
         id: comment
@@ -125,12 +137,18 @@ jobs:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           repo-token-user-login: 'github-actions[bot]'
           message: |
-            ## Code coverage: ${{ steps.code-coverage.outcome }}
+            ## ---- Code coverage ----  
             ```
             ${{ steps.code-coverage.outputs.report}}
             ```
+      - name: Upload HTML report
+        uses: actions/upload-artifact@v3
+        with:
+          name: html-report
+          path: htmlcov
       - name: Verify code coverage percent
-        run: coverage report --fail-under=80
+        working-directory: ./app
+        run: poetry run coverage report --fail-under=90
 
   docker-build:
     name: Build docker image

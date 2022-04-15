@@ -9,7 +9,8 @@ from app.core.monitoring import contains_phi
 
 @contains_phi
 class PatientBase(BaseModel):
-    """ Properties shared among all uses """
+    """Properties shared among all uses"""
+
     name: Optional[str] = None
     program: Optional[str] = None
 
@@ -19,22 +20,25 @@ class PatientBase(BaseModel):
 
         (Shown as an example)
         """
+
         alias_generator = camelcase
         allow_population_by_field_name = True
 
 
 class PatientCreate(PatientBase):
-    """ Properties to receive on item creation """
+    """Properties to receive on item creation"""
+
     name: str  # name required on creation
     date_of_birth: date  # date of birth not allowed to be updated
 
 
 class PatientUpdate(PatientBase):
-    """ Properties to receive on item update """
+    """Properties to receive on item update"""
 
 
 class PatientInDBBase(PatientCreate):
-    """ Properties shared by models stored in DB """
+    """Properties shared by models stored in DB"""
+
     id: int
     name: str
     date_of_birth: date
@@ -44,10 +48,10 @@ class PatientInDBBase(PatientCreate):
 
 
 class Patient(PatientInDBBase):
-    """ Properties to return to client on requests """
+    """Properties to return to client on requests"""
+
     pass
 
 
 class PatientInDB(PatientInDBBase):
-    """ Additional identifying properties stored within DB """
-
+    """Additional identifying properties stored within DB"""

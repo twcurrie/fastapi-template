@@ -1,8 +1,7 @@
-import asyncio
 from typing import Generator
 
 import pytest
-from mock import MagicMock, Mock
+from mock import MagicMock, Mock, AsyncMock
 
 from app.core.health.checks import is_database_available, is_redis_available
 
@@ -15,11 +14,16 @@ def session(side_effect):
 
 
 @pytest.fixture(scope="function")
-def async_session(response) -> Generator:
-    mock_session = MagicMock()
-    future_status: asyncio.Future = asyncio.Future()
-    future_status.set_result(response)
-    mock_session.execute = Mock(return_value=future_status)
+def async_session(return_value) -> Generator:
+    mock_session = AsyncMock()
+    mock_session.ping = AsyncMock(return_value=return_value)
+    yield mock_session
+
+
+@pytest.fixture(scope="function")
+def async_session_with_side_effect(side_effect) -> Generator:
+    mock_session = AsyncMock()
+    mock_session.ping = AsyncMock(side_effect=side_effect)
     yield mock_session
 
 
@@ -32,18 +36,15 @@ def test__database__health(session, expected_value: bool):
 
 
 @pytest.mark.asyncio
-@pytest.mark.parametrize(
-    "response, expected_value",
-    [(b"PONG", True), (b"PING", False)],
-)
-async def test__redis__health(async_session, expected_value: bool):
-    assert await is_redis_available(async_session) == expected_value
+@pytest.mark.parametrize("return_value", [b"PONG"])
+async def test__redis__health(async_session):
+    assert await is_redis_available(async_session)
 
 
 @pytest.mark.asyncio
 @pytest.mark.parametrize(
-    "side_effect, expected_value",
-    [(Exception, False)],
+    "side_effect",
+    [Exception],
 )
-async def test__redis__health__exception(session, expected_value: bool):
-    assert await is_redis_available(session) == expected_value
+async def test__redis__health__exception(async_session_with_side_effect):
+    assert not await is_redis_available(async_session_with_side_effect)

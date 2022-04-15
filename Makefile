@@ -1,4 +1,4 @@
-SERVICE_NAME := {{ template-service }}
+SERVICE_NAME := template-service
 ENVIRONMENT := ${ENVIRONMENT}
 AWS_DEFAULT_REGION := us-east-1
 ECR_REGISTRY := 711154312405.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${SERVICE_NAME}

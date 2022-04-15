@@ -1,13 +1,14 @@
 import os
+from typing import Generator
 
-import pytest
 import aioredis
+import pytest
 from aioredis import Redis as RedisConnection  # type: ignore
-from sqlalchemy.engine import Connection  # type: ignore
 from sqlalchemy import orm  # type: ignore
+from sqlalchemy.engine import Connection  # type: ignore
 
-from app.db.session import engine
 from app.core.config import settings
+from app.db.session import engine
 from app.tests.utils import TestType
 
 Session = orm.sessionmaker()
@@ -30,8 +31,10 @@ def db(connection) -> orm.Session:
 
 
 @pytest.fixture(scope="function")
-def redis() -> RedisConnection:
-    connection = aioredis.from_url(settings.REDIS_URI, encoding="utf-8", decode_responses=True)
+def redis() -> Generator:
+    connection = aioredis.from_url(
+        settings.REDIS_URI, encoding="utf-8", decode_responses=True
+    )
     yield connection
 
 

@@ -11,7 +11,9 @@ router = APIRouter()
 
 @router.get("/", response_model=List[schemas.Patient])
 def get_patients(
-    db: Session = Depends(deps.get_db), skip: int = 0, limit: int = 100,
+    db: Session = Depends(deps.get_db),
+    skip: int = 0,
+    limit: int = 100,
 ) -> Any:
     """
     Retrieve patients.
@@ -21,7 +23,9 @@ def get_patients(
 
 @router.post("/", response_model=schemas.Patient)
 def create_patient(
-    *, db: Session = Depends(deps.get_db), patient_in: schemas.PatientCreate,
+    *,
+    db: Session = Depends(deps.get_db),
+    patient_in: schemas.PatientCreate,
 ) -> Any:
     """
     Create new patient.
@@ -32,7 +36,10 @@ def create_patient(
 
 @router.put("/{id}", response_model=schemas.Patient)
 def update_patient(
-    *, db: Session = Depends(deps.get_db), id: int, patient_in: schemas.PatientUpdate,
+    *,
+    db: Session = Depends(deps.get_db),
+    id: int,
+    patient_in: schemas.PatientUpdate,
 ) -> Any:
     """
     Update a patient.
@@ -45,7 +52,11 @@ def update_patient(
 
 
 @router.get("/{id}", response_model=schemas.Patient)
-def read_patient(*, db: Session = Depends(deps.get_db), id: int,) -> Any:
+def read_patient(
+    *,
+    db: Session = Depends(deps.get_db),
+    id: int,
+) -> Any:
     """
     Get patient by ID.
     """
@@ -56,7 +67,11 @@ def read_patient(*, db: Session = Depends(deps.get_db), id: int,) -> Any:
 
 
 @router.delete("/{id}", response_model=schemas.Patient)
-def delete_patient(*, db: Session = Depends(deps.get_db), id: int,) -> Any:
+def delete_patient(
+    *,
+    db: Session = Depends(deps.get_db),
+    id: int,
+) -> Any:
     """
     Delete a patient.
     """

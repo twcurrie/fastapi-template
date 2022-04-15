@@ -86,7 +86,7 @@ def test__handles_phi_with_args__logging_success(caplog, sensitive_data):
 @pytest.mark.parametrize("sensitive_data", ["Jane Doe", 123, 1.0])
 def test__handles_phi_with_args__sub_function_success(caplog, sensitive_data):
     def method_unknowingly_handling_phi_primitives(
-            maybe_sensitive_field: Any, a_field: Any
+        maybe_sensitive_field: Any, a_field: Any
     ) -> None:
         logging.info(
             f"We might be processing a sensitive fields: {maybe_sensitive_field}, {a_field}"
@@ -141,7 +141,7 @@ def test__handles_phi_with_kwargs__logging_success(caplog, sensitive_data):
 @pytest.mark.parametrize("sensitive_data", ["Jane Doe", 123, 1.0])
 def test__handles_phi_with_kwargs__sub_function_success(caplog, sensitive_data):
     def method_unknowingly_handling_phi_primitives(
-            maybe_sensitive_field: Any, a_field: Any
+        maybe_sensitive_field: Any, a_field: Any
     ) -> None:
         logging.info(
             f"We might be processing a sensitive fields: {maybe_sensitive_field}, {a_field}"
@@ -249,19 +249,19 @@ def test__before_send__sanitizes_requests__sqlalchemy(get_resource):
         """
         if isinstance(obj_, dict):
             if (
-                    isinstance(parent, dict)
-                    and parent.get("module") == "sqlalchemy.engine.base"
+                isinstance(parent, dict)
+                and parent.get("module") == "sqlalchemy.engine.base"
             ):
                 assert "parameters" not in obj_
             if isinstance(parent, dict) and "sqlalchemy.engine" in parent.get(
-                    "module", ""
+                "module", ""
             ):
                 assert "args" not in obj_
                 assert "args_10style" not in obj_
                 assert "distilled_params" not in obj_
                 assert "event_params" not in obj_
             if isinstance(parent, dict) and "sqlalchemy.sql" in parent.get(
-                    "module", ""
+                "module", ""
             ):
                 assert "multiparams" not in obj_
             for value in obj_.values():
