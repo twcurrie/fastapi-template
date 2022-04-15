@@ -106,13 +106,11 @@ jobs:
           python_version: 3.9
       - name: Download unit test coverage report
         uses: actions/download-artifact@v3
-        working-directory: ./app
         id: download-unit
         with:
           name: .coverage.unit
       - name: Download integration test coverage report
         uses: actions/download-artifact@v3
-        working-directory: ./app
         id: download-integration
         with:
           name: .coverage.integration
@@ -136,6 +134,7 @@ jobs:
             ${{ steps.code-coverage.outputs.report}}
             ```
       - name: Verify code coverage percent
+        working-directory: ./app
         run: poetry run coverage report --fail-under=80
 
   docker-build:
