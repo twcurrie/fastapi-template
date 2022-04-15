@@ -145,7 +145,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: html-report
-          path: coverage_html_report/index.html
+          path: ./coverage_html_report/index.html
       - name: Verify code coverage percent
         working-directory: ./app
         run: poetry run coverage report --fail-under=90
