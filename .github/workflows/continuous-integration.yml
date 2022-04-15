@@ -115,9 +115,10 @@ jobs:
         with:
           name: .coverage.integration
       - name: Combine code coverage reports
-        run: poetry run coverage combine
+        run: |
+          poetry run coverage combine
+          cat .coverage
       - name: Produce coverage report
-        working-directory: ./app
         run: |
           report=$(poetry run coverage report -m)
           echo "::set-output name=report::${report}"
