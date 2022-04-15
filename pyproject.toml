@@ -66,6 +66,10 @@ env = [# This overrides the default values provided within the .env file
     "ENABLE_RATE_LIMITING=False"
 ]
 
+[tool.mypy]
+exclude = [
+    "*/alembic/*"
+]
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
