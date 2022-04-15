@@ -170,6 +170,7 @@ def test__update_patient(
     api_patient = r.json()
     updated_patient = crud.patient.get(db, id=patient_id)
 
+    assert updated_patient is not None
     assert updated_patient.name == api_patient["name"]
     assert str(updated_patient.date_of_birth) == api_patient["dateOfBirth"]
 
