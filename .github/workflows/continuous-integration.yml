@@ -121,13 +121,25 @@ jobs:
         working-directory: ./app
         run: |
           cp ../.coverage .
-          poetry run coverage report -m > pytest-coverage.txt
+          report=$(poetry run coverage report -m)
           poetry run coverage html --skip-covered --skip-empty
+          report="${report//'%'/'%25'}"
+          report="${report//$'\n'/'%0A'}"
+          report="${report//$'\r'/'%0D'}"
+          echo "::set-output name=report::${report}"
         continue-on-error: true
-    - name: Comment coverage
-      uses: coroo/pytest-coverage-commentator@v1.0.2
-      with:
-        token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Post code coverage to pull request
+        uses: mshick/add-pr-comment@v1
+        id: comment
+        with:
+          allow-repeats: true
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          repo-token-user-login: 'github-actions[bot]'
+          message: |
+            ## Code coverage: ${{ steps.code-coverage.outcome }}
+            ```
+            ${{ steps.code-coverage.outputs.report}}
+            ```
       - name: Upload HTML report
         uses: actions/upload-artifact@v3
         with:
