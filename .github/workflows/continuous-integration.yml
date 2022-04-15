@@ -10,8 +10,9 @@ jobs:
     name: Linting check
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v3
       - name: Install dependencies
-        uses: hinge-health/fastapi-template/.github/workflows/dependency-mgmt.yml@main
+        uses: ./.github/actions/dependency-mgmt
       - name: Linting check
         run: |
           echo "Checking linting against $(poetry run black --version)"
@@ -20,8 +21,9 @@ jobs:
     name: Static type analysis
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v3
       - name: Install dependencies
-        uses: hinge-health/fastapi-template/.github/workflows/dependency-mgmt.yml@main
+        uses: ./.github/actions/dependency-mgmt@main
         with:
           python_version: 3.9
       - name: Static typing checks
@@ -30,8 +32,9 @@ jobs:
     name: Dependency vulnerability checks
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v3
       - name: Install dependencies
-        uses: hinge-health/fastapi-template/.github/workflows/dependency-mgmt.yml@main
+        uses: ./.github/actions/dependency-mgmt
         with:
           python_version: 3.9
       - name: Run safety
@@ -40,8 +43,9 @@ jobs:
     name: Static security checks
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v3
       - name: Install dependencies
-        uses: hinge-health/fastapi-template/.github/workflows/dependency-mgmt.yml@main
+        uses: ./.github/actions/dependency-mgmt
         with:
           python_version: 3.9
       - name: Run bandit
@@ -50,8 +54,9 @@ jobs:
     name: Unit tests
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v3
       - name: Install dependencies
-        uses: hinge-health/fastapi-template/.github/workflows/dependency-mgmt.yml@main
+        uses: ./.github/actions/dependency-mgmt
         with:
           python_version: 3.9
       - name: Run unit tests
@@ -92,8 +97,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       # TODO: Full dependencies are not required, just 'coverage'
+      - uses: actions/checkout@v3
       - name: Install dependencies
-        uses: hinge-health/fastapi-template/.github/workflows/dependency-mgmt.yml@main
+        uses: ./.github/actions/dependency-mgmt
         with:
           python_version: 3.9
       - name: Download unit test coverage report

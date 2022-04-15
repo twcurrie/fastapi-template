@@ -12,7 +12,8 @@ jobs:
       github.repository != 'hinge-health/fastapi-template' ||
       ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
+      - uses: actions/checkout@v3
       - name: Deploy
-        uses: hinge-health/fastapi-template/.github/workflows/deploy_to_aptible.yml@main
+        uses: ./.github/workflows/deploy_to_aptible
         with:
           environment: scaling

@@ -1,0 +1,34 @@
+name: Deploy to aptible environment
+description: Follows standard workflow to deploy to an aptible environment
+
+inputs:
+  environment:
+    required: true
+    type: string
+
+runs:
+  env:
+    ENVIRONMENT: ${{ environment }}
+  environment:
+    name: ${{ environment }}
+  steps:
+    - name: Checkout repo
+      uses: actions/checkout@v3
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ECR__WRITE_ONLY_ACCESS_KEY_ID__RAW }}
+        aws-secret-access-key: ${{ secrets.AWS_ECR__WRITE_ONLY_SECRET_ACCESS_KEY__RAW }}
+        aws-region: us-east-1
+    - name: Install Aptible CLI
+      run: |
+        sudo apt-get install libu2f-host0 u2f-host -y
+        wget https://omnibus-aptible-toolbelt.s3.amazonaws.com/aptible/omnibus-aptible-toolbelt/master/217/pkg/aptible-toolbelt_0.16.7%2B20200812001454~ubuntu.16.04-1_amd64.deb
+        sudo dpkg -i aptible-toolbelt_0.16.7+20200812001454~ubuntu.16.04-1_amd64.deb
+    - name: Login to Amazon ECR
+      id: login-ecr
+      uses: aws-actions/amazon-ecr-login@v1
+    - name: Login to Aptible
+      run: aptible login --email=${{secrets.APTIBLE__DEPLOYMENT_SERVICE_ACCOUNT_EMAIL__RAW}} --password=${{secrets.APTIBLE__DEPLOYMENT_SERVICE_ACCOUNT_PASSWORD__RAW}} --lifetime='1hr'
+    - name: Deploy to Aptible
+      run: make aptible-deploy
