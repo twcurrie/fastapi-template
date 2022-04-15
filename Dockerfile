@@ -1,7 +1,7 @@
 # Please note this Dockerfile requires BuildKit available with Docker
 ARG BUILD_IMAGE='prod'
 
-FROM tiangolo/uvicorn-gunicorn-fastapi:python3.7 as base_image
+FROM tiangolo/uvicorn-gunicorn-fastapi:python3.9 as base_image
 
 WORKDIR /app/
 

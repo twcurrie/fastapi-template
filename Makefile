@@ -4,10 +4,6 @@ AWS_DEFAULT_REGION := us-east-1
 ECR_REGISTRY := 711154312405.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${SERVICE_NAME}
 GIT_SHA := $$(git rev-parse --short HEAD)
 
-# Login to aptible with bot account
-aptible-login:
-	@ aptible login --email=${APTIBLE_ROBOT_EMAIL} --password=${APTIBLE_ROBOT_PASSWORD} --lifetime='1hr'
-
 # Deploy to aptible by pulling image from private docker registry
 aptible-deploy:
 	aptible deploy --git-detach \

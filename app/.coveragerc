@@ -1,10 +1,16 @@
+[paths]
+source =
+    */fastapi-template/app/
+    /app/
+
 [run]
 omit =
     # Ignore tests directory in coverage calculation
-    app/app/tests/*
-    app/tests/*
+    */tests/*
+    */datadog.py
     *__init__*
 branch = True
+relative_files=True
 
 [report]
 # Regexes for lines to exclude from consideration

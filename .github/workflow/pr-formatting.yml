@@ -1,0 +1,16 @@
+name: PR Formatting Checks
+
+on:
+  pull_request:
+    types: ['opened', 'edited', 'reopened', 'synchronize']
+
+jobs:
+  pr-lint:
+    name: Verify JIRA present
+    runs-on: ubuntu-latest
+    steps:
+    - uses: seferov/pr-lint-action@v1.1.2
+      with:
+        title-regex: '^[A-Z]+-\d+'
+        title-regex-flags: 'g' # optional
+        error-message: "Add the associated JIRA ticket number to the beginning of the PR title; please only use uppercase characters. e.g. FOO-###" # optional
