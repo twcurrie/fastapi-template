@@ -117,7 +117,7 @@ jobs:
       - name: Combine code coverage reports
         run: | 
           poetry run coverage combine
-          report="${poetry run coverage report -m}"
+          report=$(poetry run coverage report -m)
           echo "::set-output name=report::${report}"
       - name: Post code coverage to pull request
         uses: mshick/add-pr-comment@v1
