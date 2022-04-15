@@ -68,7 +68,7 @@ env = [# This overrides the default values provided within the .env file
 
 [tool.mypy]
 exclude = [
-    "*/alembic/*"
+    "alembic/*"
 ]
 
 [build-system]
