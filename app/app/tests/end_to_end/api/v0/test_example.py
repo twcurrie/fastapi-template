@@ -8,12 +8,12 @@ from app.core.config import settings
 
 
 async def make_api_request(
-        client: httpx.AsyncClient,
-        endpoint: str,
-        request: dict,
-        auth_token: dict,
-        *,
-        expected_error: Optional[str] = None,
+    client: httpx.AsyncClient,
+    endpoint: str,
+    request: dict,
+    auth_token: dict,
+    *,
+    expected_error: Optional[str] = None,
 ):
     return (
         await client.post(

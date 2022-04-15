@@ -55,4 +55,3 @@ def api_timeout_exception_handler(request: Request, exc: ApiTimeoutError):
         content=jsonable_encoder({"message": "Supporting API is not available."}),
     )
     return response
-

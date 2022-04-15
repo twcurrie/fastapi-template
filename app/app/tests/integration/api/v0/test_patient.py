@@ -20,7 +20,9 @@ def test__create_patient(
 ) -> None:
     data = {"name": random_name, "dateOfBirth": random_date, "program": "chronic knee"}
     r = client.post(
-        f"{settings.API_V0_STR}/patients/", headers=basic_auth_headers, json=data,
+        f"{settings.API_V0_STR}/patients/",
+        headers=basic_auth_headers,
+        json=data,
     )
     assert 200 <= r.status_code < 300
     created_user = r.json()
@@ -44,7 +46,8 @@ def test__get_patient(
     patient = crud.patient.create(db, obj_in=patient_in)
     patient_id = patient.id
     r = client.get(
-        f"{settings.API_V0_STR}/patients/{patient_id}", headers=basic_auth_headers,
+        f"{settings.API_V0_STR}/patients/{patient_id}",
+        headers=basic_auth_headers,
     )
     assert 200 <= r.status_code < 300
 
@@ -66,7 +69,8 @@ def test__get_patient__unknown(
 ) -> None:
     patient_id = random.choice(range(0, 100))
     r = client.get(
-        f"{settings.API_V0_STR}/patients/{patient_id}", headers=basic_auth_headers,
+        f"{settings.API_V0_STR}/patients/{patient_id}",
+        headers=basic_auth_headers,
     )
     assert r.status_code == 404
 
@@ -112,7 +116,8 @@ def test__delete_patient(
     created_patient = crud.patient.create(db, obj_in=patient_in)
     patient_id = created_patient.id
     r = client.delete(
-        f"{settings.API_V0_STR}/patients/{patient_id}", headers=basic_auth_headers,
+        f"{settings.API_V0_STR}/patients/{patient_id}",
+        headers=basic_auth_headers,
     )
     assert 200 <= r.status_code < 300
 
@@ -135,7 +140,8 @@ def test__delete_patient__unknown(
 ) -> None:
     patient_id = random.choice(range(0, 100))
     r = client.delete(
-        f"{settings.API_V0_STR}/patients/{patient_id}", headers=basic_auth_headers,
+        f"{settings.API_V0_STR}/patients/{patient_id}",
+        headers=basic_auth_headers,
     )
     assert r.status_code == 404
 

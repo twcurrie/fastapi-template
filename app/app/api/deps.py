@@ -34,7 +34,9 @@ async def get_amqp_channel() -> AsyncGenerator:
 
 async def get_redis_connection() -> AsyncGenerator:
     try:
-        connection = aioredis.from_url(settings.REDIS_URI, encoding="utf-8", decode_responses=True)
+        connection = aioredis.from_url(
+            settings.REDIS_URI, encoding="utf-8", decode_responses=True
+        )
         yield connection.client()
     finally:
         connection.close()
@@ -43,7 +45,9 @@ async def get_redis_connection() -> AsyncGenerator:
 
 async def get_redis_connection_pool() -> AsyncGenerator:
     try:
-        connection_pool = aioredis.from_url(settings.REDIS_URI, encoding="utf-8", decode_responses=True)
+        connection_pool = aioredis.from_url(
+            settings.REDIS_URI, encoding="utf-8", decode_responses=True
+        )
         yield connection_pool
     finally:
         connection_pool.close()

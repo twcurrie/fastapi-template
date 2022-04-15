@@ -14,7 +14,7 @@ from app.core.environment import Environment
 
 
 class AmqpDsn(AnyUrl):
-    allowed_schemes = {'amqp'}
+    allowed_schemes = {"amqp"}
     user_required = False
 
 
@@ -89,8 +89,10 @@ class Settings(BaseSettings):
             user=values.get("RABBITMQ_DEFAULT_USER") or "",
             password=values.get("RABBITMQ_DEFAULT_PASS") or "",
             host=values.get("RABBITMQ_SERVER") or "",
-            port=str(values.get('RABBITMQ_NODE_PORT') or 5679),
-            path='' if values.get('RABBITMQ_DEFAULT_VHOST') is None else f"/{values.get('RABBITMQ_DEFAULT_VHOST')}"
+            port=str(values.get("RABBITMQ_NODE_PORT") or 5679),
+            path=""
+            if values.get("RABBITMQ_DEFAULT_VHOST") is None
+            else f"/{values.get('RABBITMQ_DEFAULT_VHOST')}",
         )
 
     EXAMPLE_API_ENDPOINT: AnyHttpUrl

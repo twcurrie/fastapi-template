@@ -12,16 +12,14 @@ from app.schemas.external.example_api import StatusCheck
 
 @tracer.wrap()
 async def request_status_check(client: httpx.AsyncClient) -> StatusCheck:
-        try:
-            response = await client.get(f"{settings.EXAMPLE_API_ENDPOINT}/status-check")
-        except httpx.ReadTimeout as e:
-            raise ApiTimeoutError(e, api_endpoint=str(settings.EXAMPLE_API_ENDPOINT))
-        try:
-            return StatusCheck(**response.json())
-        except ValidationError as e:
-            raise ApiSerializationError(
-                e, api_endpoint=str(settings.EXAMPLE_API_ENDPOINT)
-            )
+    try:
+        response = await client.get(f"{settings.EXAMPLE_API_ENDPOINT}/status-check")
+    except httpx.ReadTimeout as e:
+        raise ApiTimeoutError(e, api_endpoint=str(settings.EXAMPLE_API_ENDPOINT))
+    try:
+        return StatusCheck(**response.json())
+    except ValidationError as e:
+        raise ApiSerializationError(e, api_endpoint=str(settings.EXAMPLE_API_ENDPOINT))
 
 
 @tracer.wrap()

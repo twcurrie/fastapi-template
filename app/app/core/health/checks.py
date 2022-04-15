@@ -27,7 +27,7 @@ async def is_redis_available(
         capture_exception(e)
         logging.error(e)
         return False
-    return pong
+    return bool(pong)
 
 
 checks = [is_database_available, is_redis_available]

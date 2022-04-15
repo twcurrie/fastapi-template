@@ -31,7 +31,9 @@ def db(connection) -> orm.Session:
 
 @pytest.fixture(scope="function")
 def redis() -> RedisConnection:
-    connection = aioredis.from_url(settings.REDIS_URI, encoding="utf-8", decode_responses=True)
+    connection = aioredis.from_url(
+        settings.REDIS_URI, encoding="utf-8", decode_responses=True
+    )
     yield connection
 
 

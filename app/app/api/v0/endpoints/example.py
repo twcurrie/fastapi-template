@@ -13,7 +13,9 @@ shared_limit = rate_limiter.shared_limit("5/minute", "from-downstream")
 
 @router.get("/")
 @rate_limiter.exempt
-def get_string(request: Request,) -> str:  # noqa: Attribute used by rate limiter
+def get_string(
+    request: Request,
+) -> str:  # noqa: Attribute used by rate limiter
     return "dummy"
 
 
