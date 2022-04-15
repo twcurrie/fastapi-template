@@ -13,6 +13,6 @@ jobs:
       ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
       - name: Deploy
-        uses: hinge-health/fastapi-template/.github/workflows/deploy_to_aptible.yml@main
+        uses: ./.github/workflows/deploy_to_aptible/action.yml
         with:
           environment: scaling
