@@ -128,6 +128,13 @@ jobs:
           report="${report//$'\n'/'%0A'}"
           report="${report//$'\r'/'%0D'}"
           echo "::set-output name=report::${report}"
+          poetry run coverage json 
+          json=`cat ./coverage.json
+          json="${json//'%'/'%25'}"
+          json="${json//$'\n'/'%0A'}"
+          json="${json//$'\r'/'%0D'}"
+          # end of optional handling for multi line json
+          echo "::set-output name=json::${json}"
         continue-on-error: true
       - name: Post code coverage to pull request
         uses: mshick/add-pr-comment@v1
@@ -149,6 +156,17 @@ jobs:
       - name: Verify code coverage percent
         working-directory: ./app
         run: poetry run coverage report --fail-under=90
+      - name: Create Awesome Badge
+        uses: schneegans/dynamic-badges-action@v1.2.0
+        with:
+          auth: ${{ secrets.GIST_SECRET }}
+          gistID: 8258585e21c308f94b8ba0d66aefe1d0
+          filename: result.json
+          label: Code Coverage
+          message: ${{ fromJson(steps.code-coverage.outputs.json).totals.percent_covered }}
+          valColorRange: ${{ fromJson(steps.code-coverage.outputs.json).totals.percent_covered }}
+          maxColorRange: 100
+          minColorRange: 0
 
   docker-build:
     name: Build docker image
