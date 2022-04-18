@@ -129,7 +129,7 @@ jobs:
           report="${report//$'\r'/'%0D'}"
           echo "::set-output name=report::${report}"
           poetry run coverage json 
-          json=`cat ./coverage.json
+          json=$(cat ./coverage.json)
           json="${json//'%'/'%25'}"
           json="${json//$'\n'/'%0A'}"
           json="${json//$'\r'/'%0D'}"
