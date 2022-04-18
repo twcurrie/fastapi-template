@@ -163,9 +163,9 @@ jobs:
           gistID: 8258585e21c308f94b8ba0d66aefe1d0
           filename: result.json
           label: Code Coverage
-          message: ${{ fromJson(steps.code-coverage.outputs.json).totals.percent_covered }}
+          message: ${{ fromJson(steps.code-coverage.outputs.json).totals.percent_covered_display }}
           valColorRange: ${{ fromJson(steps.code-coverage.outputs.json).totals.percent_covered }}
-          maxColorRange: 100
+          maxColorRange: 90
           minColorRange: 0
 
   docker-build:

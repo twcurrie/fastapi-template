@@ -1,9 +1,9 @@
-![badge](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/twcurrie/8258585e21c308f94b8ba0d66aefe1d0/raw/result.json)
-
 
 ![Our mascot](docs/mascot.jpeg)
 
 # FastAPI Template Service
+![badge](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/twcurrie/8258585e21c308f94b8ba0d66aefe1d0/raw/result.json)
+
 
 Python-based microservice built with :heart: on the [FastAPI](https://github.com/tiangolo/fastapi) framework. The intent of this repo is to provide a skeleton application that includes as much as possible that will be required for our services. 
 
