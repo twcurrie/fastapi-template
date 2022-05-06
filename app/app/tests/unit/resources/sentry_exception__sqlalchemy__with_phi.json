@@ -2698,7 +2698,6 @@
     "pathspec": "0.9.0",
     "packaging": "21.0",
     "ordered-set": "4.0.2",
-    "newrelic": "6.6.0.162",
     "mypy": "0.812",
     "mypy-extensions": "0.4.3",
     "mock": "4.0.3",

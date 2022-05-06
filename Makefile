@@ -14,13 +14,6 @@ aptible-deploy:
 		--private-registry-password=`aws ecr get-login-password --region us-east-1` \
 		DD_VERSION=${GIT_SHA}
 
-# Post deployment to New Relic endpoint
-notify-new-relic-of-deploy:
-	curl -X POST "https://api.newrelic.com/v2/applications/${NEW_RELIC_APP_ID}/deployments.json" \
-     -H "X-Api-Key:${NEW_RELIC_API_KEY}" -i \
-     -H 'Content-Type: application/json' \
-     -d \ "`git log -1 --pretty=format:'{"deployment": {"revision":"%h","description":"%s", "user":"%an"}}' | cat`"
-
 # Login to AWS registry (must have docker running)
 ecr-login:
 	aws ecr get-login-password --region ${AWS_DEFAULT_REGION} | docker login -u AWS --password-stdin ${ECR_REGISTRY}
