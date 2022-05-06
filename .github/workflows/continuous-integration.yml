@@ -13,6 +13,8 @@ jobs:
       - uses: actions/checkout@v3
       - name: Install dependencies
         uses: ./.github/actions/dependency-mgmt
+        with:
+          python_version: 3.9
       - name: Linting check
         run: |
           echo "Checking linting against $(poetry run black --version)"

@@ -60,7 +60,6 @@ def before_send(event: dict, hint: dict):
             """
             if (
                 "sqlalchemy.engine" in frame["module"]
-                or "newrelic.hooks.database" in frame["module"]
                 or "sqlalchemy.sql" in frame["module"]
             ):
                 if frame["vars"]:

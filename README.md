@@ -90,6 +90,7 @@ Currently, the application only supports Basic Authentication requests.  The cre
 
 [comment]: <> (`npm run generateJwt` or `make generate-jwt` will produce the test JWT.)
 
+
 ## Documentation
 
 Once the service is started, you can visit the `/docs` route to view the Swagger API docs, or `/redocs` to view the Redocs version of the docs.
