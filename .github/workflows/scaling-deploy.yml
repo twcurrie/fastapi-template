@@ -1,20 +1,24 @@
 name: Deploy to scaling (aptible)
 on:
   workflow_run:
-    workflows: ["Continuous Integration Workflow"]
+    workflows: ["Continuous Integration Workflow"] # Remove 'Workflow' once scaling instance is ready in aptible
     branches: [main]
     types: [completed]
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    if: | 
+    if: |
       github.repository != 'hinge-health/fastapi-template' ||
       ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
       - uses: actions/checkout@v3
       - run: ./ci/read_version.sh > version.json
       - name: Deploy
-        uses: ./.github/workflows/deploy-to-aptible
+        uses: ./.github/actions/deploy-to-aptible
         with:
           environment: scaling
+          secret_aws_ecr_access_key: ${{ secrets.AWS_ECR__WRITE_ONLY_ACCESS_KEY_ID__RAW }}
+          secret_aws_ecr_secret_key: ${{ secrets.AWS_ECR__WRITE_ONLY_SECRET_ACCESS_KEY__RAW }}
+          secret_aptible_email: ${{secrets.APTIBLE__DEPLOYMENT_SERVICE_ACCOUNT_EMAIL__RAW}}
+          secret_aptible_password: ${{secrets.APTIBLE__DEPLOYMENT_SERVICE_ACCOUNT_PASSWORD__RAW}}
