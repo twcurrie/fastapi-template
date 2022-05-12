@@ -138,13 +138,10 @@ jobs:
           # end of optional handling for multi line json
           echo "::set-output name=json::${json}"
         continue-on-error: true
-      - name: Post code coverage to pull request
-        uses: mshick/add-pr-comment@v1
+      - uses: marocchino/sticky-pull-request-comment@v2
         id: comment
         with:
-          allow-repeats: true
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-          repo-token-user-login: 'github-actions[bot]'
+          recreate: true
           message: |
             ## ---- Code coverage ----  
             ```
