@@ -13,6 +13,7 @@ jobs:
       ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
       - uses: actions/checkout@v3
+      - run: ./ci/read_version.sh > version.json
       - name: Deploy
         uses: ./.github/workflows/deploy-to-aptible
         with:
