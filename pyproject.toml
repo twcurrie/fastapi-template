@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "fastapi-template-service"
-version = "0.1.0"
+version = "0.1.1"
 description = "FastAPI template service."
 authors = ["<your-name-here>@hingehealth.com>"]
 

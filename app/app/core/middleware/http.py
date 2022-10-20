@@ -9,6 +9,8 @@ from starlette.middleware.base import (
     Response,
 )
 
+from app.core.monitoring.datadog import datadog_event
+
 
 class RequestLoggingMiddleware(BaseHTTPMiddleware):
     TARGET_REQUEST_PROPERTIES = [
@@ -55,7 +57,22 @@ class RequestTimingMiddleware(BaseHTTPMiddleware):
         self, request: Request, call_next: RequestResponseEndpoint
     ) -> Response:
         start_time = time.time()
-        response = await call_next(request)
+
+        # # issue fix: https://stackoverflow.com/questions/71222144/runtimeerror-no-response-returned-in-fastapi-when-refresh-request
+        # # Workaround 2
+        try:
+            response = await call_next(request)
+        except RuntimeError as exc:
+            if await request.is_disconnected():
+                datadog_event(
+                    title="Client Disconnected before response",
+                    text=str(exc),
+                    alert_type="error",
+                    tags=["status_code:204"],
+                )
+                return Response(status_code=204)
+            raise
+
         process_time = time.time() - start_time
         response.headers["X-Process-Time"] = str(process_time)
         return response
